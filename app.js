@@ -9,8 +9,8 @@ const dotenv = require('dotenv').config();
 const port = process.env.PORT;
 const mongodbUrl = process.env.MONGODB_URL;
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./src/routes/index');
+var usersRouter = require('./src/routes/users');
 
 var app = express();
 
@@ -20,7 +20,7 @@ mongoose.connect(mongodbUrl)
   .catch(() => console.log('failed'))
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
