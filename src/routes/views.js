@@ -17,5 +17,7 @@ router.use('/list', serveStatic('list'));
 router.use('/detail', serveStatic('detail'));
 router.use('/cart', serveStatic('cart'));
 router.use('/order', serveStatic('order'));
+router.use('/login', serveStatic('login'));
+router.use('/account', serveStatic('account'));
 
 module.exports = router;

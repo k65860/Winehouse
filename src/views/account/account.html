@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WineHouse</title>
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- fontawesome icon -->
+  <script src="https://kit.fontawesome.com/20edfc9a47.js" crossorigin="anonymous"></script>
+  <!-- custom css, js -->
+  <link rel="stylesheet" href="account.css">
+  <link rel="stylesheet" href="/stylesheets/global.css">
+  <script type="text/javascript" src="account.js"></script>
+  <script src="/javascripts/global.js" type="module" defer></script>
+</head>
+<body>
+    <div class="main">
+      <div class="Account">
+        <p class="title">회원가입</p>
+        <form class="box">
+          <div class="field">
+            <label class="label">이름</label>
+            <div class="control">
+              <input id="nameInput" class="input" type="text" placeholder="이름을 입력해주세요">
+            </div>
+          </div>
+  
+          <div class="field">
+            <label class="label">이메일</label>
+            <div class="control">
+              <input id="emailInput" class="input" type="email" placeholder="이메일을 입력해주세요">
+            </div>
+            <button type="button" class="repeatBtn" onclick="checkDuplicateEmail()">중복확인</button>
+          </div>
+  
+          <div class="field">
+            <label class="label">비밀번호</label>
+            <div class="control">
+              <input class="input" type="password" placeholder="비밀번호를 입력해주세요.">
+            </div>
+          </div>
+  
+          <div class="field">
+            <label class="label">비밀번호 확인</label>
+            <div class="control">
+              <input class="input" type="password" placeholder="비밀번호를 다시한번 입력해주세요.">
+            </div>
+          </div>
+  
+          <div class="field">
+            <label class="label">주소</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="주소를 입력해주세요.">
+            </div>
+          </div>
+  
+          <div class="field">
+            <label class="label">전화 번호</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="전화번호를 입력해주세요.">
+            </div>
+          </div>
+  
+          <div class="buttonBox">
+            <input type="button" class="accountBtn" value="회원가입" onclick="Account()">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  
+  
+  
+</html>
+<!-- footer -->
+<footer class="footer">
+    <div class="footer-container">
+      <div class="company-name">
+        <p>WineHouse</p>
+      </div>
+      <div class="company-info">
+        <p class="info-title">회사 정보</p>
+        <p>(주)WineHouse | 대표 엘리스</p>
+        <p>서울특별시 강남구 선릉로 433, 신관 6층</p>
+      </div>
+      <div class="customer-service">
+        <p class="info-title">고객 센터</p>
+        <p>070-4633-2017</p>
+        <p>OPEN 10:00-18:00(BREAK 12:00-13:00)</p>
+      </div>
+    </div>
+  </footer>
+  </body>
+  </html>
+  
