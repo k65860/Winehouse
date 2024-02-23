@@ -17,6 +17,8 @@ router.use('/list', serveStatic('list'));
 router.use('/detail', serveStatic('detail'));
 router.use('/cart', serveStatic('cart'));
 router.use('/order', serveStatic('order'));
+router.use('/login', serveStatic('login'));
+router.use('/account', serveStatic('account'));
 
 router.use('/admin_login', serveStatic('admin_login'));
 router.use('/admin_order', serveStatic('admin_order'));
