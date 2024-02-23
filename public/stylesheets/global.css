@@ -1,0 +1,52 @@
+/* font */
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'GmarketSansMedium';
+}
+
+/* header */
+.navbar {
+  /* background-color: #af66aa; */
+  a.navbar-item:hover {
+    background-color: #fafafa;
+    color: #af66aa;
+  }
+}
+
+a.cart-icon {
+  margin: 0 10px;
+  transition: .4s;
+  color: #4a4a4a;
+}
+
+a.cart-icon:hover {
+  color: #af66aa;
+}
+
+
+/* footer */
+.footer {
+  padding: 3rem 1.5rem;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.company-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.info-title {
+  font-weight: bold;
+}
