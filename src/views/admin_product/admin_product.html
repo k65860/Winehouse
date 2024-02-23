@@ -37,7 +37,7 @@
           </a>
         </li>
         <li>
-          <a href="/admin_add" class="is-active">
+          <a href="/admin_update" class="is-active">
             <span class="icon"><i class="fa-solid fa-wine-bottle"></i></span> 상품 관리
           </a>
         </li>
@@ -53,14 +53,12 @@
       <div class="section">
   
         <div class="card">
-          <div class="card-header"><p class="card-header-title">상품 추가</p></div>
-          <div class="card-content">
-
-            <div class="upload-img">
-              <div id="img-container"></div>
-              <input type="file" accept="image/*" onchange="previewFile(event)">
-            </div>
+          <div class="card-header">
+            <p class="card-header-title">상품 관리</p>
             
+        </div>
+
+          <div class="card-content">
             <div class="content">
               <div class="field">
                 <label class="label">이름</label>
@@ -74,45 +72,6 @@
                   <input class="input" type="number" placeholder="가격을 입력해주세요.">
                 </div>
               </div>
-              <div class="field">
-                <label class="label">타입</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="타입을 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">국가</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="국가를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">당도</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="당도를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">산미</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="산미를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">바디</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="바디를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">년도</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="년도를 입력해주세요.">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <button class="button is-fullwidth is-light mt-5">상품 수정</button>
         
