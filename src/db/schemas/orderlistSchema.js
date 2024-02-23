@@ -1,30 +1,20 @@
 const { Schema } = require('mongoose');
 const shortId = require('./types/short-id');
 
-const userSchema = new Schema({
+const OrderlistSchema = new Schema({
   shortId,
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  age: {
+  order_num: {
     type: Number,
     required: true,
   },
-  tel: {
-    type: String,
+  order_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Order',
     required: true,
   },
-  address: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
+  product_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
     required: true,
   },
   createdAt: {
@@ -41,4 +31,4 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = userSchema;
+module.exports = OrderlistSchema;
