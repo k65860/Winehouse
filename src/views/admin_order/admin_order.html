@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WineHouse</title>
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- fontawesome icon -->
+  <script src="https://kit.fontawesome.com/20edfc9a47.js" crossorigin="anonymous"></script>
+  <!-- custom css, js -->
+  <link rel="stylesheet" href="admin_order.css">
+  <link rel="stylesheet" href="/stylesheets/global.css">
+  <script type="text/javascript" src="admin_order.js"></script>
+  <script src="/javascripts/global.js" type="module" defer></script>
+</head>
+<body>
+    <!-- admin header -->
+    <nav class="navbar is-light">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <p>WINEHOUSE-ADMIN</p>
+        </a>
+      </div>
+    </nav>
+  
+    <!-- admin menu -->
+    <section class="columns">
+        
+      <aside class="column section">
+        <p class="menu-label">Administration</p>
+        <ul class="menu-list">
+          <li>
+            <a href="/admin_order" class="is-active">
+              <span class="icon"><i class="fa-solid fa-bag-shopping"></i></span> 주문 관리
+            </a>
+          </li>
+          <li>
+            <a href="/admin_add">
+              <span class="icon"><i class="fa-solid fa-wine-bottle"></i></span> 상품 관리
+            </a>
+          </li>
+          <li>
+            <a href="/admin_category">
+              <span class="icon"><i class="fa-solid fa-list"></i></span> 카테고리
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+  <div class="real_main">
+  <p class="title">주문내역</p>
+<div class="main">
+  <div class="box1">
+    <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
+    <div id="infoBox">
+      <p>주문 번호</p>
+      <p>상품명</p>
+      <p>가격</p>
+    </div>
+    <div id="infoBox">
+      <p>회원정보</p>
+      <p>이메일</p>
+      <p>이름</p>
+      <p>전화번호</p>
+      <p>주소</p>
+    </div>
+
+    <div class="buttonBox">
+      <input type="button" onclick="cancelBtn()" value="주문취소" class="cancelBtn">
+      <div class="selectBox">
+        <select name="배송상태" class="select">
+          <option disabled selected>배송상태</option>
+          <option>배송전</option>
+          <option>배송중</option>
+          <option>배송완료</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="box1">
+    <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
+    <div id="infoBox">
+      <p>주문 번호</p>
+      <p>상품명</p>
+      <p>가격</p>
+    </div>
+    <div id="infoBox">
+      <p>회원정보</p>
+      <p>이메일</p>
+      <p>이름</p>
+      <p>전화번호</p>
+      <p>주소</p>
+    </div>
+    
+    <div class="buttonBox">
+      <input type="button" onclick="cancelBtn()" value="주문취소" class="cancelBtn">
+      <div class="selectBox">
+        <select name="배송상태" class="select">
+          <option disabled selected>배송상태</option>
+          <option>배송전</option>
+          <option>배송중</option>
+          <option>배송완료</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
