@@ -18,4 +18,8 @@ router.use('/detail', serveStatic('detail'));
 router.use('/cart', serveStatic('cart'));
 router.use('/order', serveStatic('order'));
 
+router.use('/manager_login', serveStatic('manager_login'));
+router.use('/manager_order', serveStatic('manager_order'));
+router.use('/admin-product-update', serveStatic('admin-product-update'));
+
 module.exports = router;
