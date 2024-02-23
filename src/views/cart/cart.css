@@ -1,0 +1,52 @@
+.cart-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #af66aa;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-image {
+  width: 100px;
+  height: 140px;
+  background-color: #fafafa;
+  border: 1px solid #dcdcdc;
+}
+
+.product-image img {
+  display: flex;
+  margin-right: 8px;
+  padding: 0.3rem;
+}
+
+.product-name, .product-price {
+  display: flex;
+  align-items: center;
+}
+
+#quantityBtnPlus, #quantityBtnMinus {
+  border-style: none;
+  cursor: pointer;
+}
+
+#result {
+  color: #af66aa;
+}
+
+.delete-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-info {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0;
+}

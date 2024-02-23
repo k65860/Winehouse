@@ -1,0 +1,90 @@
+/* common */
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'GmarketSansMedium';
+}
+
+html,
+body {
+    height: 100%;
+    /* 전체 페이지 좁게 가운데 정렬하는 코드 -> auto*/
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* main */
+
+.parent {
+    padding: 20px;
+}
+.real_main {
+    height: 100%;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: normal;
+    margin: 20px;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    /*사진이랑 글자있는 부분 정확히 반 나누고 싶음*/
+    align-items: center;
+    flex: 1;
+}
+
+.box1 {
+    width: 700px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+#photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.cancelBtn {
+    margin: 20px;
+    cursor: pointer;
+    background-color: hsl(0deg, 0%, 100%);
+    border-color: hsl(0deg, 0%, 86%);
+    border-radius: 0.375em;
+    color: red;
+}
+
+.select {
+    margin: 20px;
+    cursor: pointer;
+    background-color: hsl(0deg, 0%, 100%);
+    border-color: hsl(0deg, 0%, 86%);
+    border-radius: 0.375em;
+}
+
+select:focus {
+    outline: none;
+}
+
+.buttonBox {
+    display: flex;
+    flex-direction: column;
+}
