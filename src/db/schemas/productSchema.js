@@ -3,54 +3,56 @@ const shortId = require('./types/short-id');
 
 const ProductSchema = new Schema({
   shortId,
-  product_name: {
+  productName: {
     type: String,
     required: true,
   },
-  product_price: {
+  productPrice: {
     type: Number,
     required: true,
   },
-  category_name: {
+  categoryName: {
     type: String,
     required: true,
     ref: 'Category',
   },
-  product_country: {
+  productCountry: {
     type: String,
     required: true,
   },
-  product_grape: {
+  productGrape: {
     type: String,
     required: true,
   },
-  product_madeyear: {
+  productMadeyear: {
     type: Number,
     required: true,
   },
-  product_sweetrate: {
+  productSweetrate: {
     type: Number,
     required: true,
   },
-  product_sourrate: {
+  productSourrate: {
     type: Number,
     required: true,
   },
-  product_bodyrate: {
+  productBodyrate: {
     type: Number,
     required: true,
   },
   createdAt: {
     type: Date,
+    default: Date.now,
     required: true,
   },
   updatedAt: {
     type: Date,
+    default: Date.now,
     required: true,
   },
   deletedAt: {
     type: Date,
-    required: true,
+    default:null,
   },
 });
 
