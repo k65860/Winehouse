@@ -1,0 +1,33 @@
+/* main */
+.inner {
+  max-width: 100%;
+  margin: 0 80px;
+  padding: 50px 0;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.photo-container a {
+  display: flex;
+  width: 20%;
+  height: auto;
+  margin-right: 8px;
+  padding: 0.3rem;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+  transition: .4s;
+}
+
+.photo-container a:last-child {
+  margin-right: 0;
+}
+
+.photo-container a:hover {
+  background-color: #d8bfd8;
+  cursor: pointer;
+}
