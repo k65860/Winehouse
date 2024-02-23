@@ -3,7 +3,12 @@ const shortId = require('./types/short-id');
 
 const CategorySchema = new Schema({
   shortId,
-  category_name: {
+  product_id: {
+    type: shortId,
+    required: true,
+    ref: 'Product',
+  },
+  image_url: {
     type: String,
     required: true,
   },
