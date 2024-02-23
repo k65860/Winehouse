@@ -1,10 +1,20 @@
 const { Schema } = require('mongoose');
 const shortId = require('./types/short-id');
 
-const CategorySchema = new Schema({
+const OrderlistSchema = new Schema({
   shortId,
-  category_name: {
-    type: String,
+  order_num: {
+    type: Number,
+    required: true,
+  },
+  order_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Order',
+    required: true,
+  },
+  product_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
     required: true,
   },
   createdAt: {
@@ -21,4 +31,4 @@ const CategorySchema = new Schema({
   },
 });
 
-module.exports = CategorySchema;
+module.exports = OrderlistSchema;
