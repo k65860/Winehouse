@@ -1,16 +1,5 @@
-/* common */
-@font-face {
-  font-family: 'GmarketSansMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-* {
-  font-family: 'GmarketSansMedium';
-}
-
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   display: flex;
@@ -34,27 +23,9 @@ html, body {
 }
 
 .title {
-  color:#af66aa;
+  color: #af66aa;
   margin: 20px;
   text-align: center;
-}
-
-.loginBtn {
-  background-color: #af66aa;
-    border-width: 1px;
-    border-radius: 10px;
-    cursor: pointer;
-    justify-content: center;
-    padding-bottom: calc(0.5em - 1px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(0.5em - 1px);
-    text-align: center;
-    white-space: nowrap;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-    border-style: none;
-    color: white;
-    width: 100%
 }
 
 .buttonBox {
@@ -70,7 +41,6 @@ html, body {
 
 .column {
   display: flex;
-
 }
 
 .main1 {
