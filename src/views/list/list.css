@@ -7,19 +7,6 @@ body {
   flex-direction: column;
 }
 
-/* header */
-.navbar {
-  /* background-color: #af66aa; */
-  a.navbar-item:hover {
-    background-color: #fafafa;
-    color: #af66aa;
-  }
-}
-
-.icon {
-  margin: 0 10px;
-}
-
 /* main */
 .main {
   display: flex;
@@ -67,24 +54,4 @@ body {
 #text {
   margin: 0 20px 0 20px;
   font-size: 0.8em;
-}
-
-/* footer */
-.footer {
-  padding: 3rem 1.5rem;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.company-name {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.info-title {
-  font-weight: bold;
 }
