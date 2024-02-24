@@ -12,16 +12,20 @@
   }
 
 
-  .ul {
-    list-style-type: none;
-    padding: 0;
+  .list{
+    margin-top: 10px;
   }
+  .fbutton{
+    width: 200px; /* 너비를 조절할 크기로 설정합니다. */
+}
+
   
-  .li {
-    margin-bottom: 10px; /* 텍스트와 체크박스 사이의 간격 조정 */
-  }
-  
-  .label {
-    display: inline-block;
-    margin-left: 5px; /* 체크박스와 텍스트 사이의 간격 조정 */
-  }
+  .button is-light{
+    float: right;
+}
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* 각 항목 사이의 간격 조절 */
+}
