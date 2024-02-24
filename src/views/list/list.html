@@ -17,6 +17,7 @@
 </head>
 
 <body>
+  <!-- header -->
   <nav class="navbar has-shadow">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -32,17 +33,19 @@
 
     <div class="navbar-menu" id="nav-links">
       <div class="navbar-start ml-2">
-        <a class="navbar-item">레드</a>
-        <a class="navbar-item">화이트</a>
-        <a class="navbar-item">로제</a>
-        <a class="navbar-item">스파클링</a>
+        <a class="navbar-item" href="/list">레드</a>
+        <a class="navbar-item" href="/list">화이트</a>
+        <a class="navbar-item" href="/list">로제</a>
+        <a class="navbar-item" href="/list">스파클링</a>
       </div>
-
+  
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <i class="fa-solid fa-cart-shopping icon"></i>
-            <a class="button is-light"><strong>로그인</strong></a>
+            <a class="cart-icon" href="/cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <a class="button is-light" href="/login"><strong>로그인</strong></a>
           </div>
         </div>
       </div>

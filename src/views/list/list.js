@@ -2,5 +2,5 @@
 // eslint-disable-next-line no-unused-vars
 function movePhoto() {
   // eslint-disable-next-line no-restricted-globals
-  location.href = '/detail/detail.html';
+  location.href = '/detail';
 }
