@@ -19,7 +19,7 @@ router.use('/cart', serveStatic('cart'));
 router.use('/order', serveStatic('order'));
 router.use('/login', serveStatic('login'));
 router.use('/account', serveStatic('account'));
-router.use('/editProfile', serveStatic('editProfile'));
+
 
 
 router.use('/admin_login', serveStatic('admin_login'));
