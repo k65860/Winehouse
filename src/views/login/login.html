@@ -15,6 +15,41 @@
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
 <body>
+  <!-- header -->
+  <nav class="navbar is-fixed-top has-shadow">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/images/winehouse_logo.png" alt="winehouse-logo">
+      </a>
+
+      <a class="navbar-burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="nav-links">
+      <div class="navbar-start ml-2">
+        <a class="navbar-item" href="/list">레드</a>
+        <a class="navbar-item" href="/list">화이트</a>
+        <a class="navbar-item" href="/list">로제</a>
+        <a class="navbar-item" href="/list">스파클링</a>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="cart-icon" href="/cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <a class="button is-light" href="#"><strong>로그인</strong></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
 <div class="main">
   <div class="Login">
     <p class="title">로그인</p>
@@ -27,14 +62,14 @@
         </div>
 
         <div class="field">
-            <label class="label">Password</label>
+            <label class="label">비밀번호</label>
             <div class="control">
-                <input class="input" type="password" placeholder="********">
+                <input class="input" type="password" placeholder="비밀번호를 입력해주세요.">
             </div>
         </div>
 
-        <div class="buttonBox">
-            <input type="button" class="loginBtn" value="로그인" onclick="Login()">
+        <div class="buttons are-medium">
+          <button id="editProfileButton" class="button is-primary">로그인</button>
         </div>
         <div class="registerText">
             <p>회원이 아니신가요? <a href="http://localhost:4000/account/">회원가입</a></p>
