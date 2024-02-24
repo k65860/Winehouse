@@ -1,0 +1,27 @@
+.columns {
+    margin: 0 20px;
+  }
+  
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: calc(100vh - 50px); /* 화면에서 상단 네비게이션의 높이를 제외한 나머지 영역을 사용합니다. */
+  }
+
+
+  .ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .li {
+    margin-bottom: 10px; /* 텍스트와 체크박스 사이의 간격 조정 */
+  }
+  
+  .label {
+    display: inline-block;
+    margin-left: 5px; /* 체크박스와 텍스트 사이의 간격 조정 */
+  }

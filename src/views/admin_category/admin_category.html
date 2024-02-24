@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WineHouse</title>
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- fontawesome icon -->
+  <script src="https://kit.fontawesome.com/20edfc9a47.js" crossorigin="anonymous"></script>
+  <!-- custom css, js -->
+  <link rel="stylesheet" href="./admin_category.css">
+  <link rel="stylesheet" href="/stylesheets/global.css">
+  <!-- JavaScript 파일 -->
+  <script src="admin_category.js"></script>
+  <script src="/javascripts/global.js" type="module" defer></script>
+</head>
+<body>
+  <!-- admin header -->
+  <nav class="navbar is-light">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <p>WINEHOUSE-ADMIN</p>
+      </a>
+    </div>
+  </nav>
+
+  <!-- admin menu -->
+  <section class="columns">
+      
+    <aside class="column section">
+      <p class="menu-label">Administration</p>
+      <ul class="menu-list">
+        <li>
+          <a href="/admin_order">
+            <span class="icon"><i class="fa-solid fa-bag-shopping"></i></span> 주문 관리
+          </a>
+        </li>
+        <li>
+          <a href="/admin_update" class="is-active">
+            <span class="icon"><i class="fa-solid fa-wine-bottle"></i></span> 상품 관리
+          </a>
+        </li>
+        <li>
+          <a href="/admin_category">
+            <span class="icon"><i class="fa-solid fa-list"></i></span> 카테고리
+          </a>
+        </li>
+      </ul>
+    </aside>
+  
+    <div class="column is-10">
+      <div class="section">
+  
+        <div class="card">
+          <div class="card-header">
+            <p class="card-header-title">카테고리</p>
+        </div>
+
+
+        <article class="list">
+          <dl class="date middle" id="schWorkWeek">
+            <dt class="item">종류 <a href="#" class="clearBtn" onclick="JOBSEARCH.fnEachInit(3); return false;">선택삭제</a></dt>
+            <dd class="content">
+              <div class="subSelect">
+                <ul>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">레드</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">화이트</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">로제</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">스파클링</label></span></li>
+                </ul>
+                <span class="arrow"></span>                        
+              </div>
+            </dd>
+          </dl>
+          <dl class="date middle" id="schWorkWeek">
+            <dt class="item">국가 <a href="#" class="clearBtn" onclick="JOBSEARCH.fnEachInit(3); return false;">선택삭제</a></dt>
+            <dd class="content">
+              <div class="subSelect">
+                <ul>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">이탈리아</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">프랑스</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">미국</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">스페인</label></span></li>
+                </ul>
+                <span class="arrow"></span>                        
+              </div>
+            </dd>
+          </dl>
+          <dl class="date middle" id="schWorkWeek">
+            <dt class="item">당도 <a href="#" class="clearBtn" onclick="JOBSEARCH.fnEachInit(3); return false;">선택삭제</a></dt>
+            <dd class="content">
+              <div class="subSelect">
+                <ul>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8"></label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">2</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">3</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">4</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">5</label></span></li>
+                </ul>
+                <span class="arrow"></span>                        
+              </div>
+            </dd>
+          </dl>
+          <dl class="date middle" id="schWorkWeek">
+            <dt class="item">바디 <a href="#" class="clearBtn" onclick="JOBSEARCH.fnEachInit(3); return false;">선택삭제</a></dt>
+            <dd class="content">
+              <div class="subSelect">
+                <ul>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">1</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">2</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">3</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">4</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">5</label></span></li>
+                </ul>
+                <span class="arrow"></span>                        
+              </div>
+            </dd>
+          </dl>
+          <dl class="date middle" id="schWorkWeek">
+            <dt class="item">산미 <a href="#" class="clearBtn" onclick="JOBSEARCH.fnEachInit(3); return false;">선택삭제</a></dt>
+            <dd class="content">
+              <div class="subSelect">
+                <ul>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">1</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">2</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">3</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">4</label></span></li>
+                  <li><span class="input"><input type="checkbox" name="workweekcd" id="workweekcd8" value="D08"><label for="workweekcd8">5</label></span></li>
+                </ul>
+                <span class="arrow"></span>                        
+              </div>
+            </dd>
+          </dl>
+
+          <button class="button is-fullwidth is-light mt-5">수정 완료</button>
+        </article>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
