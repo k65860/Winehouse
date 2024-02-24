@@ -71,12 +71,17 @@ hr {
 
 #quantityBtn {
   border-style: none;
+  cursor: pointer;
 }
 
 .buttonDiv {
   display: flex;
   justify-content: center;
-  margin: 40px 0 40px 0;
+  margin: 40px 0;
+}
+
+.buttonDiv button {
+  margin: 10px;
 }
 
 #cartBtn {
@@ -95,24 +100,4 @@ hr {
   background-color: #af66aa;
   color: white;
   margin: 10px;
-}
-
-/* footer */
-.footer {
-  padding: 3rem 1.5rem;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.company-name {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.info-title {
-  font-weight: bold;
 }
