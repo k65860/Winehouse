@@ -12,7 +12,6 @@
   <!-- custom css, js -->
   <link rel="stylesheet" href="order.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
-  <script src="order.js" type="module" defer></script>
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
 
@@ -163,11 +162,7 @@
     </div>
 
     <div class="pay-button">
-      <a href="/detail">
-        <div class="button is-primary" style="background-color: #af66aa;">
-          <div class="div6">결제</div>
-        </div>
-      </a>
+      <button class="button is-primary is-fullwidth mt-5" id="payButton">결제</button>
     </div>
   </div>
 </main>
@@ -193,4 +188,5 @@
   </div>
 </footer>
 </body>
+  <script src="order.js"></script>
 </html>
