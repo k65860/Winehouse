@@ -11,7 +11,6 @@
   <!-- custom css, js -->
   <link rel="stylesheet" href="admin_add.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
-  <!-- <script src="admin-product-update.js" type="module" defer></script> -->
   <!-- <script src="/javascripts/global.js" type="module" defer></script> -->
   <script src="admin_add.js"></script>
 </head>
@@ -37,9 +36,12 @@
           </a>
         </li>
         <li>
-          <a href="/admin_add" class="is-active">
+          <a href="/admin_product">
             <span class="icon"><i class="fa-solid fa-wine-bottle"></i></span> 상품 관리
           </a>
+          <ul>
+            <li><a href="/admin_add" class="is-active">상품 추가</a></li>
+          </ul>
         </li>
         <li>
           <a href="/admin_category">
@@ -105,16 +107,16 @@
                 </div>
               </div>
               <div class="field">
-                <label class="label">년도</label>
+                <label class="label">생산 연도</label>
                 <div class="control">
-                  <input class="input" type="number" placeholder="년도를 입력해주세요.">
+                  <input class="input" type="number" placeholder="생산 연도를 입력해주세요.">
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <button class="button is-fullwidth is-light mt-5">상품 수정</button>
+        <button class="button is-fullwidth is-light mt-5">추가</button>
         
       </div>
     </div>
