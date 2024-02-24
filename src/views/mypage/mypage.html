@@ -15,10 +15,10 @@
       crossorigin="anonymous"
     ></script>
     <!-- custom css, js -->
-    <link rel="stylesheet" href="/src/views/mypage/mypage.css" />
-    <link rel="stylesheet" href="/public/stylesheets/global.css" />
-    <script src="./myPage.js" type="module" defer></script>
-    <script src="/public/javascripts/global.js" type="module" defer></script>
+    <link rel="stylesheet" href="mypage.css" />
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <script src="myPage.js"></script>
+    <script src="/javascripts/global.js" type="module" defer></script>
   </head>
   <body>
     <!-- header -->
@@ -61,7 +61,7 @@
       <div class="orderlist">주문 목록</div>
 
       <div class="images">
-        <img src="이미지_경로" alt="주문 와인" />
+        <img src="abc" alt="주문 와인" />
       </div>
       <div class="delivery">배송 상태</div>
       <div class="name">상품 이름</div>
@@ -73,24 +73,14 @@
       <div class="ans-date">2024.02.20</div>
       <div class="ans-pay">100,000</div>
       <div class="ans-state">
-        <input
-          type="button"
-          id="ingState"
-          value="확인 하기"
-          onclick="ingState()"
-        />
+        <button class="button is-primary" onclick="ingState()">확인</button>
       </div>
 
       <div class="blank"></div>
       <div class="profile">
         회원정보
         <div class="profileBox">
-          <input
-            type="button"
-            id="profileBox"
-            value="회원정보 수정"
-            onclick="profileBox()"
-          />
+          <button class="button is-light is-fullwidth mt-5" onclick="profileBox()">회원정보 수정</button>
         </div>
       </div>
     </div>
@@ -113,15 +103,5 @@
         </div>
       </div>
     </footer>
-
-    <script>
-      const profileBox = () => {
-        window.location.href = "/profileEdit.html";
-      };
-
-      const ingState = () => {
-        window.location.href = "/profileEdit.html";
-      };
-    </script>
   </body>
 </html>

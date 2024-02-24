@@ -14,7 +14,14 @@ body {
 
 .orderlist {
   grid-area: orderlist;
+  font-size: 2rem;
+  color: #af66aa;
 }
+
+.orderlist hr {
+  margin: 0;
+}
+
 .images,
 .delivery,
 .date,
@@ -76,6 +83,11 @@ body {
   grid-area: profileBox;
 }
 
+.profile {
+  font-size: 1.8rem;
+  color: #af66aa;
+}
+
 #ingState,
 #profileBox {
   border-radius: 50px;
@@ -89,8 +101,7 @@ body {
 
 /* 컨테이너를 위한 뷰포트 높이 설정 */
 .container {
-  margin-top: 7em;
-  margin-bottom: 3em;
+  margin: 5em;
   display: grid;
   grid-gap: 1px; /* 테두리 여백 */
   grid-template-columns: repeat(6, 1fr); /* 가로 나누기 */
