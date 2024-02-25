@@ -36,10 +36,6 @@
   cursor: pointer;
 }
 
-#result {
-  color: #af66aa;
-}
-
 .delete-button {
   display: flex;
   justify-content: space-between;
