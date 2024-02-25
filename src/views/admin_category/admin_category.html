@@ -19,7 +19,7 @@
   <!-- admin header -->
   <nav class="navbar is-light">
     <div class="navbar-brand">
-      <a class="navbar-item" href="#">
+    <a class="navbar-item" href="/admin_order">
         <p>WINEHOUSE-ADMIN</p>
       </a>
     </div>
@@ -37,92 +37,79 @@
           </a>
         </li>
         <li>
-          <a href="/admin_update" class="is-active">
+          <a href="/admin_product">
             <span class="icon"><i class="fa-solid fa-wine-bottle"></i></span> 상품 관리
           </a>
+          <ul>
+            <li><a href="/admin_add">상품 추가</a></li>
+          </ul>
         </li>
         <li>
-          <a href="/admin_category">
+          <a href="/admin_category" class="is-active">
             <span class="icon"><i class="fa-solid fa-list"></i></span> 카테고리
           </a>
         </li>
       </ul>
     </aside>
+
   
     <div class="column is-10">
       <div class="section">
   
         <div class="card">
           <div class="card-header">
-            <p class="card-header-title">카테고리</p>
+            <p class="card-header-title">카테고리 - 와인 타입</p>
         </div>
 </div>
 
-        <article class="list">
-          <dl class="date middle" id="red">
-            <dt class="item">레드 
-            <a href="#" class="clearBtn" onclick="" style="float:right">선택삭제</a></dt>
-            
-            <dd class="content">
-              <div class="subSelect">
-                <div class="input">                 
-                  <span class="input"><input type="checkbox" name="red" id="red" value=""><label for="red"></label></span> </div>
+<article class="addButton">
+  <button class="button is-light" onclick=addMessage()>추가</button>
+
+</article>
+
+<article class="list">
+<span class="item"> Red wine</span>
+              <span class="subSelect">
+                  <button class="button is-light" onclick=fixMessage()>수정</button>
                   <button class="button is-light" onclick=deleteMessage()>삭제</button>
-                  <button class="button is-light" onclick=addMessage()>추가</button>
-                  <button class="button is-light" onclick=fixMessage()>수정</button>   
-              </div>
+              </span>
         </article>
 
-        <article class="list">
-          <dl class="date middle" id="white">
-            <dt class="item">화이트 
-            <a href="#" class="clearBtn" onclick="" style="float:right">선택삭제</a></dt>
-            
-            <dd class="content">
-              <div class="subSelect">
-                <div class="input">                 
-                  <span class="input"><input type="checkbox" name="white" id="white" value=""><label for="white"></label></span> </div>
-                  <button class="button is-light" onclick=deleteMessage()>삭제</button>
-                  <button class="button is-light" onclick=addMessage()>추가</button>
-                  <button class="button is-light" onclick=fixMessage()>수정</button>  
-              </div>
-        </article>
 
         
-        
         <article class="list">
-          <dl class="date middle" id="rose">
-            <dt class="item">로제 
-            <a href="#" class="clearBtn" onclick="" style="float:right">선택삭제</a></dt>
-            
-            <dd class="content">
-              <div class="subSelect">
-                <div class="input">                 
-                  <span class="input"><input type="checkbox" name="rose" id="rose" value=""><label for="rose"></label></span> </div>
-                  <button class="button is-light" onclick=deleteMessage()>삭제</button>
-                  <button class="button is-light" onclick=addMessage()>추가</button>
-                  <button class="button is-light" onclick=fixMessage()>수정</button> 
-              </div>
+        <span class="item"> White wine</span>
+              <span class="subSelect">
+                <button class="button is-light" onclick=fixMessage()>수정</button>
+                <button class="button is-light" onclick=deleteMessage()>삭제</button>
+              </span>
         </article>
 
-        
 
+
+        
         <article class="list">
-          <dl class="date middle" id="spark">
-            <dt class="item">스파클링
-            <a href="#" class="clearBtn" onclick="" style="float:right">선택삭제</a></dt>
-            
-            <dd class="content">
-              <div class="subSelect">
-                <div class="input">                 
-                  <span class="input"><input type="checkbox" name="spark" id="spark" value=""><label for="spark"></label></span> </div>
-                  <button class="button is-light" onclick=deleteMessage()>삭제</button>
-                  <button class="button is-light" onclick=addMessage()>추가</button>
-                  <button class="button is-light" onclick=fixMessage()>수정</button>   
-              </div>
+            <span class="item"> Rose wine</span>
+              <span class="subSelect">
+                <button class="button is-light" onclick=fixMessage()>수정</button>
+                <button class="button is-light" onclick=deleteMessage()>삭제</button>
+              </span>
         </article>
 
-        <button class="button is-fullwidth is-light mt-5" onclick="showCompletionMessage()">수정 완료</button>
+
+
+        
+        <article class="list">
+            <span class="item"> Sparkling wine</span>
+              <span class="subSelect">
+                <button class="button is-light" onclick=fixMessage()>수정</button>
+                <button class="button is-light" onclick=deleteMessage()>삭제</button>
+              </span>
+        </article>
+
+
+
+        <button class="button is-fullwidth is-light mt-5" onclick="showCompletionMessage()">확인</button>
 
       </div>
     </div>

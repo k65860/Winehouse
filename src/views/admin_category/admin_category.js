@@ -7,10 +7,10 @@ function fixMessage() {
   alert("수정되었습니다.");
 }
 
+
 function deleteMessage() {
   alert("삭제 되었습니다.");
 }
-
 function addMessage() {
   alert("추가 되었습니다.");
 }
