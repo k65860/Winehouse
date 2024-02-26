@@ -35,7 +35,7 @@ body {
     flex: 1;
 }
 
-.box1 {
+.box {
     width: 700px;
     height: 180px;
     display: flex;
