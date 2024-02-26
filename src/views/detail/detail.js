@@ -20,13 +20,3 @@ function count(type) {
   // 결과 출력
   resultElement.innerText = number;
 }
-
-// eslint-disable-next-line no-unused-vars
-function cartBtn() {
-  window.location.href = '/list.html';
-}
-
-// eslint-disable-next-line no-unused-vars
-function payBtn() {
-  window.location.href = '/order.html';
-}
