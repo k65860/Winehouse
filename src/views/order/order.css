@@ -41,6 +41,7 @@ h2 {
   align-items: flex-start;
   text-align: left;
 }
+
 .main2 .payment-info,
 .main2 .terms-agreement {
   text-align: left;
@@ -50,6 +51,7 @@ h2 {
   display: flex;
   margin: 40px 80px;
 }
+
 .center {
   display: flex;
   justify-content: center;
@@ -57,14 +59,17 @@ h2 {
   flex-direction: column;
   height: 25vh;
 }
+
 .container {
   display: flex;
   justify-content: center;
 }
+
 .checkbox-container {
   display: flex;
   align-items: center;
 }
+
 .checkbox-container input {
   margin-left: 10px;
 }
