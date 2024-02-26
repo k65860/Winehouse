@@ -11,8 +11,8 @@ const ProductSchema = new Schema({
     type: Number,
     required: true,
   },
-  category_name: {
-    type: String,
+  category_id: {
+    type: shortId,
     required: true,
     ref: 'Category',
   },

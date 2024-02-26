@@ -15,13 +15,28 @@ const mongodbUrl = process.env.MONGODB_URL;
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
 const viewsRouter = require('./routes/views');
+const categoryRouter = require('./routes/category');
 
 const app = express();
 
 // mongodb connect
-mongoose.connect(mongodbUrl)
-  .then(() => console.log('connected'))
-  .catch(() => console.log('failed'));
+mongoose.connect(
+  mongodbUrl,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'db',
+  },
+);
+
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Connected to mongodb');
+});
+db.on('error', (err) => {
+  console.log(err);
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,6 +47,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/', viewsRouter);
+app.use('/category', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -45,7 +61,7 @@ app.use((err, req, res) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(err.status || 500).json(err.message);
   res.render('error');
 });
 
