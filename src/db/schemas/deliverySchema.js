@@ -1,7 +1,9 @@
 const { Schema } = require('mongoose');
+const shortId = require('./types/short-id');
 
 const DeliverySchema = new Schema(
   {
+    shortId,
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
