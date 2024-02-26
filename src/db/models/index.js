@@ -11,5 +11,5 @@ module.exports = {
   Order,
   Category,
   Delivery,
-  Orderlist,
+  Orderlist
 };

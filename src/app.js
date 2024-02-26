@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
 const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -14,13 +12,21 @@ const mongodbUrl = process.env.MONGODB_URL;
 
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
-const viewsRouter = require('./routes/views');
+const productsRouter = require('./routes/products');
+const adminRouter = require('./routes/admin');
+// const viewsRouter = require('./routes/views');
 
 const app = express();
 
 // mongodb connect
-mongoose.connect(mongodbUrl)
-  .then(() => console.log('connected'))
+mongoose.connect(
+  mongodbUrl,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'db',
+  },
+) .then(() => console.log('connected'))
   .catch(() => console.log('failed'));
 
 app.use(logger('dev'));
@@ -31,7 +37,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
-app.use('/', viewsRouter);
+app.use('/product', productsRouter);
+app.use('/admin', adminRouter);
+// app.use('/', viewsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

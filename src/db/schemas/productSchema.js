@@ -1,8 +1,11 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
+// const shortId = require('./types/short-id');
 
 const ProductSchema = new Schema({
-  shortId,
+  // shortId: {
+  //   type: String,
+  //   required: false,
+  // },
   productName: {
     type: String,
     required: true,
@@ -47,13 +50,24 @@ const ProductSchema = new Schema({
   },
   updatedAt: {
     type: Date,
-    default: Date.now,
-    required: true,
+    default: null,
   },
   deletedAt: {
     type: Date,
     default:null,
   },
+});
+
+// 값이 수정될때 updatedAt 변경
+ProductSchema.pre('updateOne', function(next) {
+  this.updateOne({}, { $set: { updatedAt: new Date() } });
+  next();
+});
+
+// 상품이 삭제될때 deletedAt 변경
+ProductSchema.pre('deleteOne', function(next) {
+  this.updateOne({}, { $set: { deletedAt: new Date() } });
+  next();
 });
 
 module.exports = ProductSchema;

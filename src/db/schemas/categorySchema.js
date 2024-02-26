@@ -1,8 +1,7 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
+// const shortId = require('./types/short-id');
 
 const CategorySchema = new Schema({
-  shortId,
   category_name: {
     type: String,
     required: true,
