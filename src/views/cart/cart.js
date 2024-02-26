@@ -94,10 +94,18 @@ function displayCartItems() {
       const cartContainer = document.querySelector('#cart-items');
       cartContainer.innerHTML = ''; // 기존 내용을 지우고 다시 표시
 
-      cartItems.forEach((item) => {
-        const card = createCardElement(item);
-        cartContainer.appendChild(card);
-      });
+      if (cartItems.length > 0) {
+        // 장바구니에 상품이 있으면 notice 숨기기
+        document.querySelector('.notice').style.display = 'none';
+
+        cartItems.forEach((item) => {
+          const card = createCardElement(item);
+          cartContainer.appendChild(card);
+        });
+      } else {
+        // 장바구니에 상품이 없으면 notice 보이기
+        document.querySelector('.notice').style.display = 'flex';
+      }
     };
   };
 }
@@ -160,6 +168,24 @@ deleteSelectedButton.addEventListener('click', () => {
   }
 });
 
+// 선택 삭제 버튼 클릭 시
+const deleteAllButton = document.querySelector('#delete-all-button');
+
+deleteAllButton.addEventListener('click', () => {
+  const cartItems = document.querySelectorAll('#cart-items .card');
+  
+  // 장바구니에 상품이 없으면 알림창 띄우기
+  if (cartItems.length === 0) {
+    alert("장바구니에 담긴 상품이 없습니다.");
+    return;
+  }
+
+  const confirmDelete = confirm("장바구니에 담긴 모든 상품을 삭제하시겠습니까?");
+  if (confirmDelete) {
+    deleteAllCartItems();
+  }
+});
+
 // 장바구니 상품 삭제 함수
 function deleteCartItem(itemId) {
   const request = window.indexedDB.open('winehouse');
@@ -175,5 +201,22 @@ function deleteCartItem(itemId) {
       const data = event.target.result;
       store.delete(data.id);
     };
+  };
+}
+
+// 모든 장바구니 상품 삭제 함수
+function deleteAllCartItems() {
+  const request = window.indexedDB.open('winehouse');
+  let db;
+
+  request.onsuccess = (event) => {
+    db = event.target.result;
+    const transaction = db.transaction(['cart'], 'readwrite');
+    const store = transaction.objectStore('cart');
+
+    store.clear();
+
+    displayCartItems();
+    alert("장바구니에 담긴 모든 상품이 삭제되었습니다.");
   };
 }
