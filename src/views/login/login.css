@@ -1,67 +1,47 @@
-  html,
-  body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-  }
+/* login.css */
 
-  /* main */
-  .main {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      justify-content: center;
-  }
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-  .box {
-      width: 700px;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-  }
+/* main */
+.main {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
 
-  .title {
-      color: #af66aa;
-      margin: 20px;
-      text-align: center;
-  }
+.box {
+    width: 700px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.title {
+    color: #af66aa;
+    margin: 20px;
+    text-align: center;
+}
 
-  .buttons-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+.buttons.are-medium {
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-  .buttons.are-medium {
-      margin: 0 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+.registerText {
+    text-align: center;
+    margin-top: 10px;
+}
 
-
-  .managerLogin {
-      display: flex;
-      flex-direction: column;
-  }
-
-  .column {
-      display: flex;
-
-  }
-
-  .main1 {
-      display: flex;
-  }
-
-  .registerText {
-      text-align: center;
-      margin-top: 10px;
-  }
-
-  .registerText a {
-      color: #af66aa;
-  }
+.registerText a {
+    color: #af66aa;
+}
