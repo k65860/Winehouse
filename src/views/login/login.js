@@ -1,6 +1,10 @@
-// eslint-disable-next-line no-unused-vars
-function Login() {
-    // eslint-disable-next-line no-restricted-globals
-    window.location.href = 'http://localhost:4000';
-  }
+document.addEventListener('DOMContentLoaded', function () {
+  // 로그인 버튼을 클릭
+  const loginButton = document.getElementById('editProfileButton');
+  loginButton.addEventListener('click', function () {
   
+      window.location.href = '/';
+  });
+
+  
+});

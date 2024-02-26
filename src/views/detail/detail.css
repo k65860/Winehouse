@@ -1,144 +1,103 @@
-/* common */
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    font-family: 'GmarketSansMedium';
-}
-
 html,
 body {
-    height: 100%;
-    /* 전체 페이지 좁게 가운데 정렬하는 코드 -> auto*/
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-/* header */
-.navbar {
-
-    /* background-color: #af66aa; */
-    a.navbar-item:hover {
-        background-color: #fafafa;
-        color: #af66aa;
-    }
-}
-
-.icon {
-    margin: 0 10px;
+  height: 100%;
+  /* 전체 페이지 좁게 가운데 정렬하는 코드 -> auto*/
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* main */
 .main {
-    display: flex;
-    justify-content: center;
-    /*사진이랑 글자있는 부분 정확히 반 나누고 싶음*/
-    align-items: center;
-    flex: 1;
-    width: 100%;
-    height: 500px;
+  display: flex;
+  justify-content: center;
+  /*사진이랑 글자있는 부분 정확히 반 나누고 싶음*/
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  height: 500px;
 }
 
 .left {
-    width: 50%;
-    float: left;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: right;
+  width: 50%;
+  float: left;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: right;
 }
 
 .right {
-    width: 50%;
-    float: right;
-    box-sizing: border-box;
-    display: flex;
+  width: 50%;
+  float: right;
+  box-sizing: border-box;
+  display: flex;
 }
 
 #photo {
-    width: 500px;
-    height: 300px;
-    margin: 20px;
-    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  width: 500px;
+  height: 300px;
+  margin: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .detailDiv {
-    width: 500px;
-    margin: 80px;
-    padding: 50px;
-    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  width: 500px;
+  margin: 80px;
+  padding: 50px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .detailRow {
-    margin: 40px 0 40px 0;
+  margin: 40px 0 40px 0;
 }
 
 #detailFont,
 #result {
-    color: black;
-    font-size: 0.9em;
+  color: black;
+  font-size: 0.9em;
 }
 
 hr {
-    background-color: black;
-    height: 0.1px;
+  background-color: black;
+  height: 0.1px;
 }
 
 #quantity {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 #quantityBtn {
-    border-style: none;
+  border-style: none;
+  cursor: pointer;
 }
 
 .buttonDiv {
-    display: flex;
-    justify-content: center;
-    margin: 40px 0 40px 0;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.buttonDiv button {
+  margin: 10px;
 }
 
 #cartBtn {
-    border-radius: 30px;
-    border-style: solid;
-    border-color: #af66aa;
-    background-color: #d5d5d5;
-    color: white;
-    margin: 10px;
+  border-radius: 30px;
+  border-style: solid;
+  border-color: #af66aa;
+  background-color: #d5d5d5;
+  color: white;
+  margin: 10px;
 }
 
 #payBtn {
-    border-radius: 30px;
-    border-style: solid;
-    border-color: #af66aa;
-    background-color: #af66aa;
-    color: white;
-    margin: 10px;
-}
-
-/* footer */
-.footer {
-    padding: 3rem 1.5rem;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.company-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.info-title {
-    font-weight: bold;
+  border-radius: 30px;
+  border-style: solid;
+  border-color: #af66aa;
+  background-color: #af66aa;
+  color: white;
+  margin: 10px;
 }
