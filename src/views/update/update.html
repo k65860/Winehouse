@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,99 +15,101 @@
   <script src="update.js" type="module" defer></script>
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
+
 <body>
-    <!-- Header -->
-    <nav class="navbar has-shadow">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="/images/winehouse_logo.png" alt="winehouse-logo">
+  <!-- Header -->
+  <nav class="navbar has-shadow">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/images/winehouse_logo.png" alt="winehouse-logo">
+      </a>
+
+      <a class="navbar-burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="nav-links">
+      <div class="navbar-start ml-2">
+        <a class="navbar-item">레드</a>
+        <a class="navbar-item">화이트</a>
+        <a class="navbar-item">로제</a>
+        <a class="navbar-item">스파클링</a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="cart-icon" href="/cart">
+              <i class="fa-solid fa-cart-shopping"></i>
             </a>
-
-            <a class="navbar-burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </a>
-        </div>
-
-        <div class="navbar-menu" id="nav-links">
-            <div class="navbar-start ml-2">
-                <a class="navbar-item">레드</a>
-                <a class="navbar-item">화이트</a>
-                <a class="navbar-item">로제</a>
-                <a class="navbar-item">스파클링</a>
-            </div>
-
-            <div class="navbar-end">
-              <div class="navbar-item">
-                <div class="buttons">
-                  <a class="cart-icon" href="/cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </a>
-                  <a class="button is-light" href="/login"><strong>로그인</strong></a>
-                </div>
-              </div>      
-            </div>
-        </div>
-    </nav>
-
-    <main role="main">
-        <div class="main">
-          <div class="update">
-            <p class="title">정보 수정</p>
-            <form class="box">
-              <div class="field">
-                <label class="label">이름</label>
-                <div class="control">
-                  <input id="nameInput" class="input" type="text" placeholder="이름을 입력해주세요">
-                </div>
-              </div>
-      
-              <div class="field">
-                <label class="label">이메일</label>
-                <div class="control">
-                  <input id="emailInput" class="input" type="email" placeholder="이메일을 입력해주세요">
-                </div>
-              </div>
-      
-              <div class="field">
-                <label class="label">비밀번호</label>
-                <div class="control">
-                  <input class="input" type="password" placeholder="비밀번호를 입력해주세요.">
-                </div>
-              </div>
-      
-              <div class="field">
-                <label class="label">비밀번호 확인</label>
-                <div class="control">
-                  <input class="input" type="password" placeholder="비밀번호를 다시한번 입력해주세요.">
-                </div>
-              </div>
-      
-              <div class="field">
-                <label class="label">주소</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="주소를 입력해주세요.">
-                </div>
-              </div>
-      
-              <div class="field">
-                <label class="label">전화 번호</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="전화번호를 입력해주세요.">
-                </div>
-              </div>
-      
-              
-              <div class="buttons are-medium">
-                <button id="editProfileButton" class="button is-primary">수정하기</button>
-                <button id="withdrawButton" class="button is-primary">탈퇴하기</button>
-            </div>
-            </form>
+            <a class="button is-light" href="/login"><strong>로그인</strong></a>
           </div>
         </div>
-      </main>
-      
+      </div>
+    </div>
+  </nav>
+
+  <main role="main">
+    <div class="main">
+      <div class="update">
+        <p class="title">정보 수정</p>
+        <form class="box">
+          <div class="field">
+            <label class="label">이름</label>
+            <div class="control">
+              <input id="nameInput" class="input" type="text" placeholder="이름을 입력해주세요">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">이메일</label>
+            <div class="control">
+              <input id="emailInput" class="input" type="email" placeholder="이메일을 입력해주세요">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">비밀번호</label>
+            <div class="control">
+              <input id="passwordInput" class="input" type="password" placeholder="비밀번호를 입력해주세요.">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">비밀번호 확인</label>
+            <div class="control">
+              <input id="confirmPasswordInput" class="input" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요.">
+              <p id="passwordMatchMessage" class="help is-danger" style="display: none;">비밀번호가 일치하지 않습니다.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">주소</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="주소를 입력해주세요.">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">전화 번호</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="전화번호를 입력해주세요.">
+            </div>
+          </div>
+
+
+          <div class="buttons are-medium">
+            <button id="editProfileButton" class="button is-primary">수정하기</button>
+            <button id="withdrawButton" class="button is-primary">탈퇴하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
@@ -126,4 +129,5 @@
     </div>
   </footer>
 </body>
+
 </html>
