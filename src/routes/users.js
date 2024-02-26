@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const UserService = require('../services/userService');
 
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const newUser = await UserService.createUser(req.body);
     res.status(201).json(newUser);
