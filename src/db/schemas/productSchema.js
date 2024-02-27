@@ -2,10 +2,7 @@ const { Schema } = require('mongoose');
 // const shortId = require('./types/short-id');
 
 const ProductSchema = new Schema({
-  // shortId: {
-  //   type: String,
-  //   required: false,
-  // },
+  // shortId,
   product_name: {
     type: String,
     required: true,
@@ -43,13 +40,18 @@ const ProductSchema = new Schema({
     type: Number,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Date,
+    required: true,
+  },
   deletedAt: {
     type: Date,
-    default:null,
-  },},
-  {
-    timestamps:true
-  }
-);
+    required: true,
+  },
+});
 
 module.exports = ProductSchema;

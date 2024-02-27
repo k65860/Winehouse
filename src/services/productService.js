@@ -1,116 +1,131 @@
-const { Product, Category } = require('../db/models/index.js');
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-return-await */
+// 불러오기
+const Category = require('../db/models/category');
+const Product = require('../db/models/product');
 
 class ProductService {
-    // 상품 추가
-    async createProduct(productName, productPrice, categoryId, productCountry, productGrape, productMadeyear, productSweetrate, productSourrate, productBodyrate) {
-        try {
-            // 카테고리 ID로 카테고리 찾기
-            const category = await Category.findOne({ _id: categoryId });
-            if(!category) { 
-                throw new Error('카테고리를 찾을 수 없습니다.')
-            }
+  constructor() {
+    this.Product = Product;
+  }
 
-
-            // 상품  생성
-            const product = await Product.create({ 
-                product_name: productName, 
-                product_price: productPrice, 
-                category_id: category._id,
-                product_country: productCountry,
-                product_grape: productGrape,
-                product_madeyear: productMadeyear, 
-                product_sweetrate: productSweetrate, 
-                product_sourrate: productSourrate, 
-                product_bodyrate: productBodyrate,
-            });
-
-            console.log(product);    
-            return product;
-        } catch (err){
-            console.log(err);
-            throw new Error('상품을 생성하는데 실패했습니다.');
-        }
+  // 상품 추가 시 빈 필드 확인
+  // eslint-disable-next-line class-methods-use-this
+  async checkProductField(
+    productName,
+    productPrice,
+    categoryId,
+    productCountry,
+    productGrape,
+    productMadeyear,
+    productSweetrate,
+    productSourrate,
+    productBodyrate,
+  ) {
+    // 빈값 확인하는 함수
+    function isEmpty(value) {
+      return value == null || value === '';
     }
+    // 빈값 여부 확인
+    return Object.values(
+      productName,
+      productPrice,
+      categoryId,
+      productCountry,
+      productGrape,
+      productMadeyear,
+      productSweetrate,
+      productSourrate,
+      productBodyrate,
+    ).some(isEmpty);
+  }
 
-    // 상품 수정
-    async updateProduct(productId, productName, productPrice, categoryId, productCountry, productGrape, productMadeyear, productSweetrate, productSourrate, productBodyrate) {
-        try {
-            const updatedProduct = await Product.findOneAndUpdate(
-                { _id: productId },
-                { 
-                    product_name: productName, 
-                    product_price: productPrice, 
-                    category_id: categoryId,
-                    product_country: productCountry,
-                    product_grape: productGrape,
-                    product_madeyear: productMadeyear, 
-                    product_sweetrate: productSweetrate, 
-                    product_sourrate: productSourrate, 
-                    product_bodyrate: productBodyrate, 
-                    updatedAt: Date.now
-                },
-                { new: true } // 업데이트 된 문서 반환
-            );
-     
-            return updatedProduct;
-        } catch(err) {
-            
-            throw new Error(`상품 수정하는데 실패했습니다: ${err.message}`);
-        }
-    }
+  // 상품 ID 확인
+  async checkProductId(productId) {
+    return await this.Product.findOne({ _id: productId });
+  }
 
-    // 상품 상세 정보
-    async getProductInfo(productId) {
-        try{
-            // ID로 상품 조회
-            const product = await Product.findOne({_id:productId});
+  // 카테고리 소속 상품 유무 확인
+  async checkCategoryHasProduct(categoryId) {
+    return await this.Product.findOne({ category_id: categoryId });
+  }
 
-            if(!product) {
-                throw new Error('상품을 찾을 수 없습니다.')
-            }
+  // 상품 목록 (개수 자르기는 여기서 진행)
+  async getProductList() {
+    return await this.Product.find({});
+  }
 
-            return product;
-        } catch(err) {
-            throw new Error(`상품 정보를 가져올 수 없습니다: ${err.message}`);
-        }
-    }
+  // 특정 카테고리에 속한 상품 조회
+  async getProductListByCategory(categoryId) {
+    return await this.Product.find({ category_id: categoryId });
+  }
 
-    // 상품 목록
-    async getProducts() {
-        try {
-            const products = await Product.find({});
+  // 상품 상세 정보
+  async getProductInfo(productId) {
+    return await this.Product.findOne({ _id: productId });
+  }
 
-            return products;
-        } catch(err){
-            throw new Error('상품 목록 가져오는데 실패했습니다.')
-        }
-    }
+  // 상품 추가
+  async addProduct(
+    productName,
+    productPrice,
+    categoryId,
+    productCountry,
+    productGrape,
+    productMadeyear,
+    productSweetrate,
+    productSourrate,
+    productBodyrate,
+  ) {
+    // 상품  생성
+    return await this.Product.create({
+      product_name: productName,
+      product_price: productPrice,
+      category_id: categoryId,
+      product_country: productCountry,
+      product_grape: productGrape,
+      product_madeyear: productMadeyear,
+      product_sweetrate: productSweetrate,
+      product_sourrate: productSourrate,
+      product_bodyrate: productBodyrate,
+    });
+  }
 
-    // 특정 카테고리에 속한 상품 조회
-    async getProductByCategory(categoryId){
-        try{
-            // 카테고리 ID로 카테고리 찾기
-            const category = await Category.findOne({ _id: categoryId });
-            if(!category) { 
-                throw new Error('카테고리를 찾을 수 없습니다.')
-            }
-            // 해당 카테고리 상품 조회
-            const products = await Product.find({ categoryId: category._id });
+  // 상품 수정
+  async setProduct(
+    productId,
+    productName,
+    productPrice,
+    categoryId,
+    productCountry,
+    productGrape,
+    productMadeyear,
+    productSweetrate,
+    productSourrate,
+    productBodyrate,
+  ) {
+    return await this.Product.findOneAndUpdate(
+      { _id: productId },
+      {
+        product_name: productName,
+        product_price: productPrice,
+        category_id: categoryId,
+        product_country: productCountry,
+        product_grape: productGrape,
+        product_madeyear: productMadeyear,
+        product_sweetrate: productSweetrate,
+        product_sourrate: productSourrate,
+        product_bodyrate: productBodyrate,
+        // updatedAt: Date.now,
+      },
+    );
+  }
 
-            return products;
-        } catch (err) {
-            throw new Error(`카테고리 속한 상품들을 조회 실패했습니다: ${err}`)
-        }
-    }
-
-    // 상품 삭제 
-    async deleteProduct(shortId) {
-            // 삭제할 상품을 찾아 삭제
-            const deletedProduct = await Product.deleteOne({ shortId });
-            
-            return deletedProduct;
-    }
-
+  // 상품 삭제
+  async deleteProduct(productId) {
+    const deletedProduct = await this.Product.deleteOne({ _id: productId });
+    return deletedProduct;
+  }
 }
 
 module.exports = new ProductService();
