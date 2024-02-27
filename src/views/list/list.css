@@ -1,103 +1,58 @@
-/* common */
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    font-family: 'GmarketSansMedium';
-}
-
 html,
 body {
-    height: 100%;
-    /* 전체 페이지 좁게 가운데 정렬하는 코드*/
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-/* header */
-.navbar {
-
-    /* background-color: #af66aa; */
-    a.navbar-item:hover {
-        background-color: #fafafa;
-        color: #af66aa;
-    }
-}
-
-.icon {
-    margin: 0 10px;
+  height: 100%;
+  /* 전체 페이지 좁게 가운데 정렬하는 코드*/
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* main */
 .main {
-    display: flex;
-    justify-content: center;
-    margin: 0px;
-    flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+  flex: 1;
 }
 
 .orderList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 3rem;
 }
 
 .listFont {
-    margin-bottom: 0;
-    font-size: 1.4em
+  margin-bottom: 0;
+  font-size: 1.4em;
 }
 
 #photo {
-    width: 200px;
-    margin: 20px;
-    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  width: 200px;
+  margin: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 #photo {
-    filter: brightness(1);
+  filter: brightness(1);
 }
 
 #photo:hover {
-    filter: brightness(0.8);
-    cursor: pointer;
+  filter: brightness(0.8);
+  cursor: pointer;
 }
 
 #productPhoto {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .photoBox {
-    margin: 15px;
+  margin: 15px;
 }
 
 #text {
-    margin: 0 20px 0 20px;
-    font-size: 0.8em;
-}
-
-/* footer */
-.footer {
-    padding: 3rem 1.5rem;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.company-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.info-title {
-    font-weight: bold;
+  margin: 0 20px 0 20px;
+  font-size: 0.8em;
 }

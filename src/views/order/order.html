@@ -17,177 +17,128 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <nav class="navbar has-shadow">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="/images/winehouse_logo.png" alt="winehouse-logo">
-            </a>
+  <!-- header -->
+  <div id="header-container"></div>
 
-            <a class="navbar-burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </a>
+  <main class="main">
+    <main class="main1">
+      <div class="order-form info">
+        <h2>배송지 정보 입력</h2>
+        <div class="your-class-name"></div>
+        <!-- 배송지 정보 입력 부분 -->
+        <div class="field">
+          <label class="label">이름</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="이름을 입력하세요">
+          </div>
         </div>
 
-        <div class="navbar-menu" id="nav-links">
-            <div class="navbar-start ml-2">
-                <a class="navbar-item">레드</a>
-                <a class="navbar-item">화이트</a>
-                <a class="navbar-item">로제</a>
-                <a class="navbar-item">스파클링</a>
+        <div class="field" style="margin-bottom: 20px;">
+          <label class="label">전화번호</label>
+          <div class="control">
+            <input class="input" type="tel" placeholder="전화번호를 입력하세요">
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom: 20px;">
+          <label class="label">주소</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="주소를 입력하세요">
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom: 20px;">
+          <label class="label">요청사항</label>
+          <div class="control">
+            <div class="select">
+              <select>
+                <option>배송 시 요청사항을 선택해주세요</option>
+                <option>문 앞에 놔주세요.</option>
+                <option>경비실에 맡겨주세요.</option>
+              </select>
             </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <i class="fa-solid fa-cart-shopping icon"></i>
-                        <a class="button is-light"><strong>로그인</strong></a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </nav>
-
-
-<main class="main">
-  <main class="main1">
-  <div class="order-form info">
-    <h2 >배송지 정보 입력</h2>
-    <div class="your-class-name"></div>
-    <!-- 배송지 정보 입력 부분 -->
-    <div class="field">
-      <label class="label">이름</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="이름을 입력하세요">
-      </div>
-    </div>
-
-    <div class="field" style="margin-bottom: 20px;">
-      <label class="label">전화번호</label>
-      <div class="control">
-        <input class="input" type="tel" placeholder="전화번호를 입력하세요">
-      </div>
-    </div>
-
-    <div class="field" style="margin-bottom: 20px;">
-      <label class="label">주소</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="주소를 입력하세요">
-      </div>
-    </div>
-
-    <div class="field" style="margin-bottom: 20px;">
-      <label class="label">요청사항</label>
-      <div class="control">
-        <div class="select">
-          <select>
-            <option>배송 시 요청사항을 선택해주세요</option>
-            <option>문 앞에 놔주세요.</option>
-            <option>경비실에 맡겨주세요.</option>
-          </select>
-        </div>
-      </div>
-    </div>
-<!-- 주문상품 정보 부분 -->
+        <!-- 주문상품 정보 부분 -->
 
         <div class="product-info">
           <div style="height: 50px;"></div>
           <h2>주문상품 정보</h2>
           <div class="your-class-name"></div>
           <img src="wine_img3.jpg" alt="Product Image">
-            <div class="product-details">
-              <p>상품 이름</p>
-              <p>가격: 10,000원/수량: 2개</p>
+          <div class="product-details">
+            <p>상품 이름</p>
+            <p>가격: 10,000원/수량: 2개</p>
+          </div>
+        </div>
+    </main>
+    <main class="main2 ">
+      <div class="inner order-container">
+        <div class="order-summary">
+          <div class="total-amount your-class-name">
+            <h2>결제 정보</h2>
+          </div>
+          <p>총 상품 금액: 20,000원</p>
+          <div style="height: 10px;"></div>
+          <div class="shipping-fee your-class-name">
+            <p>배송비: 2,000원</p>
+            <div style="height: 50px;"></div>
+          </div>
+          <div style="height: 3px;"></div>
+          <div class="total-payment">
+            <p>총 결제 금액: 22,000원</p>
+          </div>
+          <div style="height: 50px;"></div>
+        </div>
+
+        <div class="payment-info">
+          <h2>결제 수단</h2>
+          <div class="your-class-name"></div>
+          <div class="payment-method" id="credit-card">
+            <input type="radio" id="creditCard" name="paymentMethod" value="creditCard">
+            <label for="creditCard">신용카드</label>
+          </div>
+
+          <div class="payment-method" id="bank-transfer">
+            <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+            <label for="bankTransfer">무통장 입금</label>
+          </div>
+
+          <div class="payment-method" id="naver-pay">
+            <input type="radio" id="naverPay" name="paymentMethod" value="naverPay">
+            <label for="naverPay">네이버 페이</label>
+          </div>
+
+          <div class="payment-method" id="kakao-pay">
+            <input type="radio" id="kakaoPay" name="paymentMethod" value="kakaoPay">
+            <label for="kakaoPay">카카오 페이</label>
+            <div style="height: 50px;"></div>
+          </div>
+        </div>
+
+        <div class="agree-info">
+          <div class="terms-agreement">
+            <h2>약관 동의</h2>
+            <div class="your-class-name"></div>
+            <div class="checkbox-container">
+              <label for="termsAgree">동의 하시겠습니까?</label>
+              <input type="checkbox" id="termsAgree" name="termsAgree">
             </div>
+          </div>
+          <div style="height: 50px;"></div>
         </div>
-</main>
-<main class="main2 ">
-  <div class="inner order-container">
-    <div class="order-summary">
-      <div class="total-amount your-class-name">
-        <h2>결제 정보</h2>
-      </div>
-      <p>총 상품 금액: 20,000원</p>
-      <div style="height: 10px;"></div>
-      <div class="shipping-fee your-class-name">
-        <p>배송비: 2,000원</p>
-        <div style="height: 50px;"></div>
-      </div>
-      <div style="height: 3px;"></div>
-      <div class="total-payment">
-        <p>총 결제 금액: 22,000원</p>
-      </div>
-      <div style="height: 50px;"></div>
-    </div>
-  
-    <div class="payment-info">
-      <h2>결제 수단</h2>
-      <div class="your-class-name"></div>
-      <div class="payment-method" id="credit-card">
-        <input type="radio" id="creditCard" name="paymentMethod" value="creditCard">
-        <label for="creditCard">신용카드</label>
-      </div>
-  
-      <div class="payment-method" id="bank-transfer">
-        <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
-        <label for="bankTransfer">무통장 입금</label>
-      </div>
-  
-      <div class="payment-method" id="naver-pay">
-        <input type="radio" id="naverPay" name="paymentMethod" value="naverPay">
-        <label for="naverPay">네이버 페이</label>
-      </div>
-  
-      <div class="payment-method" id="kakao-pay">
-        <input type="radio" id="kakaoPay" name="paymentMethod" value="kakaoPay">
-        <label for="kakaoPay">카카오 페이</label>
-        <div style="height: 50px;"></div>
-      </div>
-    </div>
 
-    <div class="agree-info">
-      <div class="terms-agreement" >
-        <h2>약관 동의</h2>
-        <div class="your-class-name"></div>    
-        <div class="checkbox-container">
-        <label for="termsAgree">동의 하시겠습니까?</label>
-        <input type="checkbox" id="termsAgree" name="termsAgree">
+        <div class="pay-button">
+          <button class="button is-primary is-fullwidth mt-5" id="payButton">결제</button>
+          <p id="paymentErrorMessage" class="help is-danger" style="display: none;">결제 수단을 선택해주세요.</p>
+          <p id="termsErrorMessage" class="help is-danger" style="display: none;">약관에 동의해주세요.</p>
         </div>
       </div>
-      <div style="height: 50px;"></div>
-    </div>
+    </main>
 
-    <div class="pay-button">
-      <a href="/detail">
-        <div class="button is-primary" style="background-color: #af66aa;">
-          <div class="div6">결제</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</main>
+  </main>
 
-</main>
-
-<!-- footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="company-name">
-      <p>WineHouse</p>
-    </div>
-    <div class="company-info">
-      <p class="info-title">회사 정보</p>
-      <p>(주)WineHouse | 대표 엘리스</p>
-      <p>서울특별시 강남구 선릉로 433, 신관 6층</p>
-    </div>
-    <div class="customer-service">
-      <p class="info-title">고객 센터</p>
-      <p>070-4633-2017</p>
-      <p>OPEN 10:00-18:00(BREAK 12:00-13:00)</p>
-    </div>
-  </div>
-</footer>
+  <!-- footer -->
+  <div id="footer-container"></div>
 </body>
 </html>

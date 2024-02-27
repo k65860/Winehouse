@@ -12,44 +12,13 @@
   <!-- custom css, js -->
   <link rel="stylesheet" href="detail.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
-  <script type="text/javascript" src="detail.js"></script>
+  <script src="detail.js" type="module" defer></script>
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
 
 <body>
   <!-- header -->
-  <nav class="navbar has-shadow">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="/images/winehouse_logo.png" alt="winehouse-logo">
-      </a>
-
-      <a class="navbar-burger" id="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </a>
-    </div>
-
-    <div class="navbar-menu" id="nav-links">
-      <div class="navbar-start ml-2">
-        <a class="navbar-item">레드</a>
-        <a class="navbar-item">화이트</a>
-        <a class="navbar-item">로제</a>
-        <a class="navbar-item">스파클링</a>
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <i class="fa-solid fa-cart-shopping icon"></i>
-            <a class="button is-light"><strong>로그인</strong></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </nav>
+  <div id="header-container"></div>
 
   <div class="main">
     <div class="left">
@@ -64,45 +33,29 @@
         <div class="detailRow">
           <a id="detailFont">가격</a>
         </div>
-        <hr>
+        <hr class="hr">
         <div class="detailRow" id="quantity">
           <a id="detailFont">수량</a>
           <div>
-            <input type='button' onclick='count("minus")' value='-' id="quantityBtn" />
+            <button id="minus" class="quantityBtn">-</button>
             <a id='result'>1</a>
-            <input type='button' onclick='count("plus")' value='+' id="quantityBtn" />
+            <button id="plus" class="quantityBtn">+</button>
           </div>
         </div>
         <div class="detailRow">
           <a id="detailFont">총가격</a>
         </div>
         <div class="buttonDiv">
-          <input type="button" id="cartBtn" value="장바구니" onclick='cartBtn()'>
-          <input type="button" id="payBtn" value="   결제   " onclick='payBtn()'>
+          <button class="button is-light is-fullwidth mt-5" id="cartBtn">장바구니</button>
+          <button class="button is-primary is-fullwidth mt-5" id="payBtn">결제하기</button>
         </div>
       </div>
     </div>
 
   </div>
 
-
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="company-name">
-        <p>WineHouse</p>
-      </div>
-      <div class="company-info">
-        <p class="info-title">회사 정보</p>
-        <p>(주)WineHouse | 대표 엘리스</p>
-        <p>서울특별시 강남구 선릉로 433, 신관 6층</p>
-      </div>
-      <div class="customer-service">
-        <p class="info-title">고객 센터</p>
-        <p>070-4633-2017</p>
-        <p>OPEN 10:00-18:00(BREAK 12:00-13:00)</p>
-      </div>
-    </div>
-  </footer>
+  <!-- footer -->
+  <div id="footer-container"></div>
 </body>
 
 </html>

@@ -11,15 +11,14 @@
   <!-- custom css, js -->
   <link rel="stylesheet" href="admin_add.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
-  <!-- <script src="admin-product-update.js" type="module" defer></script> -->
   <!-- <script src="/javascripts/global.js" type="module" defer></script> -->
-  <script src="admin_add.js"></script>
+  <script src="admin_add.js" type="module" defer></script>
 </head>
 <body>
   <!-- admin header -->
   <nav class="navbar is-light">
     <div class="navbar-brand">
-      <a class="navbar-item" href="#">
+      <a class="navbar-item" href="/admin_order">
         <p>WINEHOUSE-ADMIN</p>
       </a>
     </div>
@@ -37,9 +36,12 @@
           </a>
         </li>
         <li>
-          <a href="/admin_add" class="is-active">
+          <a href="/admin_product">
             <span class="icon"><i class="fa-solid fa-wine-bottle"></i></span> 상품 관리
           </a>
+          <ul>
+            <li><a href="/admin_add" class="is-active">상품 추가</a></li>
+          </ul>
         </li>
         <li>
           <a href="/admin_category">
@@ -54,67 +56,65 @@
   
         <div class="card">
           <div class="card-header"><p class="card-header-title">상품 추가</p></div>
-          <div class="card-content">
+          <form class="card-content">
 
             <div class="upload-img">
               <div id="img-container"></div>
-              <input type="file" accept="image/*" onchange="previewFile(event)">
+              <input id="input-img" type="file" accept="image/*">
             </div>
             
-            <div class="content">
-              <div class="field">
-                <label class="label">이름</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="이름을 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">가격</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="가격을 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">타입</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="타입을 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">국가</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="국가를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">당도</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="당도를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">산미</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="산미를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">바디</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="바디를 입력해주세요.">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">년도</label>
-                <div class="control">
-                  <input class="input" type="number" placeholder="년도를 입력해주세요.">
-                </div>
+            <div class="field">
+              <label class="label">이름</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="이름을 입력해주세요.">
               </div>
             </div>
-          </div>
+            <div class="field">
+              <label class="label">가격</label>
+              <div class="control">
+                <input class="input" type="number" placeholder="가격을 입력해주세요.">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">타입</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="타입을 입력해주세요.">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">국가</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="국가를 입력해주세요.">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">당도</label>
+              <div class="control">
+                <input class="input" type="number" placeholder="당도를 입력해주세요.">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">산미</label>
+              <div class="control">
+                <input class="input" type="number" placeholder="산미를 입력해주세요.">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">바디</label>
+              <div class="control">
+                <input class="input" type="number" placeholder="바디를 입력해주세요.">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">생산 연도</label>
+              <div class="control">
+                <input class="input" type="number" placeholder="생산 연도를 입력해주세요.">
+              </div>
+            </div>
+            
+            <button id="add-button" class="button is-fullwidth is-light mt-5">추가</button>
+          </form>
         </div>
-
-        <button class="button is-fullwidth is-light mt-5">상품 수정</button>
         
       </div>
     </div>
