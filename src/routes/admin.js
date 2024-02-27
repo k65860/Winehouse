@@ -49,8 +49,7 @@ adminRouter.patch('/product/:productId', asyncHandler(async(req, res) => {
         productMadeyear, 
         productSweetrate, 
         productSourrate, 
-        productBodyrate, 
-        updatedAt, 
+        productBodyrate,  
     )
 
     console.log(updatedAt);
