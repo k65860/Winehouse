@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const shortId = require('./types/short-id');
 
-const CategorySchema = new Schema({
+const imageSchema = new Schema({
   shortId,
   product_id: {
     type: shortId,
@@ -26,4 +26,4 @@ const CategorySchema = new Schema({
   },
 });
 
-module.exports = CategorySchema;
+module.exports = imageSchema;

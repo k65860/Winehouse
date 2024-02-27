@@ -1,4 +1,4 @@
 const mongoose = require('mongoose');
 const OrderSchema = require('../schemas/orderSchema');
 
-module.exports = mongoose.model('Category', OrderSchema);
+module.exports = mongoose.model('Order', OrderSchema);
