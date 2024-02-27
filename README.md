@@ -28,7 +28,7 @@
   https://www.figma.com/file/R4vvhQjMq3PSULTtPrkcHU/Wine-House?type=design&node-id=0-1&mode=design&t=AOtlyKpYr70ruUDv-0
 
 ## 4. 프로젝트 팀원 역할 분담
-| 이름 | 담당 업무 |
+| 담당 업무 | 이름 |
 | ------ | ------ |
 | 팀장 | 임채리 |
 | 프론트엔드 | 임채리, 이하은, 이상돈, 김지연 |
