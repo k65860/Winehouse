@@ -10,8 +10,8 @@ const categoryRouter = Router();
 
 // 카테고리 조회
 categoryRouter.get('/', asyncHandler(async (req, res, next) => {
-  const categoryList = await CategoryService.getCategories();
-
+  const categoryList = await CategoryService.getCategoryList();
+  // 성공 상태 핸들링
   res.status(200).json({
     status: 200,
     message: '전체 카테고리 목록 조회 성공',
@@ -23,16 +23,14 @@ categoryRouter.get('/', asyncHandler(async (req, res, next) => {
 categoryRouter.post('/', asyncHandler(async (req, res, next) => {
   const { categoryName } = req.body;
   // 카테고리명 중복 확인
-  const categoryNameExisted = await Category.findOne({ category_name: categoryName });
-  console.log(categoryNameExisted);
-  if (categoryNameExisted) {
-    res.status(409).json({
-      status: 409,
-      message: '이미 있는 카테고리입니다.',
-    });
+  if (await CategoryService.checkCategoryNameDuplicated(categoryName)) {
+    const e = new Error('이미 있는 카테고리입니다.');
+    e.status = 409;
+    throw e;
   }
   // 추가 진행
   const categoryAdding = await CategoryService.addCategory(categoryName);
+  // 성공 상태 핸들링
   res.status(201).json({
     status: 201,
     message: '카테고리 추가 성공',
@@ -41,27 +39,24 @@ categoryRouter.post('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 카테고리 수정 -> admin 한정 (추후 어드민 확인 절차 추가 필요)
-categoryRouter.patch('/', asyncHandler(async (req, res, next) => {
+categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   const { modifedName } = req.body;
-  const category = await Category.findById(categoryId);
-  // ID 확인
-  if (!category) {
-    res.status(404).json({
-      status: 404,
-      message: '해당 카테고리의 id가 없습니다.',
-    });
+  // 카테고리 ID 확인
+  if (await CategoryService.checkCategoryId(categoryId)) {
+    const e = new Error('해당 카테고리의 id가 없습니다.');
+    e.status = 404;
+    throw e;
   }
   // 카테고리명 중복 확인
-  const categoryNameExisted = await Category.findOne({ name: req.body.name });
-  if (categoryNameExisted) {
-    res.status(409).json({
-      status: 409,
-      message: '이미 있는 카테고리입니다.',
-    });
+  if (await CategoryService.checkCategoryNameDuplicated(modifedName)) {
+    const e = new Error('이미 있는 카테고리입니다.');
+    e.status = 409;
+    throw e;
   }
   // 카테고리 수정 진행
   const updateCategory = await CategoryService.setCategory(categoryId, modifedName);
+  // 성공 상태 핸들링
   res.status(200).json({
     status: 200,
     message: '카테고리 수정 완료',
@@ -71,27 +66,22 @@ categoryRouter.patch('/', asyncHandler(async (req, res, next) => {
 
 // 카테고리 삭제 -> admin 한정 (추후 어드민 확인 절차 추가 필요)
 categoryRouter.delete('/:categoryId', asyncHandler(async (req, res, next) => {
-  const { categoryId } = req.params.categoryId;
-  console.log(categoryId);
-  const categoryDeleting = await Category.findById(categoryId);
-
-  const categoryProductExisted = await Product.findOne({ category_id: categoryId });
+  const { categoryId } = req.params;
   // 속한 상품 유무 확인
-  if (categoryProductExisted) {
-    res.status(405).json({
-      status: 405,
-      message: '카테고리에 속한 상품이 남아있습니다.',
-    });
+  if (await CategoryService.checkCategoryHasProduct(categoryId)) {
+    const e = new Error('카테고리에 속한 상품이 남아있습니다.');
+    e.status = 405;
+    throw e;
   }
   // ID 확인
-  if (!categoryDeleting) {
-    res.status(404).json({
-      status: 404,
-      message: '해당 카테고리의 id가 없습니다.',
-    });
+  if (await CategoryService.checkCategoryId(categoryId)) {
+    const e = new Error('해당 카테고리의 id가 없습니다.');
+    e.status = 404;
+    throw e;
   }
   // 카테고리 삭제 진행
   const deleteCategory = await CategoryService.deleteCategory(categoryId);
+  // 성공 상태 핸들링
   res.status(200).json({
     status: 200,
     message: '카테고리 삭제 완료',

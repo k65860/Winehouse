@@ -12,6 +12,8 @@ const dotenv = require('dotenv').config();
 const port = process.env.PORT;
 const mongodbUrl = process.env.MONGODB_URL;
 
+const errorMiddleware = require('./middlewares/errorMiddleware');
+
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
 const viewsRouter = require('./routes/views');
@@ -55,15 +57,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500).json(err.message);
-  res.render('error');
-});
+app.use(errorMiddleware);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

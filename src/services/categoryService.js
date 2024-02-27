@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-await */
 // 불러오기
-// eslint-disable-next-line no-unused-vars
 const Category = require('../db/models/category');
+const Product = require('../db/models/product');
 
 class CategoryService {
   // singletone pattern
@@ -9,8 +10,23 @@ class CategoryService {
     this.Category = Category;
   }
 
+  // 카테고리명 중복 확인
+  async checkCategoryNameDuplicated(categoryName) {
+    await this.Category.findOne({ category_name: categoryName });
+  }
+
+  // 카테고리 ID 확인
+  async checkCategoryId(categoryId) {
+    await this.Category.findOne({ _id: categoryId });
+  }
+
+  // 카테고리 소속 상품 유무 확인
+  async checkCategoryHasProduct(categoryId) {
+    await this.Product.findOne({ category_id: categoryId });
+  }
+
   // 카테고리 조회
-  async getCategories() {
+  async getCategoryList() {
     return await this.Category.find();
   }
 
@@ -21,8 +37,10 @@ class CategoryService {
 
   // 카테고리 수정
   async setCategory(categoryId, modifedName) {
-    // db 수정
-    return await this.Category.findOneAndUpdate({ _id: categoryId }, { modifedName });
+    return await this.Category.findOneAndUpdate(
+      { _id: categoryId },
+      { category_name: modifedName },
+    );
   }
 
   // 카테고리 삭제
