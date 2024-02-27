@@ -46,18 +46,3 @@
   font-weight: bold;
   font-size: 1.2rem;
 }
-
-.profile-button {
-  margin-top: 0.5rem;
-}
-#profile-button {
-  width: 150px;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #af66aa;
-  background-color: #af66aa;
-  color: white;
-  margin: 10px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
