@@ -1,4 +1,4 @@
-const { User } = require('../db/models/index');
+const User = require('../db/models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
@@ -6,7 +6,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 class UserService {
   constructor() {
-    this.User = User; // User 모델 설정 추가
+    this.User = User;
   }
 
   //회원가입
@@ -89,7 +89,7 @@ class UserService {
         console.log('사용자 데이터 삭제 성공');
         return true;
       } else {
-        console.log('해당 id를 가진 사용자를 찾을 수 없습니다.');
+        console.log('존재하지 않는 ID입니다.');
         return false;
       }
     } catch (error) {
