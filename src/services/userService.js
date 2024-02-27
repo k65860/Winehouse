@@ -9,7 +9,7 @@ class UserService {
     this.User = User; // User 모델 설정 추가
   }
 
-  //유저 생성
+  //회원가입
   async createUser(info) {
     const { name, email, password, address, age, tel } = info;
 
@@ -22,6 +22,76 @@ class UserService {
       tel,
     });
     return newUser;
+  }
+
+  //회원정보 조회
+  async getUserInfo(userId) {
+    try {
+      const userData = await this.User.findOne({ _id: userId });
+
+      // 사용자 데이터가 없으면 null 반환
+      return userData
+        ? {
+            name: userData.name,
+            email: userData.email,
+            address: userData.address,
+            age: userData.age,
+            tel: userData.tel,
+          }
+        : null;
+    } catch (error) {
+      console.error('유저 정보 조회 에러:', error);
+      throw error;
+    }
+  }
+
+  //회원정보 수정
+  async updateUserInfo(userId, updatedInfo) {
+    try {
+      // findOneAndUpdate 메서드를 사용하여 사용자 정보 업데이트
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        { $set: updatedInfo },
+        { new: true } // 업데이트 이후의 문서 반환
+      );
+
+      // 사용자 데이터가 없으면 null 반환
+      return updatedUser
+        ? {
+            name: updatedUser.name,
+            email: updatedUser.email,
+            address: updatedUser.address,
+            age: updatedUser.age,
+            tel: updatedUser.tel,
+          }
+        : null;
+    } catch (error) {
+      console.error('유저 정보 수정 에러:', error);
+      throw error;
+    }
+  }
+
+  //회원탈퇴
+  async deleteUser(userId) {
+    try {
+      // 주어진 userId가 문자열 형태라면 ObjectId로 변환
+      const objectId =
+        typeof userId === 'string' ? new ObjectId(userId) : userId;
+
+      // 사용자 데이터 삭제
+      const deletedUser = await User.deleteOne({ _id: objectId });
+
+      if (deletedUser.deletedCount === 1) {
+        console.log('사용자 데이터 삭제 성공');
+        return true;
+      } else {
+        console.log('해당 _id를 가진 사용자 데이터를 찾을 수 없습니다.');
+        return false;
+      }
+    } catch (error) {
+      console.error('유저 삭제 에러:', error);
+      throw error;
+    }
   }
 
   // 로그인 시 이메일로 사용자 데이터 조회
@@ -53,74 +123,6 @@ class UserService {
 
     console.log('로그인 성공');
     return userToken;
-  }
-
-  // 사용자 정보 조회
-  async getUserInfo(userId) {
-    try {
-      const userData = await this.User.findOne({ _id: userId });
-
-      // 사용자 데이터가 없으면 null 반환
-      return userData
-        ? {
-            name: userData.name,
-            email: userData.email,
-            address: userData.address,
-            age: userData.age,
-            tel: userData.tel,
-          }
-        : null;
-    } catch (error) {
-      console.error('유저 정보 조회 에러:', error);
-      throw error;
-    }
-  }
-
-  // 사용자 정보 수정
-  async updateUserInfo(userId, updatedInfo) {
-    try {
-      // findOneAndUpdate 메서드를 사용하여 사용자 정보 업데이트
-      const updatedUser = await User.findOneAndUpdate(
-        { email: userId },
-        { $set: updatedInfo },
-        { new: true } // 업데이트 이후의 문서 반환
-      );
-
-      // 사용자 데이터가 없으면 null 반환
-      return updatedUser
-        ? {
-            name: updatedUser.name,
-            email: updatedUser.email,
-            address: updatedUser.address,
-            age: updatedUser.age,
-            tel: updatedUser.tel,
-          }
-        : null;
-    } catch (error) {
-      console.error('유저 정보 수정 에러:', error);
-      throw error;
-    }
-  }
-  async deleteUser(userId) {
-    try {
-      // 주어진 userId가 문자열 형태라면 ObjectId로 변환
-      const objectId =
-        typeof userId === 'string' ? new ObjectId(userId) : userId;
-
-      // 사용자 데이터 삭제
-      const deletedUser = await User.deleteOne({ _id: objectId });
-
-      if (deletedUser.deletedCount === 1) {
-        console.log('사용자 데이터 삭제 성공');
-        return true;
-      } else {
-        console.log('해당 _id를 가진 사용자 데이터를 찾을 수 없습니다.');
-        return false;
-      }
-    } catch (error) {
-      console.error('유저 삭제 에러:', error);
-      throw error;
-    }
   }
 }
 

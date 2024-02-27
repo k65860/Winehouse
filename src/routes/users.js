@@ -16,6 +16,60 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// 회원정보 조회
+router.get('/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const userInfo = await userService.getUserInfo(userId);
+
+    if (userInfo === null) {
+      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
+    } else {
+      res.status(200).json(userInfo);
+    }
+  } catch (error) {
+    console.error('유저 정보 조회 에러:', error);
+    res.status(500).json({ error: '서버 오류' });
+  }
+});
+
+// 회원정보 수정
+router.patch('/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const updatedInfo = req.body;
+
+    const isUpdated = await userService.updateUserInfo(userId, updatedInfo);
+
+    if (isUpdated) {
+      res.status(200).json(isUpdated); // 수정된 정보를 전송
+    } else {
+      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
+    }
+  } catch (error) {
+    console.error('유저 정보 수정 에러:', error);
+    res.status(500).json({ error: '서버 오류' });
+  }
+});
+
+// 회원탈퇴
+router.delete('/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId; // req.params.id에서 req.params.userId로 수정
+
+    const isDeleted = await userService.deleteUser(userId);
+
+    if (isDeleted) {
+      res.status(200).json({ result: 'Delete Success' });
+    } else {
+      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
+    }
+  } catch (error) {
+    console.error('유저 탈퇴 에러:', error);
+    res.status(500).json({ error: '서버 오류' });
+  }
+});
+
 // 로그인
 router.post('/login', async (req, res) => {
   try {
@@ -35,60 +89,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json({
       error: '로그인 실패: 서버 오류.',
     });
-  }
-});
-
-// 유저 정보 조회
-router.get('/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const userInfo = await userService.getUserInfo(userId);
-
-    if (userInfo === null) {
-      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
-    } else {
-      res.status(200).json(userInfo);
-    }
-  } catch (error) {
-    console.error('유저 정보 조회 에러:', error);
-    res.status(500).json({ error: '서버 오류' });
-  }
-});
-
-// 유저정보 수정
-router.put('/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const updatedInfo = req.body;
-
-    const isUpdated = await userService.updateUserInfo(userId, updatedInfo);
-
-    if (isUpdated) {
-      res.status(200).json({ message: '수정되었습니다.' });
-    } else {
-      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
-    }
-  } catch (error) {
-    console.error('유저 정보 수정 에러:', error);
-    res.status(500).json({ error: '서버 오류' });
-  }
-});
-
-// 유저 탈퇴
-router.delete('/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId; // req.params.id에서 req.params.userId로 수정
-
-    const isDeleted = await userService.deleteUser(userId);
-
-    if (isDeleted) {
-      res.status(200).json({ result: 'Delete Success' });
-    } else {
-      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
-    }
-  } catch (error) {
-    console.error('유저 탈퇴 에러:', error);
-    res.status(500).json({ error: '서버 오류' });
   }
 });
 
