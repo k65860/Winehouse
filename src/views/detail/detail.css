@@ -1,6 +1,5 @@
 html,
 body {
-  height: 100%;
   /* 전체 페이지 좁게 가운데 정렬하는 코드 -> auto*/
   margin: 0;
   display: flex;
