@@ -13,15 +13,15 @@ class ProductService {
 
             // 상품  생성
             const product = await Product.create({ 
-                productName, 
-                productPrice, 
-                categoryId: category._id,
-                productCountry,
-                productGrape,
-                productMadeyear, 
-                productSweetrate, 
-                productSourrate, 
-                productBodyrate,
+                product_name: productName, 
+                product_price: productPrice, 
+                category_id: category._id,
+                product_country: productCountry,
+                product_grape: productGrape,
+                product_madeyear: productMadeyear, 
+                product_sweetrate: productSweetrate, 
+                product_sourrate: productSourrate, 
+                product_bodyrate: productBodyrate,
             });
 
             console.log(product);    
@@ -33,21 +33,21 @@ class ProductService {
     }
 
     // 상품 수정
-    async updateProduct(productId, productName, productPrice, categoryId, productCountry, productGrape, productMadeyear, productSweetrate, productSourrate, productBodyrate, updatedAt) {
+    async updateProduct(productId, productName, productPrice, categoryId, productCountry, productGrape, productMadeyear, productSweetrate, productSourrate, productBodyrate) {
         try {
             const updatedProduct = await Product.findOneAndUpdate(
                 { _id: productId },
                 { 
-                    productName, 
-                    productPrice,
-                    categoryId, 
-                    productCountry,
-                    productGrape, 
-                    productMadeyear, 
-                    productSweetrate, 
-                    productSourrate, 
-                    productBodyrate, 
-                    updatedAt
+                    product_name: productName, 
+                    product_price: productPrice, 
+                    category_id: categoryId,
+                    product_country: productCountry,
+                    product_grape: productGrape,
+                    product_madeyear: productMadeyear, 
+                    product_sweetrate: productSweetrate, 
+                    product_sourrate: productSourrate, 
+                    product_bodyrate: productBodyrate, 
+                    updatedAt: Date.now
                 },
                 { new: true } // 업데이트 된 문서 반환
             );
@@ -94,7 +94,6 @@ class ProductService {
             if(!category) { 
                 throw new Error('카테고리를 찾을 수 없습니다.')
             }
-            console.log(category);
             // 해당 카테고리 상품 조회
             const products = await Product.find({ categoryId: category._id });
 
