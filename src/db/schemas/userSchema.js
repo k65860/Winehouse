@@ -1,8 +1,6 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
 
 const userSchema = new Schema({
-  shortId,
   email: {
     type: String,
     required: true,
@@ -25,19 +23,20 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    required: true,
+    required: false,
   },
   createdAt: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    required: true,
+    required: false,
   },
   deletedAt: {
     type: Date,
-    required: true,
+    required: false,
   },
 });
 

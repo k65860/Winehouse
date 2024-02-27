@@ -1,8 +1,8 @@
-const express = require('express');
-
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 const userRouter = require('./users');
 
-router.use('/user', userRouter);
+/* GET home page. */
+router.use('/', userRouter);
 
 module.exports = router;
