@@ -18,6 +18,7 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 // const usersRouter = require('./routes/users');
 const viewsRouter = require('./routes/views');
 const categoryRouter = require('./routes/category');
+const productRouter = require('./routes/product');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // app.use('/users', usersRouter);
 app.use('/', viewsRouter);
 app.use('/category', categoryRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

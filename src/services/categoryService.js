@@ -5,24 +5,18 @@ const Category = require('../db/models/category');
 const Product = require('../db/models/product');
 
 class CategoryService {
-  // singletone pattern
   constructor() {
     this.Category = Category;
   }
 
   // 카테고리명 중복 확인
   async checkCategoryNameDuplicated(categoryName) {
-    await this.Category.findOne({ category_name: categoryName });
+    return await this.Category.findOne({ category_name: categoryName });
   }
 
   // 카테고리 ID 확인
   async checkCategoryId(categoryId) {
-    await this.Category.findOne({ _id: categoryId });
-  }
-
-  // 카테고리 소속 상품 유무 확인
-  async checkCategoryHasProduct(categoryId) {
-    await this.Product.findOne({ category_id: categoryId });
+    return await this.Category.findOne({ _id: categoryId });
   }
 
   // 카테고리 조회

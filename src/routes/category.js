@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const { Router } = require('express');
+const ProductService = require('../services/productService');
 const CategoryService = require('../services/categoryService');
 const asyncHandler = require('../middlewares/asyncHandler');
 const Product = require('../db/models/product');
@@ -43,7 +44,7 @@ categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   const { modifedName } = req.body;
   // 카테고리 ID 확인
-  if (await CategoryService.checkCategoryId(categoryId)) {
+  if (!(await CategoryService.checkCategoryId(categoryId))) {
     const e = new Error('해당 카테고리의 id가 없습니다.');
     e.status = 404;
     throw e;
@@ -68,13 +69,13 @@ categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
 categoryRouter.delete('/:categoryId', asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   // 속한 상품 유무 확인
-  if (await CategoryService.checkCategoryHasProduct(categoryId)) {
+  if (await ProductService.checkCategoryHasProduct(categoryId)) {
     const e = new Error('카테고리에 속한 상품이 남아있습니다.');
     e.status = 405;
     throw e;
   }
   // ID 확인
-  if (await CategoryService.checkCategoryId(categoryId)) {
+  if (!(await CategoryService.checkCategoryId(categoryId))) {
     const e = new Error('해당 카테고리의 id가 없습니다.');
     e.status = 404;
     throw e;
