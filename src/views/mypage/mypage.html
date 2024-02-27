@@ -2,19 +2,20 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WineHouse</title>
   <!-- bulma css -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <!-- fontawesome icon -->
   <script src="https://kit.fontawesome.com/20edfc9a47.js" crossorigin="anonymous"></script>
   <!-- custom css, js -->
-  <link rel="stylesheet" href="./mypage.css" />
-  <link rel="stylesheet" href="/stylesheets/global.css" />
-  <script src="myPage.js"></script>
+  <link rel="stylesheet" href="mypage.css">
+  <link rel="stylesheet" href="/stylesheets/global.css">
+  <script src="mypage.js" type="module" defer></script>
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
+
 
 <body>
   <!-- header -->
@@ -53,46 +54,56 @@
     </div>
   </nav>
 
-  <div class="section m-6 is-justify-content-center">
-    <div class="title">
-      <p>MY PAGE</p>
-    </div>
-  </div>
 
   <div class="container">
+    <div class="section m-6 is-justify-content-center">
+      <div class="title">
+        <p>MY PAGE</p>
+      </div>
+    </div>
+
     <div class="orderlist">주문 목록</div>
+    <div class="order-details">
+      <div class="images">
+        <img
+          src="https://images.unsplash.com/photo-1611571940159-425a28706d6f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8JUVDJTk5JTgwJUVDJTlEJUI4JUVCJUIzJTkxfGVufDB8fDB8fHww"
+          alt="주문 와인">
 
-    <div class="images">
-      <img src="이미지_경로" alt="주문 와인" />
-    </div>
-    <div class="delivery">배송 상태</div>
-    <div class="name">상품 이름</div>
-    <div class="date">주문 일자</div>
-    <div class="pay">결제 금액</div>
-    <div class="state">주문 상세</div>
-    <div class="ans-delivery">
-      <a href="https://www.cjlogistics.com/ko/tool/parcel/tracking" id="delivery-status">조회 하기</a>
-    </div>
-    <div class="ans-name">와인</div>
-    <div class="ans-date">2024.02.20</div>
-    <div class="ans-pay">100,000</div>
-    <div class="ans-state">
-      <a href="http://localhost:4000/detail/detail.html" id="ing-state">확인 하기</a>
-    </div>
-
-
-
-    <div class="blank"></div>
-    <div class="profile">
-      <p class="profile">회원 정보</p>
-      <div class="profile-box">
-        <a href="http://localhost:4000/update/" id="profile-box">수정하기</a>
+      </div>
+      <div class="name multi-line">
+        <label for="product-name">상품 이름</label>
+        <hr>
+        <label id="product-name">와인</label>
+      </div>
+      <div class="delivery multi-line">
+        <label for="product-delivery">배송 상태</label>
+        <hr>
+        <label id="product-delivery">배송 중</label>
+      </div>
+      <div class="date multi-line">
+        <label for="product-date">주문 일자</label>
+        <hr>
+        <label id="product-date">2024.02.20</label>
+      </div>
+      <div class="pay multi-line">
+        <label for="product-pay">결제 금액</label>
+        <hr>
+        <label id="product-pay">100,000</label>
       </div>
     </div>
   </div>
 
 
-  <!-- footer -->
+
+  <div class="container">
+    <div class="profile">
+      <p class="profile">회원 정보</p>
+      <div class="profile-button">
+        <button id="profile-button">수정하기</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="footer-container">
       <div class="company-name">
