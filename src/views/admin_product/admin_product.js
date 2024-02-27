@@ -2,13 +2,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("addBtn");
 
-  if (addButton) {
-    addButton.addEventListener("click", function () {
-      var destinationUrl = "/admin_add"; // 이 부분을 이동하고 싶은 페이지의 URL로 변경하세요.
+  addButton.addEventListener("click", function () {
+    var destinationUrl = "/admin_add"; // 이 부분을 이동하고 싶은 페이지의 URL로 변경하세요.
 
-      window.location.href = destinationUrl;
-    });
-  }
+    window.location.href = destinationUrl;
+  });
 });
 
 // 수정 버튼
