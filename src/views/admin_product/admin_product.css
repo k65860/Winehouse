@@ -48,7 +48,6 @@
   background-color: #f5f5f5;
   border-color: transparent;
   color: rgba(0,0,0,.7);
-  padding: 7px 16px;
   font-size: 1em;
   font-family: 'GmarketSansMedium';
   outline: none;
@@ -62,4 +61,9 @@
   background-color: #eee;
   border-color: transparent;
   color: rgba(0,0,0,.7);
+}
+
+.option {
+  text-align-last: center;
+  padding: 0;
 }

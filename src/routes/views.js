@@ -22,6 +22,8 @@ router.use('/mypage', serveStatic('mypage'));
 router.use('/account', serveStatic('account'));
 router.use('/update', serveStatic('update'));
 
+
+
 router.use('/admin_login', serveStatic('admin_login'));
 router.use('/admin_order', serveStatic('admin_order'));
 router.use('/admin_update', serveStatic('admin_update'));
