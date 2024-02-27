@@ -11,7 +11,7 @@
   <!-- custom css, js -->
   <link rel="stylesheet" href="admin_order.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
-  <script type="text/javascript" src="admin_order.js"></script>
+  <script src="admin_order.js" type="module" defer></script>
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
 <body>
@@ -54,7 +54,7 @@
       <div class="real_main">
         <p class="title">주문내역</p>
         <div class="main">
-          <div class="box1">
+          <div class="box">
             <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
             <div id="infoBox">
               <p>주문 번호</p>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="buttonBox">
-              <input type="button" onclick="cancelBtn()" value="주문취소" class="cancelBtn">
+              <input type="button" value="주문취소" class="cancelBtn">
               <div class="selectBox">
                 <select name="배송상태" class="select">
                   <option disabled selected>배송상태</option>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="main">
-          <div class="box1">
+          <div class="box">
             <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
             <div id="infoBox">
               <p>주문 번호</p>
@@ -100,7 +100,7 @@
             </div>
             
             <div class="buttonBox">
-              <input type="button" onclick="cancelBtn()" value="주문취소" class="cancelBtn">
+              <input type="button" value="주문취소" class="cancelBtn">
               <div class="selectBox">
                 <select name="배송상태" class="select">
                   <option disabled selected>배송상태</option>
