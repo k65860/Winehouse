@@ -6,40 +6,40 @@ const ProductSchema = new Schema({
   //   type: String,
   //   required: false,
   // },
-  productName: {
+  product_name: {
     type: String,
     required: true,
   },
-  productPrice: {
+  product_price: {
     type: Number,
     required: true,
   },
-  categoryId: {
+  category_id: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Category',
   },
-  productCountry: {
+  product_country: {
     type: String,
     required: true,
   },
-  productGrape: {
+  product_grape: {
     type: String,
     required: true,
   },
-  productMadeyear: {
+  product_madeyear: {
     type: Number,
     required: true,
   },
-  productSweetrate: {
+  product_sweetrate: {
     type: Number,
     required: true,
   },
-  productSourrate: {
+  product_sourrate: {
     type: Number,
     required: true,
   },
-  productBodyrate: {
+  product_bodyrate: {
     type: Number,
     required: true,
   },
