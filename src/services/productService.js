@@ -9,7 +9,7 @@ class ProductService {
             if(!category) { 
                 throw new Error('카테고리를 찾을 수 없습니다.')
             }
-            // console.log(category);
+
 
             // 상품  생성
             const product = await Product.create({ 
@@ -33,24 +33,15 @@ class ProductService {
     }
 
     // 상품 수정
-    async updateProduct(productId, categoryId, productName, productPrice, productCountry, productGrape, productMadeyear, productSweetrate, productSourrate, productBodyrate, updatedAt) {
+    async updateProduct(productId, productName, productPrice, categoryId, productCountry, productGrape, productMadeyear, productSweetrate, productSourrate, productBodyrate, updatedAt) {
         try {
-            //카테고리 Id로 카테고리 찾기
-            const category = await Category.findOne({ _id: categoryId });
-            if(!category) { 
-                throw new Error('카테고리를 찾을 수 없습니다.')
-            }
-
-            console.log(category);
-            
-            // 상품 수정
             const updatedProduct = await Product.findOneAndUpdate(
                 { _id: productId },
                 { 
                     productName, 
                     productPrice,
-                    categoryId: category._id,
-                    productCountry, 
+                    categoryId, 
+                    productCountry,
                     productGrape, 
                     productMadeyear, 
                     productSweetrate, 
@@ -60,11 +51,7 @@ class ProductService {
                 },
                 { new: true } // 업데이트 된 문서 반환
             );
-
-            if (!updatedProduct) {
-                throw new Error('상품을 찾을 수 없습니다.');
-            }
-                
+     
             return updatedProduct;
         } catch(err) {
             

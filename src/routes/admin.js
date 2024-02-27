@@ -24,7 +24,7 @@ adminRouter.get('/', asyncHandler(async (req, res) => {
 
 
 // 상품 수정
-adminRouter.put('/product/:productId', asyncHandler(async(req, res) => {
+adminRouter.patch('/product/:productId', asyncHandler(async(req, res) => {
     const { productId } = req.params;
     const { productName, 
         productPrice,
@@ -58,7 +58,6 @@ adminRouter.put('/product/:productId', asyncHandler(async(req, res) => {
     res.json(updatedProduct);
     // res.send('updated');
     // 상품 생성 성공 시 응답
-    res.status(201).json(product);
     // res.redirect('/admin/product');
 }))
 
