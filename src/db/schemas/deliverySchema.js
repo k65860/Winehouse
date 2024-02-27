@@ -37,7 +37,7 @@ const DeliverySchema = new Schema(
     deletedAt: {
       type: Date,
     },
-  }
+  },
 );
 
 module.exports = DeliverySchema;

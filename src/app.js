@@ -6,22 +6,29 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv = require('dotenv').config();
-const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const port = process.env.PORT;
 const mongodbUrl = process.env.MONGODB_URL;
 
+const errorMiddleware = require('./middlewares/errorMiddleware');
+
 const viewsRouter = require('./routes/views');
+const categoryRouter = require('./routes/category');
+const productRouter = require('./routes/product');
 const userRouter = require('./routes/users');
 
 const app = express();
 
 // mongodb connect
-mongoose.connect(mongodbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  dbName: 'db',
-});
+
+mongoose.connect(
+  mongodbUrl,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'db',
+  },
+);
 
 const db = mongoose.connection;
 
@@ -40,6 +47,8 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/', viewsRouter);
 app.use('/user', userRouter);
+app.use('/category', categoryRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
