@@ -11,7 +11,7 @@
   <!-- custom css, js -->
   <link rel="stylesheet" href="cart.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
-  <script src="cart.js"></script>
+  <script src="cart.js" type="module" defer></script>
   <script src="/javascripts/global.js" type="module" defer></script>
 </head>
 <body>
@@ -56,83 +56,24 @@
     <div class="cart-title">
       <i class="fa-solid fa-cart-shopping"></i><p>장바구니</p>
     </div>
+    <hr>
 
-    <div class="card mb-5">
-      <div class="card-content">
-        <div class="content">
-          <div class="is-flex is-align-items-center">
-            <label class="checkbox">
-              <input type="checkbox">
-            </label>
+    <div class="notice">장바구니에 담긴 상품이 없습니다.</div>
 
-            <div class="product-image m-2">
-              <img src="https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg" alt="Product Image" />
-            </div>
-
-            <div class="product-info">
-              <div class="product-name">
-                <p>와인</p>
-              </div>
-              <div class="product-price">
-                <p>xxx,xxx원</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="count-button">
-            <input type='button' onclick='count("minus", 1)' value='-' id="quantityBtnMinus" />
-            <a id='result'>1</a>
-            <input type='button' onclick='count("plus", 1)' value='+' id="quantityBtnPlus" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-5">
-      <div class="card-content">
-        <div class="content">
-          <div class="is-flex is-align-items-center">
-            <label class="checkbox">
-              <input type="checkbox">
-            </label>
-
-            <div class="product-image m-2">
-              <img src="https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg" alt="Product Image" />
-            </div>
-
-            <div class="product-info">
-              <div class="product-name">
-                <p>와인</p>
-              </div>
-              <div class="product-price">
-                <p>xxx,xxx원</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="count-button">
-            <input type='button' onclick='count("minus", 2)' value='-' id="quantityBtnMinus" />
-            <a id='result'>1</a>
-            <input type='button' onclick='count("plus", 2)' value='+' id="quantityBtnPlus" />
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- 장바구니에 담긴 상품들이 표시될 영역 -->
+    <div id="cart-items"></div>
 
     <hr>
 
     <div class="delete-button">
-      <button class="button is-light">선택 삭제</button>
-      <button class="button is-light">전체 삭제</button>
+      <button id="delete-selected-button" class="button is-light">선택 삭제</button>
+      <button id="delete-all-button" class="button is-light">전체 삭제</button>
     </div>
 
-    <div class="price-info">
-      <p>총 상품 금액</p> +
-      <p>배송비</p> =
-      <p>총 결제 금액</p>
-    </div>
+    <div class="price-info"></div>
 
-    <button class="button is-primary is-fullwidth mt-5">xxx,xxx원 결제하기</button>
+    <button id="payment-button" class="button is-primary is-fullwidth mt-5">결제하기</button>
+
     
   </div>
 
