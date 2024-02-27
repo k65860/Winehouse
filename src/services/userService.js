@@ -12,11 +12,12 @@ class UserService {
   //회원가입
   async createUser(info) {
     const { name, email, password, address, age, tel } = info;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       address,
       age,
       tel,
@@ -48,11 +49,14 @@ class UserService {
   //회원정보 수정
   async updateUserInfo(userId, updatedInfo) {
     try {
+      if (updatedInfo.password) {
+        updatedInfo.password = await bcrypt.hash(updatedInfo.password, 10);
+      }
       // findOneAndUpdate 메서드를 사용하여 사용자 정보 업데이트
       const updatedUser = await User.findOneAndUpdate(
         { _id: userId },
         { $set: updatedInfo },
-        { new: true } // 업데이트 이후의 문서 반환
+        { new: true }
       );
 
       // 사용자 데이터가 없으면 null 반환
@@ -85,7 +89,7 @@ class UserService {
         console.log('사용자 데이터 삭제 성공');
         return true;
       } else {
-        console.log('해당 _id를 가진 사용자 데이터를 찾을 수 없습니다.');
+        console.log('해당 id를 가진 사용자를 찾을 수 없습니다.');
         return false;
       }
     } catch (error) {
@@ -105,8 +109,10 @@ class UserService {
     }
 
     // 로그인 시 저장된 비밀번호와 입력된 비밀번호 비교
-    const userPassword = userData.password;
-    const comparePassword = await bcrypt.compare(userPw, userPassword);
+    const comparePassword = await this.comparePasswords(
+      userPw,
+      userData.password
+    );
 
     // 비밀번호가 틀리면 로그인 실패
     if (!comparePassword) {
@@ -115,18 +121,46 @@ class UserService {
     }
 
     // 로그인 성공 후 토큰 반환
-    const secretKey = process.env.JWT_SECRET_KEY; //env 설정 필요
-    const userToken = jwt.sign(
-      { userId: userData.email, role: userData.role },
-      secretKey
-    );
+    const secretKey = process.env.JWT_SECRET_KEY; // env 설정 필요
+    const userToken = jwt.sign({ userId: userData.email }, secretKey);
 
     console.log('로그인 성공');
     return userToken;
   }
-}
 
-// To Do
-// 관리자 기능
+  async comparePasswords(inputPassword, hashedPassword) {
+    return bcrypt.compare(inputPassword, hashedPassword);
+  }
+
+  //관리자 로그인
+  async getAdminToken(userId, userPw) {
+    const adminData = await User.findOne({ email: userId, role: 'admin' });
+
+    // 관리자 데이터가 없으면 로그인 실패
+    if (!adminData) {
+      console.log('관리자 정보가 존재하지 않습니다.');
+      return null;
+    }
+
+    // 로그인 시 저장된 비밀번호와 입력된 비밀번호 비교
+    const comparePassword = await this.comparePasswords(
+      userPw,
+      adminData.password
+    );
+
+    // 비밀번호가 틀리면 로그인 실패
+    if (!comparePassword) {
+      console.log('비밀번호가 일치하지 않습니다.');
+      return null;
+    }
+
+    // 로그인 성공 후 토큰 반환
+    const secretKey = process.env.JWT_SECRET_KEY; // env 설정 필요
+    const adminToken = jwt.sign({ userId: adminData.email }, secretKey);
+
+    console.log('관리자 로그인 성공');
+    return adminToken;
+  }
+}
 
 module.exports = UserService;

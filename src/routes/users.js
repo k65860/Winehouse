@@ -81,13 +81,35 @@ router.post('/login', async (req, res) => {
       res.status(200).json({ token: userToken });
     } else {
       res.status(401).json({
-        error: '로그인 실패: 아이디 또는 비밀번호가 일치하지 않습니다.',
+        error: '로그인 실패',
       });
     }
   } catch (error) {
     console.error('로그인 에러:', error);
     res.status(500).json({
-      error: '로그인 실패: 서버 오류.',
+      error: '로그인 실패: 서버 오류',
+    });
+  }
+});
+
+//관리자 로그인
+router.post('/role', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const adminToken = await userService.getAdminToken(email, password);
+
+    if (adminToken) {
+      res.status(200).json({ token: adminToken });
+    } else {
+      res.status(401).json({
+        error: '관리자 로그인 실패',
+      });
+    }
+  } catch (error) {
+    console.error('관리자 로그인 에러:', error);
+    res.status(500).json({
+      error: '관리자 로그인 실패: 서버 오류',
     });
   }
 });
