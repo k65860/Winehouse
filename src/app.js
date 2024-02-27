@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
 const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose');
