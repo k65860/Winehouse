@@ -16,6 +16,9 @@ function adjustProductQuantity(type, productIndex) {
   }
 
   quantityElement.innerText = currentQuantity;
+
+  // 수량 변경 시 가격 업데이트
+  updateTotalPrice();
 }
 
 const cartContainer = document.querySelector('#cart-items');
@@ -45,6 +48,8 @@ cartContainer.addEventListener('click', (event) => {
 // 페이지 로드 시 IndexedDB 초기화 함수 호출
 window.onload = () => {
   initializeIndexedDB();
+  // 임시로 데이터 추가
+  // addProductsToIndexedDB();
 };
 
 // IndexedDB 초기화 함수
@@ -69,8 +74,7 @@ function initializeIndexedDB() {
       console.log(event.target.errorCode);
     };
 
-    request.onsuccess = (event) => {
-      db = event.target.result;
+    request.onsuccess = () => {
       // 장바구니 상품 출력
       displayCartItems();
     };
@@ -102,10 +106,13 @@ function displayCartItems() {
           const card = createCardElement(item);
           cartContainer.appendChild(card);
         });
+
       } else {
         // 장바구니에 상품이 없으면 notice 보이기
         document.querySelector('.notice').style.display = 'flex';
       }
+
+      updateTotalPrice();
     };
   };
 }
@@ -120,7 +127,7 @@ function createCardElement(item) {
       <div class="content">
         <div class="is-flex is-align-items-center">
           <label class="checkbox">
-            <input type="checkbox" data-item-id="${item.id}">
+            <input type="checkbox" name="${item.id}" checked>
           </label>
           <div class="product-image m-2">
             <img src="${item.productImage}" alt="Product Image" />
@@ -156,7 +163,7 @@ deleteSelectedButton.addEventListener('click', () => {
     const confirmDelete = confirm("선택한 상품을 삭제하시겠습니까?");
     if (confirmDelete) {
       checkedItems.forEach((item) => {
-        const itemId = parseInt(item.dataset.itemId);
+        const itemId = parseInt(item.name);
         deleteCartItem(itemId);
       });
 
@@ -168,7 +175,21 @@ deleteSelectedButton.addEventListener('click', () => {
   }
 });
 
-// 선택 삭제 버튼 클릭 시
+// 장바구니 상품 선택 삭제 함수
+function deleteCartItem(itemId) {
+  const request = window.indexedDB.open('winehouse');
+  let db;
+
+  request.onsuccess = (event) => {
+    db = event.target.result;
+    const transaction = db.transaction(['cart'], 'readwrite');
+    const store = transaction.objectStore('cart');
+
+    store.delete(itemId);
+  };
+}
+
+// 전체 삭제 버튼 클릭 시
 const deleteAllButton = document.querySelector('#delete-all-button');
 
 deleteAllButton.addEventListener('click', () => {
@@ -183,26 +204,10 @@ deleteAllButton.addEventListener('click', () => {
   const confirmDelete = confirm("장바구니에 담긴 모든 상품을 삭제하시겠습니까?");
   if (confirmDelete) {
     deleteAllCartItems();
+    displayCartItems();
+    alert("장바구니에 담긴 모든 상품이 삭제되었습니다.");
   }
 });
-
-// 장바구니 상품 삭제 함수
-function deleteCartItem(itemId) {
-  const request = window.indexedDB.open('winehouse');
-  let db;
-
-  request.onsuccess = (event) => {
-    db = event.target.result;
-    const transaction = db.transaction(['cart'], 'readwrite');
-    const store = transaction.objectStore('cart');
-
-    const getRequest = store.get(itemId);
-    getRequest.onsuccess = (event) => {
-      const data = event.target.result;
-      store.delete(data.id);
-    };
-  };
-}
 
 // 모든 장바구니 상품 삭제 함수
 function deleteAllCartItems() {
@@ -215,8 +220,76 @@ function deleteAllCartItems() {
     const store = transaction.objectStore('cart');
 
     store.clear();
-
-    displayCartItems();
-    alert("장바구니에 담긴 모든 상품이 삭제되었습니다.");
   };
 }
+
+// 선택된 상품의 가격 합산 함수
+function calculateCheckedItemsTotal() {
+  const cartItems = document.querySelectorAll('#cart-items input[type="checkbox"]:checked');
+  let checkedItemsTotal = 0;
+
+  cartItems.forEach((checkbox) => {
+    const itemCard = checkbox.closest('.card');
+    const itemPriceElement = itemCard.querySelector('.product-price p');
+    const itemPrice = parseInt(itemPriceElement.innerText.replace('원', ''));
+    const itemQuantity = parseInt(itemCard.querySelector('.quantity').innerText);
+    checkedItemsTotal += itemPrice * itemQuantity;
+  });
+
+  return checkedItemsTotal;
+}
+
+// 총 상품 가격 업데이트 함수
+function updateTotalPrice() {
+  const checkedItemsTotal = calculateCheckedItemsTotal();
+  const shippingCost = checkedItemsTotal > 0 ? (checkedItemsTotal >= 50000 ? 0 : 5000) : 0;
+  const totalPayment = checkedItemsTotal + shippingCost;
+
+  const priceInfoContainer = document.querySelector('.price-info');
+  priceInfoContainer.innerHTML = `
+    <p>총 상품 금액: ${checkedItemsTotal}원 +</p>
+    <p>배송비: ${shippingCost}원 =</p>
+    <p>총 결제 금액: ${totalPayment}원</p>
+  `;
+
+  const paymentButtonContainer = document.querySelector('#payment-button');
+  paymentButtonContainer.innerHTML = `${totalPayment}원 결제하기`;
+}
+
+// 체크박스 변경 시 총 상품 가격 업데이트
+document.addEventListener('change', (event) => {
+  const target = event.target;
+  if (target && target.type === 'checkbox') {
+    updateTotalPrice();
+  }
+});
+
+// 상품 데이터 추가
+// function addProductsToIndexedDB() {
+//   const request = window.indexedDB.open('winehouse');
+  
+//   request.onsuccess = (event) => {
+//     const db = event.target.result;
+//     const transaction = db.transaction(['cart'], 'readwrite');
+//     const store = transaction.objectStore('cart');
+
+//     const products = [
+//       { productName: '브레드앤버터 소비뇽', productPrice: '40000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
+//       { productName: '쇼비뇽블랑', productPrice: '32000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
+//       { productName: '소비뇽', productPrice: '140000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
+//       { productName: '클라우디', productPrice: '132000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
+//     ];
+
+//     products.forEach((product) => {
+//       store.add(product);
+//     });
+    
+//     transaction.oncomplete = () => {
+//       console.log('상품 데이터가 IndexedDB에 추가되었습니다.');
+//     };
+
+//     transaction.onerror = (event) => {
+//       console.error(event.target.errorCode);
+//     };
+//   };
+// }
