@@ -24,6 +24,25 @@
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
+  // 장바구니 버튼 클릭 시 alert
+  document
+    .getElementById("cartBtn")
+    .addEventListener("click", function (event) {
+      // 사용자에게 확인 메시지를 띄움
+      const result = confirm(
+        "장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?"
+      );
+
+      // 사용자가 확인을 선택한 경우
+      if (result) {
+        // 장바구니 페이지로 이동
+        window.location.href = "/cart";
+      } else {
+        // 아무런 동작도 하지 않음
+        event.preventDefault();
+      }
+    });
+
   // 마이너스 플러스 버튼
   const resultElement = document.getElementById("result");
   let resultValue = parseInt(resultElement.innerText);
@@ -54,10 +73,3 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "/order";
   });
 });
-
-// window.addEventListener("beforeunload", (event) => {
-//   // 표준에 따라 기본 동작 방지
-//   event.preventDefault();
-//   // Chrome에서는 returnValue 설정이 필요함
-//   event.returnValue = "사이트를 새로고침하시겠습니까?";
-// });
