@@ -1,12 +1,15 @@
 const { Router } = require('express');
 const UserService = require('../services/userService');
 const asyncHandler = require('../middlewares/asyncHandler');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 const userRouter = Router();
-const userService = new UserService(); // UserService 인스턴스 생성
+const userService = new UserService();
 
 // 회원가입
 userRouter.post(
   '/signup',
+  authMiddleware, //auth 미들웨어 추가
   asyncHandler(async (req, res, next) => {
     const createdUser = await userService.createUser(req.body);
     // 성공 상태 핸들링
@@ -104,7 +107,7 @@ userRouter.post(
         res.status(200).json({
           status: 200,
           message: '유저 로그인 성공',
-          data: userToken,
+          token: userToken,
         });
     }
   })
@@ -131,7 +134,7 @@ userRouter.post(
         res.status(200).json({
           status: 200,
           message: '관리자 로그인 성공',
-          data: adminToken,
+          token: adminToken,
         });
     }
   })

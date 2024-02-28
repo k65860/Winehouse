@@ -1,8 +1,8 @@
 const User = require('../db/models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
+// const mongoose = require('mongoose');
+// const ObjectId = mongoose.Types.ObjectId;
 
 class UserService {
   constructor() {

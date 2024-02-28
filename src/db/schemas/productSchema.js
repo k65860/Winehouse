@@ -43,14 +43,15 @@ const ProductSchema = new Schema({
   createdAt: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    required: true,
+    required: false,
   },
   deletedAt: {
     type: Date,
-    required: true,
+    required: false,
   },
 });
 
