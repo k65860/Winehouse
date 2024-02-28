@@ -90,7 +90,7 @@ form.addEventListener('submit', async (e) => {
       throw new Error('상품을 추가하는데 실패했습니다.');
     }
 
-    alert('추가 되었습니다.');
+    alert('상품이 추가되었습니다.');
     window.location.href = '/admin_product';
   
   } catch (err) {

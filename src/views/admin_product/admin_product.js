@@ -123,7 +123,7 @@ async function displayProducts() {
             </div>
 
             <div class="buttonBox">
-              <button class="button is-fullwidth is-light m-1" id="updateBtn">수정</button>
+              <button class="button is-fullwidth is-light m-1" id="${product._id}">수정</button>
               <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
             </div>
           </div><!--content-->
@@ -146,6 +146,15 @@ addButton.addEventListener('click', function () {
 });
 
 // 수정 버튼
+document.addEventListener('click', async (e) => {
+  if (e.target) {
+    // 상품 아이디
+    const productId = e.target.id;
+    // 수정 페이지로 이동
+    window.location.href = `/admin_update?productId=${productId}`;
+    // window.location.href = `/update?productId=${productId}&productName=${product.product_name}&productPrice=${product.product_price}&categoryId=${product.category_id}&productCountry=${product.product_country}&productGrape=${product.product_grape}&productMadeyear=${product.product_madeyear}&productSweetrate=${product.product_sweetrate}&productSourrate=${product.product_sourrate}&productBodyrate=${product.product_bodyrate}`;
 
+  }
+});
 
 // 삭제 버튼
