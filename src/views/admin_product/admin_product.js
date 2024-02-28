@@ -152,8 +152,6 @@ document.addEventListener('click', async (e) => {
     const productId = e.target.id;
     // 수정 페이지로 이동
     window.location.href = `/admin_update?productId=${productId}`;
-    // window.location.href = `/update?productId=${productId}&productName=${product.product_name}&productPrice=${product.product_price}&categoryId=${product.category_id}&productCountry=${product.product_country}&productGrape=${product.product_grape}&productMadeyear=${product.product_madeyear}&productSweetrate=${product.product_sweetrate}&productSourrate=${product.product_sourrate}&productBodyrate=${product.product_bodyrate}`;
-
   }
 });
 
