@@ -1,11 +1,8 @@
 const jwt = require('jsonwebtoken');
-const { promisify } = require('util');
 
-const verifyToken = promisify(jwt.verify);
-
-const authMiddleware = async (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization.split(' ')[1]; // Bearer token에서 token만 추출하기 위함
 
     if (!token) {
       throw new Error('토큰이 전송되지 않았습니다.');
@@ -13,7 +10,8 @@ const authMiddleware = async (req, res, next) => {
 
     const secretKey = process.env.JWT_SECRET_KEY;
 
-    const decoded = await verifyToken(token, secretKey);
+    // 토큰 검증
+    const decoded = jwt.verify(token, secretKey);
 
     req.userId = decoded.userId;
 
