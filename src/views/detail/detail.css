@@ -1,6 +1,5 @@
 html,
 body {
-  height: 100%;
   /* 전체 페이지 좁게 가운데 정렬하는 코드 -> auto*/
   margin: 0;
   display: flex;
@@ -41,6 +40,10 @@ body {
   border-radius: 10px;
 }
 
+.hr {
+  background-color: #d5d5d5;
+}
+
 .detailDiv {
   width: 500px;
   margin: 80px;
@@ -69,7 +72,7 @@ hr {
   justify-content: space-between;
 }
 
-#quantityBtn {
+.quantityBtn {
   border-style: none;
   cursor: pointer;
 }
@@ -85,19 +88,23 @@ hr {
 }
 
 #cartBtn {
-  border-radius: 30px;
+  border-radius: 20px;
   border-style: solid;
   border-color: #af66aa;
-  background-color: #d5d5d5;
-  color: white;
+  background-color: #ffffff;
+  color: #d5d5d5;
   margin: 10px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 #payBtn {
-  border-radius: 30px;
+  border-radius: 20px;
   border-style: solid;
   border-color: #af66aa;
   background-color: #af66aa;
   color: white;
   margin: 10px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
