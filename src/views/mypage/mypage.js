@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const cancelButtons = document.querySelectorAll('#product-pay');
+  const cancelButtons = document.querySelectorAll('#product-pay-cancel');
 
   document
     .getElementById('update-button')
