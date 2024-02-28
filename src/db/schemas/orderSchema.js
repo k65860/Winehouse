@@ -1,7 +1,6 @@
 const { Schema } = require('mongoose');
 
-const OrderSchema = new Schema(
-  {
+const OrderSchema = new Schema({
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
@@ -41,18 +40,17 @@ const OrderSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Delivery',
     },
-  },
-
-  {
-    timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
+    createdAt: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
     },
     deletedAt: {
       type: Date,
-      required: true,
     },
-  }
-);
+});
 
 module.exports = OrderSchema;

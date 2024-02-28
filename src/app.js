@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
 const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,7 +5,6 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const errorMiddleware = require('./middlewares/errorMiddleware');
 const dotenv = require('dotenv').config();
 
 const port = process.env.PORT;
@@ -15,15 +12,15 @@ const mongodbUrl = process.env.MONGODB_URL;
 
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
-// const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
 const viewsRouter = require('./routes/views');
 const categoryRouter = require('./routes/category');
 const productRouter = require('./routes/product');
+const userRouter = require('./routes/users');
 
 const app = express();
 
 // mongodb connect
+
 mongoose.connect(
   mongodbUrl,
   {
@@ -48,9 +45,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 app.use('/', viewsRouter);
+app.use('/user', userRouter);
 app.use('/category', categoryRouter);
 app.use('/product', productRouter);
 
