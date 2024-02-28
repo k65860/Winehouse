@@ -1,14 +1,19 @@
-const deliverystatus = document.getElementById('delivery-status');
-button.addEventListener('click', function () {
-  window.location.href = 'https://www.cjlogistics.com/ko/tool/parcel/tracking';
-});
+document.addEventListener('DOMContentLoaded', function () {
+  const cancelButtons = document.querySelectorAll('#product-pay');
 
-const ingstate = document.getElementById('ing-state');
-button.addEventListener('click', function () {
-  window.location.href = 'http://localhost:4000/detail/detail.html';
-});
+  document
+    .getElementById('update-button')
+    .addEventListener('click', function () {
+      window.location.href = '/update';
+    });
 
-const profile = document.getElementById('profile-box');
-button.addEventListener('click', function () {
-  window.location.href = 'http://localhost:4000/update/';
+  cancelButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      const orderDetails = this.closest('.order-details');
+      if (orderDetails) {
+        orderDetails.remove();
+        alert('주문이 취소되었습니다.');
+      }
+    });
+  });
 });
