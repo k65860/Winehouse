@@ -7,76 +7,105 @@ const userService = new UserService(); // UserService 인스턴스 생성
 // 회원가입
 userRouter.post(
   '/signup',
-  asyncHandler(async (req, res) => {
-    await userService.createUser(req.body);
-
-    // 회원가입 성공 응답
-    res.status(201).json({ result: 'Success' });
+  asyncHandler(async (req, res, next) => {
+    const createdUser = await userService.createUser(req.body);
+    // 성공 상태 핸들링
+    res.status(201).json({
+      status: 201,
+      message: '회원가입 성공',
+      data: createdUser,
+    });
   })
 );
 
 // 회원정보 조회
 userRouter.get(
   '/:userId',
-  asyncHandler(async (req, res) => {
-    const userId = req.params.userId;
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.params;
     const userInfo = await userService.getUserInfo(userId);
-
-    if (userInfo === null) {
-      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
-    } else {
-      res.status(200).json(userInfo);
+    // 유저 ID 확인
+    if (!userInfo) {
+      const e = new Error('존재하지 않는 회원번호입니다.');
+      e.status = 404;
+      throw e;
     }
+    // 성공 상태 핸들링
+    res.status(200).json({
+      status: 200,
+      message: '유저 정보 조회 성공',
+      data: userInfo,
+    });
   })
 );
 
 // 회원정보 수정
 userRouter.patch(
   '/:userId',
-  asyncHandler(async (req, res) => {
-    const userId = req.params.userId;
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.params;
     const updatedInfo = req.body;
-
-    const isUpdated = await userService.updateUserInfo(userId, updatedInfo);
-
-    if (isUpdated) {
-      res.status(200).json(isUpdated); // 수정된 정보를 전송
-    } else {
-      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
+    // 유저 ID 확인
+    if (!(await userService.getUserInfo(userId))) {
+      const e = new Error('존재하지 않는 회원번호입니다.');
+      e.status = 404;
+      throw e;
     }
+    // 수정 진행
+    const isUpdated = await userService.updateUserInfo(userId, updatedInfo);
+    // 성공 상태 핸들링
+    res.status(200).json({
+      status: 200,
+      message: '유저 정보 수정 성공',
+      data: isUpdated,
+    });
   })
 );
 
 // 회원탈퇴
 userRouter.delete(
   '/:userId',
-  asyncHandler(async (req, res) => {
-    const userId = req.params.userId; // req.params.id에서 req.params.userId로 수정
-
-    const isDeleted = await userService.deleteUser(userId);
-
-    if (isDeleted) {
-      res.status(200).json({ result: 'Delete Success' });
-    } else {
-      res.status(404).json({ error: '유저 정보를 찾을 수 없습니다.' });
+  asyncHandler(async (req, res, next) => {
+    const { userId } = req.params;
+    // 유저 ID 확인
+    if (!(await userService.getUserInfo(userId))) {
+      const e = new Error('존재하지 않는 회원번호입니다.');
+      e.status = 404;
+      throw e;
     }
+    const isDeleted = await userService.deleteUser(userId);
+    // 성공 상태 핸들링
+    res.status(200).json({
+      status: 200,
+      message: '유저 탈퇴 성공',
+      data: isDeleted,
+    });
   })
 );
 
 // 로그인
 userRouter.post(
   '/login',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
-
     const userToken = await userService.getUserToken(email, password);
-
-    if (userToken) {
-      res.status(200).json({ token: userToken });
-    } else {
-      res.status(401).json({
-        error: '로그인 실패',
-      });
+    // 로그인 정보 확인
+    switch (userToken) {
+      case 1:
+        const err1 = new Error('올바르지 않은 ID');
+        err1.status = 404;
+        throw err1;
+      case 2:
+        const err2 = new Error('올바르지 않은 비밀번호');
+        err2.status = 404;
+        throw err2;
+      default:
+        // 성공 상태 핸들링
+        res.status(200).json({
+          status: 200,
+          message: '유저 로그인 성공',
+          data: userToken,
+        });
     }
   })
 );
@@ -84,17 +113,26 @@ userRouter.post(
 //관리자 로그인
 userRouter.post(
   '/role',
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
-
     const adminToken = await userService.getAdminToken(email, password);
-
-    if (adminToken) {
-      res.status(200).json({ token: adminToken });
-    } else {
-      res.status(401).json({
-        error: '관리자 로그인 실패',
-      });
+    // 로그인 정보 확인
+    switch (adminToken) {
+      case 1:
+        const err1 = new Error('올바르지 않은 ID');
+        err1.status = 404;
+        throw err1;
+      case 2:
+        const err2 = new Error('올바르지 않은 비밀번호');
+        err2.status = 404;
+        throw err2;
+      default:
+        // 성공 상태 핸들링
+        res.status(200).json({
+          status: 200,
+          message: '관리자 로그인 성공',
+          data: adminToken,
+        });
     }
   })
 );

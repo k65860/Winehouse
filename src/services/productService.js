@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-return-await */
 // 불러오기
-const Category = require('../db/models/category');
 const Product = require('../db/models/product');
 
 class ProductService {
