@@ -1,124 +1,52 @@
-html,
-body {
-  margin: 0;
+.title {
+  color: #af66aa;
+}
+
+.container {
+  margin-top: 1.5rem;
+}
+
+.order-details img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.orderlist {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.order-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.order-details > * {
+  padding: 0.5rem;
+  border: 1px solid #ccc; /* 테두리 추가 */
+  border-radius: 5px; /* 둥근 테두리 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.name,
+.delivery,
+.date,
+.pay {
   display: flex;
   flex-direction: column;
 }
 
-.title,
-.orderlist {
-  display: flex;
-  font-size: 2rem;
-  color: #af66aa;
-}
-
-#ing-state {
-  border: none; /* 검정 테두리 제거 */
-  border-radius: 50px;
-  background-color: #af66aa;
-  color: white;
-  width: 100px;
-}
-
-p.profile {
-  font-size: 2rem;
-}
 .profile {
-  color: #af66aa;
-}
-.title {
-  justify-content: center;
-}
-
-.orderlist {
-  grid-area: orderlist;
-  text-align: left;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
-.images,
-.delivery,
-.date,
-.name,
-.pay,
-.state,
-.ans-delivery,
-.ans-date,
-.ans-name,
-.ans-pay,
-.ans-state {
-  text-align: center; /* 텍스트를 수평 중앙으로 정렬합니다. */
-  line-height: 1.5; /* 텍스트의 수직 정렬을 위해 line-height를 조정합니다. */
-  display: flex;
-  justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
-  border: 1px solid #000;
-}
-
-#ingState,
-#profile-box {
-  border-radius: 50px;
-  border-style: solid;
-  border-color: #af66aa;
-  background-color: #af66aa;
-  color: white;
-}
-
-/* 컨테이너를 위한 뷰포트 높이 설정 */
-.container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 가로 나누기 */
-  grid-template-rows: 100px 50px 50px 200px 50px 100px; /* 세로 나누기 */
-  grid-template-areas:
-    'orderlist orderlist orderlist orderlist orderlist orderlist'
-    'images delivery name date pay state'
-    'images ans-delivery ans-name ans-date ans-pay ans-state'
-    'blank blank blank blank blank blank'
-    'profile profile profile profile profile profile'
-    'ans-profile ans-profile ans-profile ans-profile ans-profile ans-profile';
-}
-.images {
-  grid-area: images;
-}
-.delivery {
-  grid-area: delivery;
-}
-.date {
-  grid-area: date;
-}
-.pay {
-  grid-area: pay;
-}
-.state {
-  grid-area: state;
-}
-.name {
-  grid-area: name;
-}
-.ans-delivery {
-  grid-area: ans-delivery;
-}
-.ans-name {
-  grid-area: ans-name;
-}
-.ans-date {
-  grid-area: ans-date;
-}
-.ans-pay {
-  grid-area: ans-pay;
-}
-.ans-state {
-  grid-area: ans-state;
-}
-.ingState {
-  grid-area: ans-state;
-}
-.blank {
-  grid-area: blank;
-}
-
-.profile-box {
-  grid-area: profile-box;
-}
-.blank {
-  grid-area: blank;
+.product-pay {
+  margin: 50px;
 }
