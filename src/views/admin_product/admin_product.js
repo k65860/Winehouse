@@ -1,5 +1,39 @@
-// 상품 조회
+// 카테고리 목록 가져오기
 document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const categoryRes = await fetch('/category');
+    const categoryData = await categoryRes.json();
+
+    if (categoryData.status !== 200) {
+      throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
+    }
+
+    const categories = categoryData.data;
+    // console.log(categories);
+
+    // 셀렉트 박스
+    const selectElement = document.querySelector('#categoryBtn');
+
+    // 카테고리 목록을 셀렉트 박스에 추가
+    categories.forEach(category => {
+      const optionElement = document.createElement('option');
+      optionElement.value = category._id;
+      optionElement.textContent = category.category_name;
+      selectElement.appendChild(optionElement);
+    });
+
+    await displayProducts();
+
+    // 카테고리 변경 시
+    selectElement.addEventListener('change', displayProducts);
+
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// 상품 출력 함수
+async function displayProducts() {
   try {
     // 카테고리 목록 가져오기
     const categoryRes = await fetch('/category');
@@ -10,20 +44,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const categories = categoryData.data;
-    console.log(categories);
 
-    // 상품 목록 가져오기
-    const productRes = await fetch('/product');
-    const productData = await productRes.json();
+    const selectElement = document.querySelector('#categoryBtn');
+    const selectedCategory = selectElement.value;
+    const url = selectedCategory === 'all' ? '/product' : `/product/${selectedCategory}`;
 
-    if (productData.status !== 200) {
-      throw new Error('상품 목록을 가져오는데 실패했습니다.');
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status !== 200) {
+      throw new Error('카테고리별 상품 목록을 가져오는데 실패했습니다.');
     }
 
-    const products = productData.data;
-    console.log(products);
+    const products = data.data;
+    // console.log(products);
 
     const productsContainer = document.querySelector('.products-container');
+    productsContainer.innerHTML = ''; // 기존 상품 목록 초기화
 
     products.forEach((product) => {
       const productElement = document.createElement('div');
@@ -95,27 +132,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       productsContainer.appendChild(productElement);
 
     });
+
   } catch (err) {
     console.log(err);
   }
-});
+}
 
 // 추가 버튼
 const addButton = document.getElementById('addBtn');
-
 addButton.addEventListener('click', function () {
   // 'admin_add' 페이지로 이동
   window.location.href = '/admin_add';
 });
 
 // 수정 버튼
-const updateButtons = document.querySelectorAll('#updateBtn');
 
-updateButtons.forEach(function (button) {
-  button.addEventListener('click', function () {
-    // 'admin_update' 페이지로 이동
-    window.location.href = '/admin_update';
-  });
-});
 
 // 삭제 버튼
