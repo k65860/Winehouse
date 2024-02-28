@@ -1,67 +1,121 @@
+// 상품 조회
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    // 카테고리 목록 가져오기
+    const categoryRes = await fetch('/category');
+    const categoryData = await categoryRes.json();
+
+    if (categoryData.status !== 200) {
+      throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
+    }
+
+    const categories = categoryData.data;
+    console.log(categories);
+
+    // 상품 목록 가져오기
+    const productRes = await fetch('/product');
+    const productData = await productRes.json();
+
+    if (productData.status !== 200) {
+      throw new Error('상품 목록을 가져오는데 실패했습니다.');
+    }
+
+    const products = productData.data;
+    console.log(products);
+
+    const productsContainer = document.querySelector('.products-container');
+
+    products.forEach((product) => {
+      const productElement = document.createElement('div');
+      productElement.classList.add('card');
+
+      const category = categories.find(cat => cat._id === product.category_id);
+
+      productElement.innerHTML += `
+        <div class="card-header">
+          <p class="card-header-title">${product.product_name}</p>
+        </div>
+
+        <div class="card-content">
+          <div class="content">
+
+            <div class="field">
+              <div class="imgDiv">
+                <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">가격</label>
+              <p>${product.product_price}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">타입</label>
+              <p>${category.category_name}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">국가</label>
+              <p>${product.product_country}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">포도 품종</label>
+              <p>${product.product_grape}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">당도</label>
+              <p>${product.product_sweetrate}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">산도</label>
+              <p>${product.product_sourrate}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">바디</label>
+              <p>${product.product_bodyrate}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">생산 연도</label>
+              <p>${product.product_madeyear}</p>
+            </div>
+
+            <div class="buttonBox">
+              <button class="button is-fullwidth is-light m-1" id="updateBtn">수정</button>
+              <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
+            </div>
+          </div><!--content-->
+        </div><!--card-content-->
+      `;
+      productsContainer.appendChild(productElement);
+
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 // 추가 버튼
-document.addEventListener("DOMContentLoaded", function () {
-  const addButton = document.getElementById("addBtn");
+const addButton = document.getElementById('addBtn');
 
-  addButton.addEventListener("click", function () {
-    const destinationUrl = "/admin_add"; // 이 부분을 이동하고 싶은 페이지의 URL로 변경하세요.
-
-    window.location.href = destinationUrl;
-  });
+addButton.addEventListener('click', function () {
+  // 'admin_add' 페이지로 이동
+  window.location.href = '/admin_add';
 });
 
 // 수정 버튼
-document.addEventListener("DOMContentLoaded", function () {
-  const updateButtons = document.querySelectorAll("#updateBtn");
+const updateButtons = document.querySelectorAll('#updateBtn');
 
-  updateButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      // 'admin_update' 페이지로 이동합니다.
-      window.location.href = "/admin_update"; // 이동하고 싶은 페이지의 경로를 설정합니다.
-    });
+updateButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
+    // 'admin_update' 페이지로 이동
+    window.location.href = '/admin_update';
   });
 });
-
-// // 삭제 버튼
-// document.addEventListener("DOMContentLoaded", function () {
-//   const addButton = document.getElementById("deleteBtn");
-
-//   if (addButton) {
-//     addButton.addEventListener("click", function () {
-//       // 삭제 버튼
-//       var result = confirm("정말로 삭제하시겠습니까?");
-
-//       // 사용자가 '예'를 선택했을 경우
-//       if (result) {
-//         // 클래스명이 'card'인 첫 번째 요소를 찾아 삭제합니다.
-//         var cardToDelete = document.querySelector(".card");
-//         if (cardToDelete) {
-//           cardToDelete.remove(); // 삭제
-//         }
-//       }
-//     });
-//   }
-// });
 
 // 삭제 버튼
-document.addEventListener("DOMContentLoaded", function () {
-  const deleteButtons = document.querySelectorAll("#deleteBtn");
-
-  // forEach를 사용하여 각 버튼에 클릭 이벤트를 추가합니다.
-  deleteButtons.forEach(function (button, index) {
-    button.addEventListener("click", function () {
-      // 사용자에게 확인 메시지를 표시합니다.
-      const result = confirm("정말로 삭제하시겠습니까?");
-
-      // 사용자가 '예'를 선택한 경우
-      if (result) {
-        // 클래스명이 'card'인 요소의 인덱스에 해당하는 요소를 삭제합니다.
-        const cards = document.querySelectorAll(".card");
-        if (cards.length > index) {
-          cards[index].remove(); // 삭제
-        } else {
-          alert("더이상 삭제할 상품이 존재하지 않습니다.");
-        }
-      }
-    });
-  });
-});
