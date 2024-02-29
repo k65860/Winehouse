@@ -24,7 +24,7 @@ body {
 
 .listFont {
   margin-bottom: 0;
-  font-size: 1.4em;
+  font-size: 1.3em;
 }
 
 #photo {
@@ -52,7 +52,18 @@ body {
   margin: 15px;
 }
 
-#text {
-  margin: 0 20px 0 20px;
-  font-size: 0.8em;
+#data-name,
+#data-price,
+.name {
+  color: black;
+  font-size: 0.9em;
+  pointer-events: none;
+}
+
+.dataRow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 20px 10px 20px;
+  font-weight: bold;
 }

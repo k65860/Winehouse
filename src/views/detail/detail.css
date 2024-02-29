@@ -33,8 +33,8 @@ body {
 }
 
 #photo {
-  width: 500px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   margin: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -54,12 +54,19 @@ body {
 
 .detailRow {
   margin: 40px 0 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #detailFont,
-#result {
+#result,
+#data-name,
+#data-price,
+#data-totalPrice {
   color: black;
   font-size: 0.9em;
+  pointer-events: none;
 }
 
 hr {
