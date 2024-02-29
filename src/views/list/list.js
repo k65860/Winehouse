@@ -64,3 +64,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(err);
   }
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+      // 쿼리스트링에서 상품 ID 가져오기
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('_id');
+      if (!productId) {
+          throw new Error('Product ID is missing in query string');
+      }
+
+      // 서버로 요청을 보내어 해당 상품의 정보를 조회합니다.
+      const response = await fetch(`/product/info/${productId}`);
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+
+      // 서버로부터 받은 데이터를 JSON 형식으로 파싱합니다.
+      const data = await response.json();
+      console.log(data);
+
+      // 상품 정보 출력
+      console.log('Product ID:', data.id);
+      console.log('Product Name:', data.name);
+      console.log('Product Price:', data.price);
+      // 필요한 작업을 수행합니다.
+  } catch (error) {
+      // 오류 처리
+      console.error('Error:', error);
+  }
+});
