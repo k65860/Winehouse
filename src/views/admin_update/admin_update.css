@@ -17,3 +17,7 @@
   height: auto;
   margin: 10px;
 }
+
+.select, .select select {
+  width: 100%;
+}

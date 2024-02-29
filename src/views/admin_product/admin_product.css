@@ -24,9 +24,10 @@
   justify-content: center;
 }
 
-.section2 {
+.products-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -36,6 +37,7 @@
 .menu {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .field {
@@ -55,6 +57,7 @@
   margin: 0 20px 0 20px;
   width: 15%;
   text-align: center;
+  cursor: pointer;
 }
 
 #categoryBtn:hover {
@@ -66,4 +69,10 @@
 .option {
   text-align-last: center;
   padding: 0;
+}
+
+.card-header-title {
+  justify-content: center;
+  /* color: #af66aa; */
+  font-weight: bold;
 }

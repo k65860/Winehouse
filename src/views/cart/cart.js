@@ -26,9 +26,7 @@ const cartContainer = document.querySelector('#cart-items');
 // 플러스 버튼
 cartContainer.addEventListener('click', (event) => {
   if (event.target && event.target.classList.contains('quantity-plus-btn')) {
-    const index = Array.from(
-      cartContainer.querySelectorAll('.quantity-plus-btn')
-    ).indexOf(event.target);
+    const index = Array.from(cartContainer.querySelectorAll('.quantity-plus-btn')).indexOf(event.target);
     adjustProductQuantity('plus', index);
   }
 });
@@ -36,9 +34,7 @@ cartContainer.addEventListener('click', (event) => {
 // 마이너스 버튼
 cartContainer.addEventListener('click', (event) => {
   if (event.target && event.target.classList.contains('quantity-minus-btn')) {
-    const index = Array.from(
-      cartContainer.querySelectorAll('.quantity-minus-btn')
-    ).indexOf(event.target);
+    const index = Array.from(cartContainer.querySelectorAll('.quantity-minus-btn')).indexOf(event.target);
     adjustProductQuantity('minus', index);
   }
 });
@@ -106,7 +102,6 @@ function displayCartItems() {
           const card = createCardElement(item);
           cartContainer.appendChild(card);
         });
-
       } else {
         // 장바구니에 상품이 없으면 notice 보이기
         document.querySelector('.notice').style.display = 'flex';
@@ -160,7 +155,7 @@ deleteSelectedButton.addEventListener('click', () => {
 
   // 확인 메시지 표시
   if (checkedItems.length > 0) {
-    const confirmDelete = confirm("선택한 상품을 삭제하시겠습니까?");
+    const confirmDelete = confirm('선택한 상품을 삭제하시겠습니까?');
     if (confirmDelete) {
       checkedItems.forEach((item) => {
         const itemId = parseInt(item.name);
@@ -168,10 +163,10 @@ deleteSelectedButton.addEventListener('click', () => {
       });
 
       displayCartItems();
-      alert("선택한 상품이 삭제되었습니다.");
+      alert('선택한 상품이 삭제되었습니다.');
     }
   } else {
-    alert("삭제할 상품을 선택해주세요.");
+    alert('삭제할 상품을 선택해주세요.');
   }
 });
 
@@ -194,18 +189,18 @@ const deleteAllButton = document.querySelector('#delete-all-button');
 
 deleteAllButton.addEventListener('click', () => {
   const cartItems = document.querySelectorAll('#cart-items .card');
-  
+
   // 장바구니에 상품이 없으면 알림창 띄우기
   if (cartItems.length === 0) {
-    alert("장바구니에 담긴 상품이 없습니다.");
+    alert('장바구니에 담긴 상품이 없습니다.');
     return;
   }
 
-  const confirmDelete = confirm("장바구니에 담긴 모든 상품을 삭제하시겠습니까?");
+  const confirmDelete = confirm('장바구니에 담긴 모든 상품을 삭제하시겠습니까?');
   if (confirmDelete) {
     deleteAllCartItems();
     displayCartItems();
-    alert("장바구니에 담긴 모든 상품이 삭제되었습니다.");
+    alert('장바구니에 담긴 모든 상품이 삭제되었습니다.');
   }
 });
 
@@ -264,26 +259,74 @@ document.addEventListener('change', (event) => {
   }
 });
 
+// 결제 버튼 클릭 시 order objectStore에 결제 상품 추가
+const paymentButton = document.querySelector('#payment-button');
+paymentButton.addEventListener('click', () => {
+  const checkedItems = document.querySelectorAll('#cart-items input[type="checkbox"]:checked');
+
+  const request = window.indexedDB.open('winehouse');
+
+  request.onsuccess = (event) => {
+    const db = event.target.result;
+    const transaction = db.transaction(['order'], 'readwrite');
+    const store = transaction.objectStore('order');
+
+    // 확인 메시지 표시
+    if (checkedItems.length > 0) {
+      const confirmDelete = confirm('선택한 상품을 결제하시겠습니까?');
+      if (confirmDelete) {
+        const items = [];
+
+        checkedItems.forEach((checkbox) => {
+          const itemCard = checkbox.closest('.card');
+          // 사진
+          const itemImage = itemCard.querySelector('img').src;
+          // 이름
+          const itemName = itemCard.querySelector('.product-name').innerText;
+          // 가격
+          const itemPriceElement = itemCard.querySelector('.product-price p');
+          const itemPrice = parseInt(itemPriceElement.innerText.replace('원', ''));
+          // 수량
+          const itemQuantity = parseInt(itemCard.querySelector('.quantity').innerText);
+
+          items.push({
+            productName: itemName,
+            productPrice: itemPrice,
+            productQuantity: itemQuantity,
+            productImage: itemImage,
+          });
+
+        });
+        store.add(items);
+
+        window.location.href = '/order';
+      }
+    } else {
+      alert('결제할 상품을 선택해주세요.');
+    }
+  };
+});
+
 // 상품 데이터 추가
 // function addProductsToIndexedDB() {
-//   const request = window.indexedDB.open('winehouse');
-  
-//   request.onsuccess = (event) => {
-//     const db = event.target.result;
-//     const transaction = db.transaction(['cart'], 'readwrite');
-//     const store = transaction.objectStore('cart');
+// const request = window.indexedDB.open('winehouse');
 
-//     const products = [
-//       { productName: '브레드앤버터 소비뇽', productPrice: '40000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
-//       { productName: '쇼비뇽블랑', productPrice: '32000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
-//       { productName: '소비뇽', productPrice: '140000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
-//       { productName: '클라우디', productPrice: '132000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
-//     ];
+// request.onsuccess = (event) => {
+//   const db = event.target.result;
+//   const transaction = db.transaction(['cart'], 'readwrite');
+//   const store = transaction.objectStore('cart');
+
+// const products = [
+//   { productName: '브레드앤버터 소비뇽', productPrice: '40000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
+//   { productName: '쇼비뇽블랑', productPrice: '32000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
+//   { productName: '소비뇽', productPrice: '140000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
+//   { productName: '클라우디', productPrice: '132000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
+// ];
 
 //     products.forEach((product) => {
 //       store.add(product);
 //     });
-    
+
 //     transaction.oncomplete = () => {
 //       console.log('상품 데이터가 IndexedDB에 추가되었습니다.');
 //     };

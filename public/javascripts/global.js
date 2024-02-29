@@ -1,9 +1,9 @@
 // 헤더와 푸터를 렌더링하는 함수
-function renderHeaderAndFooter() {
+async function renderHeaderAndFooter() {
   // 헤더 추가
   const headerContainer = document.getElementById('header-container');
   if (headerContainer) {
-      headerContainer.innerHTML = `
+    headerContainer.innerHTML = `
         <nav class="navbar has-shadow ${window.location.pathname === '/' ? 'is-fixed-top' : ''}">
           <div class="navbar-brand">
             <a class="navbar-item" href="/">
@@ -18,12 +18,7 @@ function renderHeaderAndFooter() {
           </div>
 
           <div class="navbar-menu" id="nav-links">
-            <div class="navbar-start ml-2">
-              <a class="navbar-item" href="/list">레드</a>
-              <a class="navbar-item" href="/list">화이트</a>
-              <a class="navbar-item" href="/list">로제</a>
-              <a class="navbar-item" href="/list">스파클링</a>
-            </div>
+            <div class="navbar-start ml-2"><!-- 카테고리(타입) --></div>
         
             <div class="navbar-end">
               <div class="navbar-item">
@@ -31,9 +26,9 @@ function renderHeaderAndFooter() {
                   <a class="cart-icon" href="/cart">
                     <i class="fa-solid fa-cart-shopping"></i>
                   </a>
-                  <!-- <a class="cart-icon" href="/mypage">
+                  <a class="cart-icon" href="/mypage">
                     <i class="fa-solid fa-user"></i>
-                  </a> -->
+                  </a>
                   <a class="button is-light" href="/login"><strong>로그인</strong></a>
                 </div>
               </div>
@@ -47,7 +42,7 @@ function renderHeaderAndFooter() {
   // 푸터 추가
   const footerContainer = document.getElementById('footer-container');
   if (footerContainer) {
-      footerContainer.innerHTML = `
+    footerContainer.innerHTML = `
       <footer class="footer">
         <div class="footer-container">
           <div class="company-name">
@@ -70,7 +65,7 @@ function renderHeaderAndFooter() {
 }
 
 // 페이지가 로드될 때 헤더와 푸터 렌더링
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async () => {
   renderHeaderAndFooter();
 
   // burger-menu
@@ -80,4 +75,27 @@ document.addEventListener('DOMContentLoaded', function () {
   burgerIcon.addEventListener('click', () => {
     navbarMenu.classList.toggle('is-active');
   });
+
+  // 카테고리 가져오기
+  try {
+    const res = await fetch('/category');
+    const data = await res.json();
+
+    if (data.status !== 200) {
+      throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
+    }
+
+    const categories = data.data;
+
+    const menuElement = document.querySelector('.navbar-start');
+
+    // 카테고리 목록을 메뉴에 추가
+    categories.forEach((category) => {
+      menuElement.innerHTML += `
+          <a class="navbar-item" href="/list?categoryId=${category._id}">${category.category_name}</a>
+        `;
+    });
+  } catch (error) {
+    console.error('카테고리 불러오기 오류:', error);
+  }
 });
