@@ -1,8 +1,6 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
 
 const ImageSchema = new Schema({
-  shortId,
   product_id: {
     type: shortId,
     required: true,
@@ -18,11 +16,9 @@ const ImageSchema = new Schema({
   },
   updatedAt: {
     type: Date,
-    required: true,
   },
   deletedAt: {
     type: Date,
-    required: true,
   },
 });
 

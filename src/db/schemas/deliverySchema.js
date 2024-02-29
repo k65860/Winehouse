@@ -1,26 +1,23 @@
 const { Schema } = require('mongoose');
 
 const DeliverySchema = new Schema({
-  userId: {
+  user_id: {
     type: Schema.Types.ObjectId,
     required: true,
   },
-
-  orderId: {
+  order_id: {
     type: Schema.Types.ObjectId,
     required: true,
   },
-
-  deliveryStatus: {
+  delivery_status: {
     type: Number,
     required: true,
+    default: 1,
   },
-
-  deliveryDate: {
+  delivery_date: {
     type: Date,
   },
-
-  deliveryWish: {
+  delivery_wish: {
     type: String,
   },
   createdAt: {

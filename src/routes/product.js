@@ -11,6 +11,7 @@ const productRouter = Router();
 
 // 상품 목록 가져오기
 productRouter.get('/', asyncHandler(async (req, res, next) => {
+  // 전체 상품 목록 호출
   const productList = await ProductService.getProductList();
   // 성공 상태 핸들링
   res.status(200).json({
@@ -24,11 +25,8 @@ productRouter.get('/', asyncHandler(async (req, res, next) => {
 productRouter.get('/:categoryId', asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   // 카테고리 유무 확인
-  if (!(await CategoryService.checkCategoryId(categoryId))) {
-    const e = new Error('해당 카테고리의 id가 없습니다.');
-    e.status = 404;
-    throw e;
-  }
+  await CategoryService.checkCategoryId(categoryId);
+  // 해당 카테고리 상품 목록 호출
   const productListOfCategory = await ProductService.getProductListByCategory(categoryId);
   // 성공 상태 핸들링
   res.status(200).json({
@@ -42,11 +40,8 @@ productRouter.get('/:categoryId', asyncHandler(async (req, res, next) => {
 productRouter.get('/info/:productId', asyncHandler(async (req, res, next) => {
   const { productId } = req.params;
   // 상품 ID 확인
-  if (!(await ProductService.checkProductId(productId))) {
-    const e = new Error('해당 id의 상품이 없습니다.');
-    e.status = 404;
-    throw e;
-  }
+  await ProductService.checkProductId(productId);
+  // 해당 상품 상세페이지 호출
   const productInfo = await ProductService.getProductInfo(productId);
   // 성공 상태 핸들링
   res.status(200).json({
@@ -58,51 +53,12 @@ productRouter.get('/info/:productId', asyncHandler(async (req, res, next) => {
 
 // 상품 추가
 productRouter.post('/', asyncHandler(async (req, res, next) => {
-  const {
-    productName,
-    productPrice,
-    categoryId,
-    productCountry,
-    productGrape,
-    productMadeyear,
-    productSweetrate,
-    productSourrate,
-    productBodyrate,
-  } = req.body;
-
   // 상품 빈 필드 확인
-  if (await ProductService.checkProductField(
-    productName,
-    productPrice,
-    categoryId,
-    productCountry,
-    productGrape,
-    productMadeyear,
-    productSweetrate,
-    productSourrate,
-    productBodyrate,
-  )) {
-    const e = new Error('상품을 추가하기 위해선 모든 필드가 채워져야 합니다.');
-    e.status = 405;
-    throw e;
-  }
+  await ProductService.checkProductField(req.body);
   // 카테고리 유무 확인
-  if (!(await CategoryService.checkCategoryId(categoryId))) {
-    const e = new Error('해당 카테고리의 id가 없습니다.');
-    e.status = 404;
-    throw e;
-  }
-  const productAdding = await ProductService.addProduct(
-    productName,
-    productPrice,
-    categoryId,
-    productCountry,
-    productGrape,
-    productMadeyear,
-    productSweetrate,
-    productSourrate,
-    productBodyrate,
-  );
+  await CategoryService.checkCategoryId(req.body.categoryId);
+  // 상품 추가 진행
+  const productAdding = await ProductService.addProduct(req.body);
   // 성공 상태 핸들링
   res.status(201).json({
     status: 201,
@@ -114,42 +70,12 @@ productRouter.post('/', asyncHandler(async (req, res, next) => {
 // 상품 수정
 productRouter.patch('/:productId', asyncHandler(async (req, res, next) => {
   const { productId } = req.params;
-  const {
-    productName,
-    productPrice,
-    categoryId,
-    productCountry,
-    productGrape,
-    productMadeyear,
-    productSweetrate,
-    productSourrate,
-    productBodyrate,
-    updatedAt,
-  } = req.body;
   // 상품 ID 확인
-  if (!(await ProductService.checkProductId(productId))) {
-    const e = new Error('해당 id의 상품이 없습니다.');
-    e.status = 404;
-    throw e;
-  }
-  // 카테고리 유무 확인
-  if (categoryId && !(await CategoryService.checkCategoryId(categoryId))) {
-    const e = new Error('해당 카테고리의 id가 없습니다.');
-    e.status = 404;
-    throw e;
-  }
-  const updatedProduct = await ProductService.setProduct(
-    productId,
-    productName,
-    productPrice,
-    categoryId,
-    productCountry,
-    productGrape,
-    productMadeyear,
-    productSweetrate,
-    productSourrate,
-    productBodyrate,
-  );
+  await ProductService.checkProductId(productId);
+  // 카테고리 유무 확인 (있다면)
+  if (req.params.category_id) await CategoryService.checkCategoryId(req.params.category_id);
+  // 상품 수정 진행
+  const updatedProduct = await ProductService.setProduct(productId,req.body);
   // 성공 상태 핸들링
   res.status(200).json({
     status: 200,
@@ -162,11 +88,8 @@ productRouter.patch('/:productId', asyncHandler(async (req, res, next) => {
 productRouter.delete('/:productId', asyncHandler(async (req, res, next) => {
   const { productId } = req.params;
   // 상품 ID 확인
-  if (!(await ProductService.checkProductId(productId))) {
-    const e = new Error('해당 id의 상품이 없습니다.');
-    e.status = 404;
-    throw e;
-  }
+  await ProductService.checkProductId(productId);
+  // 상품 삭제 진행
   const deleteProduct = await ProductService.deleteProduct(productId);
   // 성공 상태 핸들링
   res.status(200).json({

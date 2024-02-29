@@ -16,6 +16,7 @@ const viewsRouter = require('./routes/views');
 const categoryRouter = require('./routes/category');
 const productRouter = require('./routes/product');
 const userRouter = require('./routes/users');
+const orderRouter = require('./routes/order');
 
 const app = express();
 
@@ -45,10 +46,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.use('/', viewsRouter);
+// app.use('/', viewsRouter);
 app.use('/user', userRouter);
 app.use('/category', categoryRouter);
 app.use('/product', productRouter);
+app.use('/order', orderRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

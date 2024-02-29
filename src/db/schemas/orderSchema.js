@@ -1,42 +1,22 @@
 const { Schema } = require('mongoose');
 
 const OrderSchema = new Schema({
-    userId: {
+    user_id: {
       type: Schema.Types.ObjectId,
       required: true,
+      ref: 'User',
     },
-
-    orderList: [
-      {
-        productId: {
-          type: Schema.Types.ObjectId,
-          ref: 'Product',
-          required: true,
-        },
-
-        quantity: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
-
-    orderDate: {
-      type: Date,
-      default: Date.now,
-    },
-
-    orderPrice: {
+    order_price: {
       type: Number,
       required: true,
+      default: 0,
     },
-
-    orderCount: {
+    order_count: {
       type: Number,
       required: true,
+      default: 0,
     },
-
-    deliveryId: {
+    delivery_id: {
       type: Schema.Types.ObjectId,
       ref: 'Delivery',
     },
