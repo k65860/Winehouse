@@ -17,6 +17,28 @@ function previewFile(event) {
 // 카테고리 & 상품 정보 가져오기
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    //////// 카데고리 정보 가져오기
+    const categoryRes= await fetch('/category');
+    const categoryData = await categoryRes.json();
+
+    if (categoryData.status !== 200) {
+      throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
+    }
+
+    const categories = categoryData.data;
+    // console.log(categories);
+
+    // 셀렉트 박스 생성
+    const selectElement = document.querySelector('.field select[name="type"]');
+
+    // 카테고리 목록을 셀렉트 박스에 추가
+    categories.forEach(category => {
+      const optionElement = document.createElement('option');
+      optionElement.value = category._id;
+      optionElement.textContent = category.category_name;
+      selectElement.appendChild(optionElement);
+    });
+
     //////// 상품 정보 가져오기
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('productId');
@@ -42,27 +64,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('#sour').value = product.product_sourrate;
     document.querySelector('#body').value = product.product_bodyrate;
     document.querySelector('#year').value = product.product_madeyear;
-
-    //////// 카데고리 정보 가져오기
-    const categoryRes= await fetch('/category');
-    const categoryData = await categoryRes.json();
-
-    if (categoryData.status !== 200) {
-      throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
-    }
-
-    const categories = categoryData.data;
-
-    // 셀렉트 박스 생성
-    const selectElement = document.querySelector('.field select[name="type"]');
-
-    // 카테고리 목록을 셀렉트 박스에 추가
-    categories.forEach(category => {
-      const optionElement = document.createElement('option');
-      optionElement.value = category._id;
-      optionElement.textContent = category.category_name;
-      selectElement.appendChild(optionElement);
-    });
 
   } catch (err) {
     console.error(err);
