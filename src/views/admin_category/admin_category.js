@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // 확인 버튼 생성
       const confirmButton = document.createElement('button');
       confirmButton.textContent = '확인';
-      confirmButton.classList.add('button', 'is-light');
+      confirmButton.classList.add('button', 'is-warning');
       confirmButton.addEventListener('click', function () {
         // 입력된 내용으로 item 내용 변경
         const newText = input.value.trim();

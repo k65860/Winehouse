@@ -2,19 +2,8 @@
   margin: 0 20px;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  overflow-x: auto;
-  overflow-y: auto;
-  height: calc(
-    100vh - 50px
-  ); /* 화면에서 상단 네비게이션의 높이를 제외한 나머지 영역을 사용합니다. */
-}
-
 .addButton {
-  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: right;
 }
 

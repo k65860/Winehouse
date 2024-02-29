@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/stylesheets/global.css">
   <!-- JavaScript 파일 -->
   <script src="admin_category.js"></script>
-  <script src="/javascripts/global.js" type="module" defer></script>
+  <!-- <script src="/javascripts/global.js" type="module" defer></script> -->
 </head>
 
 <body>
@@ -57,62 +57,60 @@
 
     <div class="column is-10">
       <div class="section">
+        <div class="addButton">
+          <button id="addButton" class="button is-info">추가</button>
+        </div>
 
         <div class="card">
           <div class="card-header">
             <p class="card-header-title">카테고리 - 와인 타입</p>
           </div>
+
+          <div class="card-content">
+            <div class="content">
+      
+              <article class="list">
+                <span class="item"> Red wine</span>
+                <span class="subSelect">
+                  <button class="button is-light fixButton">수정</button>
+                  <button class="button is-danger deleteButton">삭제</button>
+                </span>
+              </article>
+      
+              <article class="list">
+                <span class="item"> White wine</span>
+                <span class="subSelect">
+                  <button class="button is-light fixButton">수정</button>
+                  <button class="button is-danger deleteButton">삭제</button>
+                </span>
+              </article>
+      
+              <article class="list">
+                <span class="item"> Rose wine</span>
+                <span class="subSelect">
+                  <button class="button is-light fixButton">수정</button>
+                  <button class="button is-danger deleteButton">삭제</button>
+                </span>
+              </article>
+      
+              <article class="list">
+                <span class="item"> Sparkling wine</span>
+                <span class="subSelect">
+                  <button class="button is-light fixButton">수정</button>
+                  <button class="button is-danger deleteButton">삭제</button>
+                </span>
+              </article>
+
+            </div>
+  
+            <button class="button is-fullwidth is-light mt-5" id="completionButton">확인</button>
+          </div>
+
         </div>
-
-        <article class="addButton">
-          <button id="addButton" class="button is-light">추가</button>
-        </article>
-
-        <article class="list">
-          <span class="item"> Red wine</span>
-          <span class="subSelect">
-            <button class="button is-light fixButton">수정</button>
-            <button class="button is-light deleteButton">삭제</button>
-          </span>
-        </article>
-
-
-
-        <article class="list">
-          <span class="item"> White wine</span>
-          <span class="subSelect">
-            <button class="button is-light fixButton">수정</button>
-            <button class="button is-light deleteButton">삭제</button>
-          </span>
-        </article>
-
-
-
-
-        <article class="list">
-          <span class="item"> Rose wine</span>
-          <span class="subSelect">
-            <button class="button is-light fixButton">수정</button>
-            <button class="button is-light deleteButton">삭제</button>
-          </span>
-        </article>
-
-
-
-
-        <article class="list">
-          <span class="item"> Sparkling wine</span>
-          <span class="subSelect">
-            <button class="button is-light fixButton">수정</button>
-            <button class="button is-light deleteButton">삭제</button>
-          </span>
-        </article>
-
-
-
-        <button class="button is-fullwidth is-light mt-5" id="completionButton">확인</button>
-
       </div>
+
+        
+
     </div>
   </section>
 </body>
