@@ -7,13 +7,13 @@ body {
   flex-direction: column;
 }
 
-/* main */
+/* main 
 .main {
   display: flex;
   justify-content: center;
   margin: 0px;
   flex: 1;
-}
+}*/
 
 .orderList {
   display: flex;
@@ -46,10 +46,12 @@ body {
 #productPhoto {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .photoBox {
-  margin: 15px;
+  margin: 20px;
 }
 
 #data-name,
