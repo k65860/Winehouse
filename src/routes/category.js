@@ -11,6 +11,7 @@ const categoryRouter = Router();
 
 // 카테고리 조회
 categoryRouter.get('/', asyncHandler(async (req, res, next) => {
+  // 전체 카테고리 조회
   const categoryList = await CategoryService.getCategoryList();
   // 성공 상태 핸들링
   res.status(200).json({
@@ -24,11 +25,7 @@ categoryRouter.get('/', asyncHandler(async (req, res, next) => {
 categoryRouter.post('/', asyncHandler(async (req, res, next) => {
   const { categoryName } = req.body;
   // 카테고리명 중복 확인
-  if (await CategoryService.checkCategoryNameDuplicated(categoryName)) {
-    const e = new Error('이미 있는 카테고리입니다.');
-    e.status = 409;
-    throw e;
-  }
+  await CategoryService.checkCategoryNameDuplicated(categoryName);
   // 추가 진행
   const categoryAdding = await CategoryService.addCategory(categoryName);
   // 성공 상태 핸들링
@@ -44,17 +41,9 @@ categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   const { modifedName } = req.body;
   // 카테고리 ID 확인
-  if (!(await CategoryService.checkCategoryId(categoryId))) {
-    const e = new Error('해당 카테고리의 id가 없습니다.');
-    e.status = 404;
-    throw e;
-  }
+  await CategoryService.checkCategoryId(categoryId);
   // 카테고리명 중복 확인
-  if (await CategoryService.checkCategoryNameDuplicated(modifedName)) {
-    const e = new Error('이미 있는 카테고리입니다.');
-    e.status = 409;
-    throw e;
-  }
+  await CategoryService.checkCategoryNameDuplicated(modifedName);
   // 카테고리 수정 진행
   const updateCategory = await CategoryService.setCategory(categoryId, modifedName);
   // 성공 상태 핸들링
@@ -69,17 +58,9 @@ categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
 categoryRouter.delete('/:categoryId', asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   // 속한 상품 유무 확인
-  if (await ProductService.checkCategoryHasProduct(categoryId)) {
-    const e = new Error('카테고리에 속한 상품이 남아있습니다.');
-    e.status = 405;
-    throw e;
-  }
-  // ID 확인
-  if (!(await CategoryService.checkCategoryId(categoryId))) {
-    const e = new Error('해당 카테고리의 id가 없습니다.');
-    e.status = 404;
-    throw e;
-  }
+  await ProductService.checkCategoryHasProduct(categoryId);
+  // 카테고리 ID 확인
+  await CategoryService.checkCategoryId(categoryId);
   // 카테고리 삭제 진행
   const deleteCategory = await CategoryService.deleteCategory(categoryId);
   // 성공 상태 핸들링

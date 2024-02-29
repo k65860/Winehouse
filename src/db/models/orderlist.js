@@ -1,4 +1,4 @@
 const mongoose = require('mongoose');
 const OrderlistSchema = require('../schemas/orderlistSchema');
 
-exports.User = mongoose.model('Orderlist', OrderlistSchema);
+module.exports = mongoose.model('Orderlist', OrderlistSchema);
