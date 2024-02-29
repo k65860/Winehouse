@@ -123,7 +123,7 @@ async function displayProducts() {
             </div>
 
             <div class="buttonBox">
-              <button class="button is-fullwidth is-light m-1" id="${product._id}">수정</button>
+              <button class="button is-fullwidth is-light m-1" id="updateBtn" name="${product._id}">수정</button>
               <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
             </div>
           </div><!--content-->
@@ -142,9 +142,9 @@ async function displayProducts() {
 document.addEventListener('click', async (e) => {
   if (e.target && e.target.id === 'addBtn') { // 추가
     window.location.href = '/admin_add';
-  } else { // 수정
+  } else if (e.target && e.target.id === 'updateBtn') { // 수정
     // 상품 아이디
-    const productId = e.target.id;
+    const productId = e.target.name;
     // 수정 페이지로 이동
     window.location.href = `/admin_update?productId=${productId}`;
   }
