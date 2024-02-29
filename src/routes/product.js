@@ -2,10 +2,13 @@
 const { Router } = require('express');
 const ProductService = require('../services/productService');
 const CategoryService = require('../services/categoryService');
+
+// 미들웨어 호출
 const asyncHandler = require('../middlewares/asyncHandler');
+const authAdminMiddleware = require('../middlewares/authAdminMiddleware');
+
 const Product = require('../db/models/product');
 const Category = require('../db/models/category');
-// const adminAuth = require('../middlewares/authMiddleware');
 
 const productRouter = Router();
 
@@ -52,7 +55,9 @@ productRouter.get('/info/:productId', asyncHandler(async (req, res, next) => {
 }));
 
 // 상품 추가
-productRouter.post('/', asyncHandler(async (req, res, next) => {
+productRouter.post('/',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   // 상품 빈 필드 확인
   await ProductService.checkProductField(req.body);
   // 카테고리 유무 확인
@@ -68,7 +73,9 @@ productRouter.post('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 상품 수정
-productRouter.patch('/:productId', asyncHandler(async (req, res, next) => {
+productRouter.patch('/:productId',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { productId } = req.params;
   // 상품 ID 확인
   await ProductService.checkProductId(productId);
@@ -85,7 +92,9 @@ productRouter.patch('/:productId', asyncHandler(async (req, res, next) => {
 }));
 
 // 상품 삭제
-productRouter.delete('/:productId', asyncHandler(async (req, res, next) => {
+productRouter.delete('/:productId',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { productId } = req.params;
   // 상품 ID 확인
   await ProductService.checkProductId(productId);

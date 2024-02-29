@@ -1,12 +1,15 @@
 const { Router } = require('express');
 const UserService = require('../services/userService');
-const authMiddleware = require('../middlewares/authMiddleware');
+
+
+// 미들웨어 호출
 const asyncHandler = require('../middlewares/asyncHandler');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const userRouter = Router();
 
 // 회원가입
-userRouter.post('/signup',authMiddleware, asyncHandler(async (req, res, next) => {
+userRouter.post('/signup', asyncHandler(async (req, res, next) => {
   // 회원가입 함수 호출 (유효성 검사 필요)
   const createdUser = await UserService.createUser(req.body);
   // 성공 상태 핸들링
@@ -19,26 +22,26 @@ userRouter.post('/signup',authMiddleware, asyncHandler(async (req, res, next) =>
 );
 
 // 회원정보 조회
-userRouter.get('/:userId', asyncHandler(async (req, res, next) => {
-  const { userId } = req.params;
-  // 회원정보 조회
-  const userInfo = await UserService.getUserInfo(userId);
-  // 성공 상태 핸들링
-  res.status(200).json({
-    status: 200,
-    message: '유저 정보 조회 성공',
-    data: userInfo,
-  });
-  })
+userRouter.get('/',
+  authMiddleware, 
+  asyncHandler(async (req, res, next) => {
+    // 회원정보 조회
+    const userInfo = await UserService.getUserInfo(req.userId);
+    // 성공 상태 핸들링
+    res.status(200).json({
+      status: 200,
+      message: '유저 정보 조회 성공',
+      data: userInfo,
+    });
+    })
 );
 
 // 회원정보 수정
-userRouter.patch('/:userId', asyncHandler(async (req, res, next) => {
-    const { userId } = req.params;
-    // 유저 ID 확인
-    await UserService.getUserInfo(userId);
+userRouter.patch('/', 
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
     // 수정 진행
-    const isUpdated = await UserService.updateUserInfo(userId, req.body);
+    const isUpdated = await UserService.updateUserInfo(req.userId, req.body);
     // 성공 상태 핸들링
     res.status(200).json({
     status: 200,
@@ -49,10 +52,9 @@ userRouter.patch('/:userId', asyncHandler(async (req, res, next) => {
 );
 
 // 회원탈퇴
-userRouter.delete('/:userId', asyncHandler(async (req, res, next) => {
-    const { userId } = req.params;
-    // 유저 ID 확인
-    await UserService.getUserInfo(userId);
+userRouter.delete('/',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
     // 회원 탈퇴 진행
     const isDeleted = await UserService.deleteUser(userId);
     // 성공 상태 핸들링

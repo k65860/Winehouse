@@ -80,7 +80,10 @@ class UserService {
 
     // 로그인 성공 후 토큰 반환
     const secretKey = process.env.JWT_SECRET_KEY; // env 설정 필요
-    return jwt.sign({ userId: userData.email }, secretKey);
+    return jwt.sign({
+      userId: userData._id,
+      isAdimn: false,
+    }, secretKey);
   }
 
   async comparePasswords(inputPassword, hashedPassword) {
@@ -113,7 +116,10 @@ class UserService {
 
     // 로그인 성공 후 토큰 반환
     const secretKey = process.env.JWT_SECRET_KEY; // env 설정 필요
-    const adminToken = jwt.sign({ userId: adminData.email }, secretKey);
+    const adminToken = jwt.sign({
+      userId: adminData._id,
+      isAdimn: true,
+    }, secretKey);
     return adminToken;
   }
 }

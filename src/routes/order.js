@@ -1,21 +1,29 @@
 /* eslint-disable no-unused-vars */
 const { Router } = require('express');
+
+// 서비스 호출
 const OrderService = require('../services/orderService');
 const OrderlistService = require('../services/orderlistService');
 const DeliveryService = require('../services/deliveryService');
 const UserService = require('../services/userService');
+
+// 미들웨어 호출
 const asyncHandler = require('../middlewares/asyncHandler');
+const authAdminMiddleware = require('../middlewares/authAdminMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+
+// 모델 호출
 const Order = require('../db/models/order');
 const Orderlist = require('../db/models/orderlist');
 const Delivery = require('../db/models/delivery');
 const User = require('../db/models/user');
-const order = require('../db/models/order');
-// const adminAuth = require('../middlewares/authMiddleware');
 
 const orderRouter = Router();
 
 // 전체 주문 목록 가져오기
-orderRouter.get('/', asyncHandler(async (req, res, next) => {
+orderRouter.get('/',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   // 전체 주문 목록 호출
   const orderList = await OrderService.getOrderList();
   // 성공 상태 핸들링
@@ -27,12 +35,13 @@ orderRouter.get('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 특정 유저 주문 목록 확인
-orderRouter.get('/:userId', asyncHandler(async (req, res, next) => {
-  const { userId } = req.params;
+orderRouter.get('/',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
   // 유효한 유저인지 확인
-  await UserService.getUserInfo(userId);
+  await UserService.getUserInfo(req.userId);
   // 특정 유저 주문 호출
-  const orderListOfUser = await OrderService.getOrderListOfUser(userId);
+  const orderListOfUser = await OrderService.getOrderListOfUser(req.userId);
   // 성공 상태 핸들링
   res.status(200).json({
     status: 200,
@@ -42,7 +51,9 @@ orderRouter.get('/:userId', asyncHandler(async (req, res, next) => {
 }));
 
 // 특정 주문의 상품 목록 확인
-orderRouter.get('/info/:orderId', asyncHandler(async (req, res, next) => {
+orderRouter.get('/info/:orderId',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { orderId } = req.params;
   // 주문 유무 확인
   await OrderService.checkOrderId(orderId);
@@ -57,7 +68,9 @@ orderRouter.get('/info/:orderId', asyncHandler(async (req, res, next) => {
 }))
 
 // 특정 주문의 배송 상태 확인
-orderRouter.get('/status/:orderId', asyncHandler(async (req, res, next) => {
+orderRouter.get('/status/:orderId',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { orderId } = req.params;
   // 배송 상태 호출
   const getDeliveryOfOrder = await DeliveryService.getDeliveryOfOrder(orderId);
@@ -70,19 +83,20 @@ orderRouter.get('/status/:orderId', asyncHandler(async (req, res, next) => {
 }))
 
 // 주문 추가
-orderRouter.post('/:userId', asyncHandler(async (req, res, next) => {
-  const { userId } = req.params;
+orderRouter.post('/',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { productArray } = req.body;
   // 주문 빈 필드 확인
   await OrderService.checkOrderField(req.body);
   // orderSchema 추가 (임시)
-  const addOrder = await OrderService.addOrder(userId);
+  const addOrder = await OrderService.addOrder(req.userId);
   // 받아온 상품 목록대로 orderlistSchema 추가
   productArray.forEach(async productOrder => {
     await OrderlistService.addOrderlist(addOrder._id, productOrder);
   });
   // deliverySchema 추가
-  const addDelivery = await DeliveryService.addDelivery(userId, addOrder._id);
+  const addDelivery = await DeliveryService.addDelivery(req.userId, addOrder._id);
   // 상품 총 수량 및 금액 계산
   const getOrderQuntity = await OrderlistService.getOrderQuntity(addOrder._id);
   // orderSchmea에 총 가격 및 수량 기입
@@ -100,7 +114,9 @@ orderRouter.post('/:userId', asyncHandler(async (req, res, next) => {
 }));
 
 // 관리자 배송 상태 수정
-orderRouter.patch('/delivery/:deliveryId', asyncHandler(async (req, res, next) => {
+orderRouter.patch('/delivery/:deliveryId',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { deliveryId } = req.params;
   // 배송 상태 수정 함수 호출
   const updateDelivery = await DeliveryService.setDelivery(deliveryId, req.body);
@@ -113,7 +129,9 @@ orderRouter.patch('/delivery/:deliveryId', asyncHandler(async (req, res, next) =
 }))
 
 // 사용자 주문 수정
-orderRouter.patch('/:orderId', asyncHandler(async (req, res, next) => {
+orderRouter.patch('/:orderId',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { orderId } = req.params;
   const { productArray } = req.body;
   // 주문 유무 확인
@@ -142,7 +160,9 @@ orderRouter.patch('/:orderId', asyncHandler(async (req, res, next) => {
 }));
 
 // 주문 삭제
-orderRouter.delete('/:orderId', asyncHandler(async (req, res, next) => {
+orderRouter.delete('/:orderId',
+  authMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { orderId } = req.params;
   // 주문 유무 확인
   await OrderService.checkOrderId(orderId);

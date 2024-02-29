@@ -2,10 +2,12 @@
 const { Router } = require('express');
 const ProductService = require('../services/productService');
 const CategoryService = require('../services/categoryService');
+
 const asyncHandler = require('../middlewares/asyncHandler');
+const authAdminMiddleware = require('../middlewares/authAdminMiddleware');
+
 const Product = require('../db/models/product');
 const Category = require('../db/models/category');
-// const adminAuth = require('../middlewares/authMiddleware');
 
 const categoryRouter = Router();
 
@@ -22,7 +24,9 @@ categoryRouter.get('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 카테고리 추가 -> admin 한정 (추후 어드민 확인 절차 추가 필요)
-categoryRouter.post('/', asyncHandler(async (req, res, next) => {
+categoryRouter.post('/',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { categoryName } = req.body;
   // 카테고리명 중복 확인
   await CategoryService.checkCategoryNameDuplicated(categoryName);
@@ -37,7 +41,9 @@ categoryRouter.post('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 카테고리 수정 -> admin 한정 (추후 어드민 확인 절차 추가 필요)
-categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
+categoryRouter.patch('/:categoryId',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   const { modifedName } = req.body;
   // 카테고리 ID 확인
@@ -55,7 +61,9 @@ categoryRouter.patch('/:categoryId', asyncHandler(async (req, res, next) => {
 }));
 
 // 카테고리 삭제 -> admin 한정 (추후 어드민 확인 절차 추가 필요)
-categoryRouter.delete('/:categoryId', asyncHandler(async (req, res, next) => {
+categoryRouter.delete('/:categoryId',
+  authAdminMiddleware,
+  asyncHandler(async (req, res, next) => {
   const { categoryId } = req.params;
   // 속한 상품 유무 확인
   await ProductService.checkCategoryHasProduct(categoryId);
