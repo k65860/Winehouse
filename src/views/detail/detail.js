@@ -24,61 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", async () => {
-//   try {
-//     const res = await fetch("/product");
-//     const data = await res.json();
-//     console.log(data);
-
-//     const products = data.data.reverse().slice(0, 5); // 최신 5개 상품만
-//     console.log(products);
-
-//     // 0번째 요소의 product_name 값 불러오기
-//     const product_name =
-//       products.length > 0 ? products[0].product_name : "No data"; // 데이터가 없으면 'No data'를 표시
-
-//     // id가 'data-name'인 a 태그에 상품 type 추가
-//     const dataNameElement = document.getElementById("data-name");
-//     dataNameElement.textContent = `${product_name}`;
-
-//     // 0번째 요소의 product_price 값 불러오기
-//     const product_price =
-//       products.length > 0 ? products[0].product_price : "No data"; // 데이터가 없으면 'No data'를 표시
-
-//     const dataPriceElement = document.getElementById("data-price");
-//     dataPriceElement.textContent = `${product_price}`;
-
-//     // 마이너스 플러스 버튼
-//     const resultElement = document.getElementById("result");
-//     let resultValue = parseInt(resultElement.innerText);
-
-//     document.getElementById("plus").addEventListener("click", function () {
-//       // resultValue 값을 1씩 증가시킵니다.
-//       resultValue++;
-//       resultElement.innerText = resultValue;
-
-//       // 총 가격
-//       let totalPriceElement = document.getElementById("data-totalPrice");
-//       let resultValueElement = parseInt(resultValue);
-//       totalPriceElement.textContent = `${resultValueElement * product_price}`;
-//     });
-
-//     document.getElementById("minus").addEventListener("click", function () {
-//       // resultValue 값이 1보다 큰 경우에만 감소
-//       if (resultValue > 1) {
-//         resultValue--;
-//         resultElement.innerText = resultValue;
-//       }
-//       // 총 가격
-//       let totalPriceElement = document.getElementById("data-totalPrice");
-//       let resultValueElement = parseInt(resultValue);
-//       totalPriceElement.textContent = `${resultValueElement * product_price}`;
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
@@ -96,24 +41,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // const productData = productdata.data;
     // console.log(productData);
-
-    // 마이너스 플러스 버튼
-    let resultElement = document.getElementById("result");
-    let resultValue = parseInt(resultElement.innerText);
-
-    document.getElementById("plus").addEventListener("click", function () {
-      // resultValue 값을 1씩 증가시킵니다.
-      resultValue++;
-      resultElement.innerText = resultValue;
-    });
-
-    document.getElementById("minus").addEventListener("click", function () {
-      // resultValue 값이 1보다 큰 경우에만 감소
-      if (resultValue > 1) {
-        resultValue--;
-        resultElement.innerText = resultValue;
-      }
-    });
 
     const productsContainer = document.querySelector(".detailDiv");
     productsContainer.innerHTML = ""; // 기존 상품 목록 초기화
@@ -141,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="detailRow">
           <a id="detailFont">총가격</a>
-          <a id="data-totalPrice">${products.product_price * resultValue}</a>
+          <a id="data-totalPrice">${products.product_price}</a>
         </div>
         <div class="buttonDiv">
           <button class="button is-light is-fullwidth mt-5" id="cartBtn">장바구니</button>
@@ -149,6 +76,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
     `;
     productsContainer.appendChild(productElement);
+
+    // 마이너스 플러스 버튼
+    let resultElement = document.getElementById("result");
+    let resultValue = parseInt(resultElement.innerText);
+    let totalPriceElement = document.getElementById('data-totalPrice');
+
+    document.getElementById("plus").addEventListener("click", function () {
+      // resultValue 값을 1씩 증가시킵니다.
+      resultValue++;
+      resultElement.innerText = resultValue;
+      totalPriceElement.innerHTML = products.product_price * resultValue;
+    });
+
+    document.getElementById("minus").addEventListener("click", function () {
+      // resultValue 값이 1보다 큰 경우에만 감소
+      if (resultValue > 1) {
+        resultValue--;
+        resultElement.innerText = resultValue;
+        totalPriceElement.innerHTML = products.product_price * resultValue;
+      }
+    });
   } catch (err) {
     console.log(err);
   }
