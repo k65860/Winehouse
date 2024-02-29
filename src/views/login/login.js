@@ -1,33 +1,58 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // 이메일을 정규식을 사용하여 유효성 검사하는 함수
+
   function validateEmail(email) {
     const emailRegex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i;
     return emailRegex.test(email);
   }
 
-  // 폼 제출을 처리하는 함수
   function handleFormSubmission(event) {
     event.preventDefault();
 
-    // 이메일 입력 값 가져오기
     const emailInput = document.querySelector('.input[type="email"]');
-    const email = emailInput.value.trim();
+    const passwordInput = document.querySelector('.input[type="password"]');
 
-    // 이메일 유효성 검사
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
     if (!validateEmail(email)) {
-      // 유효하지 않은 이메일 오류 메시지
       alert('유효한 이메일 주소를 입력해주세요.');
       return;
     }
 
+    // API 주소
+    const apiURL = '/user/login';
 
-    window.location.href = '/';
+    // 사용자 정보를 담은 객체
+    const userData = {
+      email: emailInput.value.trim(),
+      password: passwordInput.value
+    };
 
-    // 데모 목적으로 성공 메시지를 알림창으로 표시
-    alert('로그인 되셨습니다.');
+    // API 호출 및 데이터 전송
+    fetch(apiURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // 로그인 성공
+          alert('로그인 되셨습니다.');
+          window.location.href = '/';
+        } else {
+          // 로그인 실패
+          alert('로그인에 실패했습니다. 다시 시도해주세요.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
+      });
   }
 
-  // 폼 제출에 대한 이벤트 리스너 추가
   const loginForm = document.querySelector('.box');
   loginForm.addEventListener('submit', handleFormSubmission);
 });
