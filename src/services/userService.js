@@ -11,7 +11,14 @@ class UserService {
 
   // 회원정보 조회
   async getUserInfo(userId) {
-    return await this.User.findOne({ _id: userId });
+    const userInfo = await this.User.findOne({ _id: userId });
+    if (userInfo) {
+      return userInfo;
+    } else {
+      const e = new Error('존재하지 않는 회원번호입니다.');
+      e.status = 404;
+      throw e;
+    }
   }
 
   // 회원가입
@@ -53,7 +60,9 @@ class UserService {
 
     // 사용자 데이터가 없으면 로그인 실패
     if (!userData) {
-      return 1;
+        const e = new Error('올바르지 않은 ID');
+        e.status = 404;
+        throw e;
     }
 
     // 로그인 시 저장된 비밀번호와 입력된 비밀번호 비교
@@ -64,7 +73,9 @@ class UserService {
 
     // 비밀번호가 틀리면 로그인 실패
     if (!comparePassword) {
-      return 2;
+        const e = new Error('올바르지 않은 비밀번호');
+        e.status = 404;
+        throw e;
     }
 
     // 로그인 성공 후 토큰 반환
@@ -82,8 +93,10 @@ class UserService {
 
     // 관리자 데이터가 없으면 로그인 실패
     if (!adminData) {
-      return 1;
-    }
+      const e = new Error('올바르지 않은 ID');
+      e.status = 404;
+      throw e;
+  }
 
     // 로그인 시 저장된 비밀번호와 입력된 비밀번호 비교
     const comparePassword = await this.comparePasswords(
@@ -93,7 +106,9 @@ class UserService {
 
     // 비밀번호가 틀리면 로그인 실패
     if (!comparePassword) {
-      return 2;
+      const e = new Error('올바르지 않은 비밀번호');
+      e.status = 404;
+      throw e;
     }
 
     // 로그인 성공 후 토큰 반환
@@ -103,4 +118,4 @@ class UserService {
   }
 }
 
-module.exports = UserService;
+module.exports = new UserService();
