@@ -1,41 +1,36 @@
 const { Schema } = require('mongoose');
 
-const DeliverySchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
-
-    orderId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
-
-    deliveryStatus: {
-      type: Number,
-      required: true,
-    },
-
-    deliveryDate: {
-      type: Date,
-    },
-
-    deliveryWish: {
-      type: String,
-    },
+const DeliverySchema = new Schema({
+  user_id: {
+    type: Schema.Types.ObjectId,
+    required: true,
   },
-
-  {
-    timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
-    },
-
-    deletedAt: {
-      type: Date,
-    },
+  order_id: {
+    type: Schema.Types.ObjectId,
+    required: true,
   },
-);
+  delivery_status: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  delivery_date: {
+    type: Date,
+  },
+  delivery_wish: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+  },
+  deletedAt: {
+    type: Date,
+  },
+});
 
 module.exports = DeliverySchema;

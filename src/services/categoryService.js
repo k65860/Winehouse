@@ -2,7 +2,6 @@
 /* eslint-disable no-return-await */
 // 불러오기
 const Category = require('../db/models/category');
-const Product = require('../db/models/product');
 
 class CategoryService {
   constructor() {
@@ -11,12 +10,26 @@ class CategoryService {
 
   // 카테고리명 중복 확인
   async checkCategoryNameDuplicated(categoryName) {
-    return await this.Category.findOne({ category_name: categoryName });
+    const checkCategoryDup = await this.Category.findOne({ category_name: categoryName });
+    if (!checkCategoryDup) {
+      return checkCategoryDup;
+    } else {
+      const e = new Error('이미 있는 카테고리입니다.');
+      e.status = 409;
+      throw e;
+    }
   }
 
   // 카테고리 ID 확인
   async checkCategoryId(categoryId) {
-    return await this.Category.findOne({ _id: categoryId });
+    const checkCategoryId = await this.Category.findOne({ _id: categoryId });
+    if (checkCategoryId) {
+      return checkCategoryId;
+    } else {
+      const e = new Error('존재하지 않는 카테고리입니다.');
+      e.status = 404;
+      throw e;
+    }
   }
 
   // 카테고리 조회
