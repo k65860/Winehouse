@@ -126,7 +126,7 @@ async function displayProducts() {
 
             <div class="buttonBox">
               <button class="button is-fullwidth is-light m-1" id="updateBtn" name="${product._id}">수정</button>
-              <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
+              <button class="button is-fullwidth is-danger m-1" id="deleteBtn" name="${product._id}">삭제</button>
             </div>
           </div><!--content-->
         </div><!--card-content-->
@@ -140,16 +140,36 @@ async function displayProducts() {
   }
 }
 
-// 추가 & 수정 버튼
+// 추가 & 수정 & 삭제 버튼
 document.addEventListener('click', async (e) => {
   if (e.target && e.target.id === 'addBtn') { // 추가
     window.location.href = '/admin_add';
+    
   } else if (e.target && e.target.id === 'updateBtn') { // 수정
     // 상품 아이디
     const productId = e.target.name;
     // 수정 페이지로 이동
     window.location.href = `/admin_update?productId=${productId}`;
+
+  } else if (e.target && e.target.id === 'deleteBtn') { // 삭제
+    const productId = e.target.name;
+    const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+
+    if (confirmDelete) {
+      try {
+        const res = await fetch(`/product/${productId}`, {
+          method: 'DELETE'
+        });
+        const data = await res.json();
+  
+        if (data.status === 200) {
+          alert('상품이 삭제되었습니다.');
+          window.location.reload();
+        }
+  
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
 });
-
-// 삭제 버튼
