@@ -57,7 +57,7 @@
     <div class="column is-10">
       <div class="section">
         <div class="add-button">
-          <button id="addButton" class="button is-info">추가</button>
+          <button id="addBtn" class="button is-info">추가</button>
         </div>
 
         <div class="card">
@@ -66,26 +66,32 @@
           </div>
 
           <div class="card-content">
-            <div class="content">
-      
-              <!-- <article class="list">
-                <span class="item"> Red wine</span>
-                <span class="subSelect">
-                  <button class="button is-light fixButton">수정</button>
-                  <button class="button is-danger deleteButton">삭제</button>
-                </span>
-              </article>
-
-            </div>
-  
-            <button class="button is-fullwidth is-light mt-5" id="completionButton">확인</button> -->
-          </div>
+            <div class="content"><!-- 카테고리 목록 --></div>
 
         </div>
       </div>
 
     </div>
   </section>
+
+  <!-- 모달 -->
+  <div class="modal" id="categoryModal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h3 class="title">카테고리 수정</h3>
+        <div class="field">
+          <label class="label">새로운 카테고리 이름</label>
+          <div class="control">
+            <input class="input" type="text" id="newCategoryName">
+          </div>
+        </div>
+        <button class="button is-success" id="saveBtn">수정</button>
+        <button class="button" id="cancelBtn">취소</button>
+      </div>
+    </div>
+  </div>
+  
 </body>
 
 </html>
