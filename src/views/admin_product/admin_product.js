@@ -138,16 +138,11 @@ async function displayProducts() {
   }
 }
 
-// 추가 버튼
-const addButton = document.getElementById('addBtn');
-addButton.addEventListener('click', function () {
-  // 'admin_add' 페이지로 이동
-  window.location.href = '/admin_add';
-});
-
-// 수정 버튼
+// 추가 & 수정 버튼
 document.addEventListener('click', async (e) => {
-  if (e.target) {
+  if (e.target && e.target.id === 'addBtn') { // 추가
+    window.location.href = '/admin_add';
+  } else { // 수정
     // 상품 아이디
     const productId = e.target.id;
     // 수정 페이지로 이동
