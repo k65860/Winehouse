@@ -57,16 +57,18 @@ async function displayProducts() {
     }
 
     const products = data.data;
-    // console.log(products);
+    console.log(products);
 
     const productsContainer = document.querySelector('.products-container');
     productsContainer.innerHTML = ''; // 기존 상품 목록 초기화
+
 
     products.forEach((product) => {
       const productElement = document.createElement('div');
       productElement.classList.add('card');
 
       const category = categories.find(cat => cat._id === product.category_id);
+      const categoryText = category ? category.category_name : 'Unknown';
 
       productElement.innerHTML += `
         <div class="card-header">
@@ -89,7 +91,7 @@ async function displayProducts() {
 
             <div class="field">
               <label class="label">타입</label>
-              <p>${category.category_name}</p>
+              <p>${categoryText}</p>
             </div>
 
             <div class="field">
