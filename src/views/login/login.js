@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.success) {
+        if (data.status === 200) {
           // 로그인 성공
           alert('로그인 되셨습니다.');
           window.location.href = '/';

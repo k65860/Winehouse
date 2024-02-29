@@ -1,5 +1,6 @@
 const signUpButton = document.getElementById("editLoginButton");
-signUpButton.addEventListener("click", async function () {
+signUpButton.addEventListener("click", async function (event) {
+  event.preventDefault();
   const passwordsMatch = passwordInput.value === confirmPasswordInput.value;
   const isValidName = /^[가-힣]+$/.test(nameInput.value);
   const isValidEmail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i.test(emailInput.value);

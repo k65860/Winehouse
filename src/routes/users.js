@@ -7,19 +7,16 @@ const userRouter = Router();
 
 // 회원가입
 userRouter.post('/signup', asyncHandler(async (req, res, next) => {
-  try {
-    const createdUser = await UserService.createUser(req.body);
-    // 성공 상태 핸들링
-    res.status(201).json({
-      status: 201,
-      message: '회원가입 성공',
-      data: createdUser,
-    });
-  } catch (error) {
-    console.error('Error during signup:', error);
-    next(error);  // 에러를 다음 미들웨어로 전달
-  }
-}));
+  // 회원가입 함수 호출 (유효성 검사 필요)
+  const createdUser = await UserService.createUser(req.body);
+  // 성공 상태 핸들링
+  res.status(201).json({
+    status: 201,
+    message: '회원가입 성공',
+    data: createdUser,
+  });
+})
+);
 
 // 회원정보 조회
 userRouter.get('/:userId', asyncHandler(async (req, res, next) => {
