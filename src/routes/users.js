@@ -6,17 +6,20 @@ const asyncHandler = require('../middlewares/asyncHandler');
 const userRouter = Router();
 
 // 회원가입
-userRouter.post('/signup',authMiddleware, asyncHandler(async (req, res, next) => {
-  // 회원가입 함수 호출 (유효성 검사 필요)
-  const createdUser = await UserService.createUser(req.body);
-  // 성공 상태 핸들링
-  res.status(201).json({
-    status: 201,
-    message: '회원가입 성공',
-    data: createdUser,
-  });
-  })
-);
+userRouter.post('/signup', asyncHandler(async (req, res, next) => {
+  try {
+    const createdUser = await UserService.createUser(req.body);
+    // 성공 상태 핸들링
+    res.status(201).json({
+      status: 201,
+      message: '회원가입 성공',
+      data: createdUser,
+    });
+  } catch (error) {
+    console.error('Error during signup:', error);
+    next(error);  // 에러를 다음 미들웨어로 전달
+  }
+}));
 
 // 회원정보 조회
 userRouter.get('/:userId', asyncHandler(async (req, res, next) => {
@@ -29,39 +32,39 @@ userRouter.get('/:userId', asyncHandler(async (req, res, next) => {
     message: '유저 정보 조회 성공',
     data: userInfo,
   });
-  })
+})
 );
 
 // 회원정보 수정
 userRouter.patch('/:userId', asyncHandler(async (req, res, next) => {
-    const { userId } = req.params;
-    // 유저 ID 확인
-    await UserService.getUserInfo(userId);
-    // 수정 진행
-    const isUpdated = await UserService.updateUserInfo(userId, req.body);
-    // 성공 상태 핸들링
-    res.status(200).json({
+  const { userId } = req.params;
+  // 유저 ID 확인
+  await UserService.getUserInfo(userId);
+  // 수정 진행
+  const isUpdated = await UserService.updateUserInfo(userId, req.body);
+  // 성공 상태 핸들링
+  res.status(200).json({
     status: 200,
     message: '유저 정보 수정 성공',
     data: isUpdated,
-    });
-  })
+  });
+})
 );
 
 // 회원탈퇴
 userRouter.delete('/:userId', asyncHandler(async (req, res, next) => {
-    const { userId } = req.params;
-    // 유저 ID 확인
-    await UserService.getUserInfo(userId);
-    // 회원 탈퇴 진행
-    const isDeleted = await UserService.deleteUser(userId);
-    // 성공 상태 핸들링
-    res.status(200).json({
+  const { userId } = req.params;
+  // 유저 ID 확인
+  await UserService.getUserInfo(userId);
+  // 회원 탈퇴 진행
+  const isDeleted = await UserService.deleteUser(userId);
+  // 성공 상태 핸들링
+  res.status(200).json({
     status: 200,
     message: '유저 탈퇴 성공',
     data: isDeleted,
-    });
-  })
+  });
+})
 );
 
 // 로그인
@@ -86,7 +89,7 @@ userRouter.post('/role', asyncHandler(async (req, res, next) => {
   res.status(200).json({
     status: 200,
     message: '관리자 로그인 성공',
-    data: adminToken, 
+    data: adminToken,
   });
 }))
 

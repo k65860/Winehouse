@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // API 주소
-    const apiURL = '/user/login';
+    const apiURL = "/user/login";
 
     // 사용자 정보를 담은 객체
     const userData = {
