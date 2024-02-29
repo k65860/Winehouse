@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const UserService = require('../services/userService');
+const authMiddleware = require('../middlewares/authMiddleware');
 const asyncHandler = require('../middlewares/asyncHandler');
 
 const userRouter = Router();
 
 // 회원가입
-userRouter.post('/signup', asyncHandler(async (req, res, next) => {
+userRouter.post('/signup',authMiddleware, asyncHandler(async (req, res, next) => {
   // 회원가입 함수 호출 (유효성 검사 필요)
   const createdUser = await UserService.createUser(req.body);
   // 성공 상태 핸들링
