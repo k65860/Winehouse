@@ -1,10 +1,8 @@
 const { Router } = require('express');
-const UserService = require('../services/userService');
+const userService = require('../services/userService');
 const asyncHandler = require('../middlewares/asyncHandler');
 const authMiddleware = require('../middlewares/authMiddleware');
-
 const userRouter = Router();
-const userService = new UserService();
 
 // 회원가입
 userRouter.post(
