@@ -6,6 +6,7 @@
     "start": "node bin/www"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bulma": "^0.9.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -14,17 +15,13 @@
     "gitmoji-cli": "^9.1.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.3",
     "morgan": "~1.9.1",
-    "nanoid": "^5.0.6"
+    "nanoid": "^3.3.7"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1"
-  },
-  "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
