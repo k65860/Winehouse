@@ -61,10 +61,20 @@
             </div>
           </div>
 
+
+          <div class="field">
+            <label class="label">나이</label>
+            <div class="control">
+              <input id="ageInput" class="input" type="text" placeholder="나이를 입력해주세요">
+            </div>
+            <p id="ageErrorMessage" class="help is-danger" style="display: none;">나이는 숫자로만 입력해주세요.</p>
+          </div>
+
           <div class="field">
             <label class="label">전화 번호</label>
             <div class="control">
-              <input class="input" type="text" placeholder="전화번호를 입력해주세요.">
+              <input class="input" type="text" placeholder="전화번호를 '-'포함 하여 입력해주세요">
+              <p id="phoneNumberErrorMessage" class="help is-danger" style="display: none;">전화번호는 숫자로만 입력해주세요.</p>
             </div>
           </div>
 

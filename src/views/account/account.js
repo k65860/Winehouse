@@ -1,52 +1,45 @@
-const signUpButton = document.getElementById("editLoginButton");
-signUpButton.addEventListener("click", async function (event) {
-  event.preventDefault();
-  const passwordsMatch = passwordInput.value === confirmPasswordInput.value;
-  const isValidName = /^[가-힣]+$/.test(nameInput.value);
-  const isValidEmail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i.test(emailInput.value);
-  const isValidPhoneNumber = /^01[0-9]-\d{4}-\d{4}$/.test(phoneNumberInput.value);
-  const isValidAge = /^\d+$/.test(ageInput.value);
+// update.js
 
-  if (!passwordsMatch) {
-    alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-  } else if (!isValidName) {
-    alert("이름을 입력해주세요.");
-  } else if (!isValidEmail) {
-    alert("이메일 주소를 입력해주세요.");
-  } else if (!isValidPhoneNumber) {
-    alert("전화번호를 입력해주세요.");
-  } else if (!isValidAge) {
-    alert("나이를 입력해주세요.");
-  } else {
-    // 서버로 데이터 전송
-    try {
-      const response = await fetch("/user/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: nameInput.value,
-          email: emailInput.value,
-          password: passwordInput.value,
-          address: emailInput.value,
-          tel: phoneNumberInput.value,
-          age: ageInput.value,
-        }),
-      });
+document.addEventListener("DOMContentLoaded", function () {
+  const passwordInput = document.getElementById("passwordInput");
+  const confirmPasswordInput = document.getElementById("confirmPasswordInput");
+  const passwordMatchMessage = document.getElementById("passwordMatchMessage");
 
-      if (response.ok) {
-        const responseData = await response.json();
-        alert(responseData.message);
-        window.location.href = "/login";
+  function checkPasswordMatch() {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    // 비밀번호 확인 입력 후에만 일치 여부 확인 및 에러 메시지 표시
+    if (confirmPassword !== "") {
+      if (password !== confirmPassword) {
+        passwordMatchMessage.style.display = "block";
       } else {
-        alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+        passwordMatchMessage.style.display = "none";
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("서버와의 통신 중 오류가 발생했습니다.");
     }
   }
+
+  passwordInput.addEventListener("input", checkPasswordMatch);
+  confirmPasswordInput.addEventListener("input", checkPasswordMatch);
+
+  const editLoginButton = document.getElementById("editLoginButton");  // Changed to editLoginButton
+  const withdrawButton = document.getElementById("withdrawButton");
+
+  // 수정하기 버튼 클릭 시 알림 창 표시
+  editLoginButton.addEventListener("click", function () {
+    alert("수정되었습니다.");
+  });
+
+  // 탈퇴하기 버튼 클릭 시 확인 창 표시
+  withdrawButton.addEventListener("click", function () {
+    const confirmWithdraw = confirm("정말 탈퇴하시겠습니까?");
+
+    // 확인을 누를 경우 알림 창 표시 및 페이지 이동
+    if (confirmWithdraw) {
+      alert("탈퇴되었습니다.");
+      window.location.href = "/";
+    }
+  });
 });
 
 // 나이 입력 값 검증 함수
@@ -65,6 +58,7 @@ function validateAge() {
     ageErrorMessage.style.display = 'block';
   }
 }
+
 // 비밀번호 확인 함수
 function validatePassword() {
   let passwordInput = document.getElementById('passwordInput');
