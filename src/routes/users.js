@@ -9,7 +9,6 @@ const userService = new UserService();
 // 회원가입
 userRouter.post(
   '/signup',
-  authMiddleware, //auth 미들웨어 추가
   asyncHandler(async (req, res, next) => {
     const createdUser = await userService.createUser(req.body);
     // 성공 상태 핸들링
@@ -24,9 +23,11 @@ userRouter.post(
 // 회원정보 조회
 userRouter.get(
   '/:userId',
+  authMiddleware,
   asyncHandler(async (req, res, next) => {
     const { userId } = req.params;
     const userInfo = await userService.getUserInfo(userId);
+
     // 유저 ID 확인
     if (!userInfo) {
       const e = new Error('존재하지 않는 회원번호입니다.');
@@ -45,6 +46,7 @@ userRouter.get(
 // 회원정보 수정
 userRouter.patch(
   '/:userId',
+  authMiddleware,
   asyncHandler(async (req, res, next) => {
     const { userId } = req.params;
     const updatedInfo = req.body;
@@ -68,8 +70,10 @@ userRouter.patch(
 // 회원탈퇴
 userRouter.delete(
   '/:userId',
+  authMiddleware,
   asyncHandler(async (req, res, next) => {
     const { userId } = req.params;
+
     // 유저 ID 확인
     if (!(await userService.getUserInfo(userId))) {
       const e = new Error('존재하지 않는 회원번호입니다.');
