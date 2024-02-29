@@ -1,29 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // 장바구니 버튼 클릭 시 alert
-  document
-    .getElementById("cartBtn")
-    .addEventListener("click", function (event) {
-      // 사용자에게 확인 메시지를 띄움
-      const result = confirm(
-        "장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?"
-      );
-
-      // 사용자가 확인을 선택한 경우
-      if (result) {
-        // 장바구니 페이지로 이동
-        window.location.href = "/cart";
-      } else {
-        // 아무런 동작도 하지 않음
-        event.preventDefault();
-      }
-    });
-
-  // 결제하기 버튼
-  document.getElementById("payBtn").addEventListener("click", function () {
-    window.location.href = "/order";
-  });
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
@@ -97,6 +71,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         totalPriceElement.innerHTML = products.product_price * resultValue;
       }
     });
+
+    // 장바구니 버튼 클릭 시 alert
+  document
+  .getElementById("cartBtn")
+  .addEventListener("click", function (event) {
+    // 사용자에게 확인 메시지를 띄움
+    const result = confirm(
+      "장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?"
+    );
+
+    // 사용자가 확인을 선택한 경우
+    if (result) {
+      // 장바구니 페이지로 이동
+      window.location.href = "/cart";
+    } else {
+      // 아무런 동작도 하지 않음
+      event.preventDefault();
+    }
+  });
+
+// 결제하기 버튼
+document.getElementById("payBtn").addEventListener("click", function () {
+  window.location.href = "/order";
+});
   } catch (err) {
     console.log(err);
   }
