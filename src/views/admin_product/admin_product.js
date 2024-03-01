@@ -1,7 +1,14 @@
 // 카테고리 목록 가져오기
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const categoryRes = await fetch('/category');
+    const token = localStorage.getItem('token');
+
+    const categoryRes = await fetch('/category', {
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${token}`
+        },
+    });
     const categoryData = await categoryRes.json();
 
     if (categoryData.status !== 200) {
@@ -36,9 +43,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function displayProducts() {
   try {
     // 카테고리 목록 가져오기
-    const categoryRes = await fetch('/category');
+    const token = localStorage.getItem('token');
+
+    const categoryRes = await fetch('/category', {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
+
     const categoryData = await categoryRes.json();
 
+    
     if (categoryData.status !== 200) {
       throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
     }
@@ -157,8 +173,13 @@ document.addEventListener('click', async (e) => {
 
     if (confirmDelete) {
       try {
+        const token = localStorage.getItem('token');
+        
         const res = await fetch(`/product/${productId}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            authorization: `Bearer ${token}`
+          },
         });
         const data = await res.json();
   

@@ -1,6 +1,14 @@
 // 카테고리 조회
 document.addEventListener('DOMContentLoaded', async () => {
-  const res = await fetch('/category');
+  const token = localStorage.getItem('token');
+
+  const res = await fetch('/category', {
+    method: 'GET',
+    header: {
+      authorization: `Bearer ${token}`
+    }
+  });
+
   const data = await res.json();
 
   if (data.status !== 200) {
@@ -41,13 +49,17 @@ document.addEventListener('click', async (e) => {
       }
 
       try {
+        const token = localStorage.getItem('token');
+
         const res = await fetch('/category', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-          },
+                authorization: `Bearer ${token}`
+              },
           body: JSON.stringify({ categoryName: categoryName }),
         });
+        
         const data = await res.json();
 
         if (data.status === 500) {
@@ -93,10 +105,12 @@ document.addEventListener('click', async (e) => {
       }
 
       try {
+        const token = localStorage.getItem('token');
         const res = await fetch(`/category/${categoryId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
           },
           body: JSON.stringify({ modifedName: newCategoryName }),
         });
