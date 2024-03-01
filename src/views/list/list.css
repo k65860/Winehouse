@@ -28,13 +28,10 @@ body {
 }
 
 #photo {
-  width: 200px;
+  width: 50%;
   margin: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-}
-
-#photo {
   filter: brightness(1);
 }
 
@@ -52,6 +49,7 @@ body {
 
 .photoBox {
   margin: 20px;
+  width: 18%;
 }
 
 #data-name,
