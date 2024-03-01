@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
       // 로그아웃 버튼에 이벤트 리스너 추가
       document.getElementById('logoutBtn').addEventListener('click', () => {
+        alert('로그아웃 되었습니다.');
+        window.location.href = '/admin_login';
         localStorage.removeItem('adminToken'); // 토큰 삭제
         updateHeader(); // 헤더 업데이트
       });
