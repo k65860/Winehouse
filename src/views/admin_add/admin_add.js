@@ -17,7 +17,14 @@ function previewFile(event) {
 // 카테고리 가져오기
 document.addEventListener('DOMContentLoaded', async function() {
   try {
-    const res= await fetch('/category');
+    const token = localStorage.getItem('token');
+
+    const res = await fetch('/category', {
+      method: 'GET',
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    });
     const data = await res.json();
 
     if (data.status !== 200) {
@@ -78,10 +85,13 @@ form.addEventListener('submit', async (e) => {
   }
 
   try {
+    const token = localStorage.getItem('token');
+
     const res = await fetch('/product', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`
       },
       body: JSON.stringify(formData)
     });

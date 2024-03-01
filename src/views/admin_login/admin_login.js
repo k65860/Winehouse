@@ -38,7 +38,7 @@ loginForm.addEventListener('submit', async (e) => {
     const data = await res.json();
     
     if (res.ok) {
-      localStorage.setItem('adminToken', data.data);
+      localStorage.setItem('token', data.data);
 
       alert('관리자 모드로 로그인 되었습니다.');
       window.location.href = '/admin_product';
