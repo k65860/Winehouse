@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const headerContainer = document.getElementById('admin-header-container');
 
   const updateHeader = () => {
-    if (localStorage.getItem('adminToken')) {
+    if (localStorage.getItem('token')) {
       headerContainer.innerHTML = `
         <nav class="navbar is-light">
           <div class="navbar-brand is-justify-content-space-between">
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('logoutBtn').addEventListener('click', () => {
         alert('로그아웃 되었습니다.');
         window.location.href = '/admin_login';
-        localStorage.removeItem('adminToken'); // 토큰 삭제
+        localStorage.removeItem('token'); // 토큰 삭제
         updateHeader(); // 헤더 업데이트
       });
 

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     products.forEach(async product => {
       const imageId = product.image_id;
-      console.log(imageId);
+      // console.log(imageId);
 
       const imgRes = await fetch(`/product/image/${imageId}`);
       const imgData = await imgRes.json();
