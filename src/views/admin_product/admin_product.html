@@ -13,17 +13,12 @@
   <link rel="stylesheet" href="admin_product.css">
   <link rel="stylesheet" href="/stylesheets/global.css">
   <script src="admin_product.js" type="module" defer></script>
+  <script src="/javascripts/admin_header.js" type="module" defer></script>
 </head>
 
 <body>
   <!-- admin header -->
-  <nav class="navbar is-light">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/admin_order">
-        <p>WINEHOUSE-ADMIN</p>
-      </a>
-    </div>
-  </nav>
+  <div id="admin-header-container"></div>
 
   <!-- admin menu -->
   <section class="columns">
@@ -55,192 +50,17 @@
     <!--card div-->
     <div class="column is-10">
       <div class="menu">
+        <span>와인 타입:</span>
         <select id="categoryBtn">
-          <option disabled selected>카테고리</option>
-          <option>레드</option>
-          <option>화이트</option>
-          <option>스파클링</option>
-          <option>로제</option>
+          <option selected>all</option>
         </select>
 
-        <button class="button is-light" id="addBtn">상품 추가</button>
+        <button class="button is-info" id="addBtn">상품 추가</button>
       </div>
 
-      <div class="section2">
-        <div class="card">
-          <div class="card-header">
-            <p class="card-header-title">이름</p>
-          </div>
+      <!-- 상품 목록 출력 -->
+      <div class="products-container"></div>
 
-          <div class="card-content">
-            <div class="content">
-              <div class="field">
-                <div class="imgDiv">
-                  <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">가격</label>
-                <p>xxx,xxx원</p>
-              </div>
-
-              <div class="field">
-                <label class="label">타입</label>
-                <p>레드</p>
-              </div>
-
-              <div class="field">
-                <label class="label">국가</label>
-                <p>미국</p>
-              </div>
-
-              <div class="field">
-                <label class="label">당도</label>
-                <p>5</p>
-              </div>
-
-              <div class="field">
-                <label class="label">산미</label>
-                <p>2</p>
-              </div>
-
-              <div class="field">
-                <label class="label">바디</label>
-                <p>3</p>
-              </div>
-
-              <div class="field">
-                <label class="label">생산 연도</label>
-                <p>2009</p>
-              </div>
-
-              <div class="buttonBox">
-                <button class="button is-fullwidth is-light m-1" id="updateBtn">수정</button>
-                <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
-              </div>
-            </div><!--content-->
-          </div><!--card-content-->
-
-        </div><!--card-->
-
-        <div class="card">
-          <div class="card-header">
-            <p class="card-header-title">이름</p>
-          </div>
-
-          <div class="card-content">
-            <div class="content">
-              <div class="field">
-                <div class="imgDiv">
-                  <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">가격</label>
-                <p>xxx,xxx원</p>
-              </div>
-
-              <div class="field">
-                <label class="label">타입</label>
-                <p>레드</p>
-              </div>
-
-              <div class="field">
-                <label class="label">국가</label>
-                <p>미국</p>
-              </div>
-
-              <div class="field">
-                <label class="label">당도</label>
-                <p>5</p>
-              </div>
-
-              <div class="field">
-                <label class="label">산미</label>
-                <p>2</p>
-              </div>
-
-              <div class="field">
-                <label class="label">바디</label>
-                <p>3</p>
-              </div>
-
-              <div class="field">
-                <label class="label">생산 연도</label>
-                <p>2009</p>
-              </div>
-
-              <div class="buttonBox">
-                <button class="button is-fullwidth is-light m-1" id="updateBtn">수정</button>
-                <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
-              </div>
-            </div><!--content-->
-          </div><!--card-content-->
-
-        </div><!--card2-->
-
-        <div class="card">
-          <div class="card-header">
-            <p class="card-header-title">이름</p>
-          </div>
-
-          <div class="card-content">
-            <div class="content">
-              <div class="field">
-                <div class="imgDiv">
-                  <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">가격</label>
-                <p>xxx,xxx원</p>
-              </div>
-
-              <div class="field">
-                <label class="label">타입</label>
-                <p>레드</p>
-              </div>
-
-              <div class="field">
-                <label class="label">국가</label>
-                <p>미국</p>
-              </div>
-
-              <div class="field">
-                <label class="label">당도</label>
-                <p>5</p>
-              </div>
-
-              <div class="field">
-                <label class="label">산미</label>
-                <p>2</p>
-              </div>
-
-              <div class="field">
-                <label class="label">바디</label>
-                <p>3</p>
-              </div>
-
-              <div class="field">
-                <label class="label">생산 연도</label>
-                <p>2009</p>
-              </div>
-
-              <div class="buttonBox">
-                <button class="button is-fullwidth is-light m-1" id="updateBtn">수정</button>
-                <button class="button is-fullwidth is-danger m-1" id="deleteBtn">삭제</button>
-              </div>
-            </div><!--content-->
-          </div><!--card-content-->
-
-        </div><!--card3-->
-
-          
-
-      </div><!--section-->
     </div><!--column is-10-->
         
   </section>

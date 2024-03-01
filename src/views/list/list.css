@@ -7,13 +7,13 @@ body {
   flex-direction: column;
 }
 
-/* main */
+/* main 
 .main {
   display: flex;
   justify-content: center;
   margin: 0px;
   flex: 1;
-}
+}*/
 
 .orderList {
   display: flex;
@@ -24,7 +24,7 @@ body {
 
 .listFont {
   margin-bottom: 0;
-  font-size: 1.4em;
+  font-size: 1.3em;
 }
 
 #photo {
@@ -46,13 +46,26 @@ body {
 #productPhoto {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .photoBox {
-  margin: 15px;
+  margin: 20px;
 }
 
-#text {
-  margin: 0 20px 0 20px;
-  font-size: 0.8em;
+#data-name,
+#data-price,
+.name {
+  color: black;
+  font-size: 0.9em;
+  pointer-events: none;
+}
+
+.dataRow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 20px 10px 20px;
+  font-weight: bold;
 }
