@@ -29,21 +29,21 @@
         <div class="field">
           <label class="label">이름</label>
           <div class="control">
-            <input class="input" type="text" placeholder="이름을 입력하세요">
+            <input class="input" type="text" id="nameInput" placeholder="이름을 입력하세요">
           </div>
         </div>
 
         <div class="field" style="margin-bottom: 20px;">
           <label class="label">전화번호</label>
           <div class="control">
-            <input class="input" type="tel" placeholder="전화번호를 입력하세요">
+            <input class="input" type="tel" id="telInput" placeholder="전화번호를 입력하세요">
           </div>
         </div>
 
         <div class="field" style="margin-bottom: 20px;">
           <label class="label">주소</label>
           <div class="control">
-            <input class="input" type="text" placeholder="주소를 입력하세요">
+            <input class="input" type="text" id="addressInput" placeholder="주소를 입력하세요">
           </div>
         </div>
 
@@ -59,6 +59,7 @@
             </div>
           </div>
         </div>
+
         <!-- 주문상품 정보 부분 -->
 
         <div class="product-info">
@@ -68,7 +69,7 @@
           <img src="wine_img3.jpg" alt="Product Image">
           <div class="product-details">
             <p>상품 이름</p>
-            <p>가격: 10,000원/수량: 2개</p>
+            <!-- <p>가격: 10,000원/수량: 2개</p> -->
           </div>
         </div>
     </main>
@@ -78,15 +79,15 @@
           <div class="total-amount your-class-name">
             <h2>결제 정보</h2>
           </div>
-          <p>총 상품 금액: 20,000원</p>
+          <!-- <p>총 상품 금액: ${totalAmount}원</p> -->
           <div style="height: 10px;"></div>
           <div class="shipping-fee your-class-name">
-            <p>배송비: 2,000원</p>
+            <!-- <p>배송비: 2,000원</p> -->
             <div style="height: 50px;"></div>
           </div>
           <div style="height: 3px;"></div>
           <div class="total-payment">
-            <p>총 결제 금액: 22,000원</p>
+            <!-- <p>총 결제 금액: 22,000원</p> -->
           </div>
           <div style="height: 50px;"></div>
         </div>
@@ -141,4 +142,5 @@
   <!-- footer -->
   <div id="footer-container"></div>
 </body>
+
 </html>

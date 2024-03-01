@@ -1,86 +1,102 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const paymentButton = document.getElementById("payButton");
-  const paymentMethodRadios = document.querySelectorAll(
-    '[name="paymentMethod"]'
-  );
-  const termsAgreeCheckbox = document.getElementById("termsAgree");
-  const paymentErrorMessage = document.getElementById("paymentErrorMessage");
-  const termsErrorMessage = document.getElementById("termsErrorMessage");
-  const paymentSuccessMessage = document.getElementById(
-    "paymentSuccessMessage"
-  );
+document.addEventListener("DOMContentLoaded", async function (event) {
+  event.preventDefault();
+  const token = localStorage.getItem('token');
+  const userInfo = await fetchUserInfo(token);
 
-  // 결제 버튼 클릭 제외하고 페이지를 새로고침하거나 나갈때 경고창 뜨는 함수
-  window.addEventListener("beforeunload", function (event) {
-    if (!paymentButtonClicked) {
-      event.preventDefault();
-      event.returnValue = "";
-    }
-  });
+  async function fetchUserInfo(token) {
+    const apiUrl = "/user";
 
-  // 결제 버튼 클릭에만 경고창이 안뜸
-  let paymentButtonClicked = false;
-  paymentButton.addEventListener("click", function () {
-    paymentButtonClicked = true;
-  });
-
-  // 결제 수단 중 하나가 선택되었는지 확인하는 함수
-  function isPaymentMethodSelected() {
-    for (const radio of paymentMethodRadios) {
-      if (radio.checked) {
-        return true;
+    try {
+      if (!token) {
+        window.location.href = '/login';
+        return null;
       }
-    }
-    return false;
-  }
 
-  // 약관 동의 체크 여부를 확인하는 함수
-  function areTermsAgreed() {
-    return termsAgreeCheckbox.checked;
-  }
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
 
-  // 결제 버튼 상태를 업데이트하는 함수
-  function updatePaymentButtonState() {
-    // 에러 메시지 숨기기
-    paymentErrorMessage.style.display = "none";
-    termsErrorMessage.style.display = "none";
-    paymentSuccessMessage.style.display = "none";
-
-    // 결제 수단선택 안될 시
-    if (!isPaymentMethodSelected()) {
-      paymentErrorMessage.style.display = "block";
-    }
-
-    // 약관 동의선택 안될 시
-    if (!areTermsAgreed()) {
-      termsErrorMessage.style.display = "block";
+      if (response.status === 200) {
+        const userInfo = await response.json();
+        initializeUserInfo(userInfo);
+        return userInfo;
+      } else {
+        console.error('사용자 정보를 가져오지 못했습니다. 상태 코드:', response.status);
+        return null;
+      }
+    } catch (error) {
+      console.error('에러:', error);
+      return null;
     }
   }
 
-  for (const radio of paymentMethodRadios) {
-    radio.addEventListener("change", updatePaymentButtonState);
+  function initializeUserInfo(userInfo) {
+    const nameInput = document.getElementById('nameInput');
+    const phoneNumberInput = document.getElementById('telInput');
+    const addressInput = document.getElementById('addressInput');
+
+    nameInput.value = userInfo.data.name;
+    phoneNumberInput.value = userInfo.data.tel;
+    addressInput.value = userInfo.data.address;
   }
 
-  // 약관 동의 체크박스에 변경 이벤트 리스너 추가
-  termsAgreeCheckbox.addEventListener("change", updatePaymentButtonState);
+  const paymentButton = document.getElementById("payButton");
+  paymentButton.addEventListener("click", async function () {
+    const checkedItems = document.querySelectorAll('#cart-items input[type="checkbox"]:checked');
 
-  // 결제 버튼 클릭
-  paymentButton.addEventListener("click", function (event) {
-    // 결제 수단이 선택안될 시 에러 메시지
-    if (!isPaymentMethodSelected()) {
-      paymentErrorMessage.style.display = "block";
-    }
+    const request = window.indexedDB.open('winehouse');
 
-    // 약관에 동의 안할 시 에러 메시지
-    if (!areTermsAgreed()) {
-      termsErrorMessage.style.display = "block";
-    }
+    request.onsuccess = async (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction(['order'], 'readwrite');
+      const store = transaction.objectStore('order');
 
-    if (isPaymentMethodSelected() && areTermsAgreed()) {
-      window.location.href = "/detail";
-    }
+      if (checkedItems.length > 0) {
+        const confirmDelete = confirm('선택한 상품을 결제하시겠습니까?');
+        if (confirmDelete) {
+          const items = [];
+
+          checkedItems.forEach((checkbox) => {
+            const itemCard = checkbox.closest('.card');
+            const itemImage = itemCard.querySelector('img').src;
+            const itemName = itemCard.querySelector('.product-name').innerText;
+            const itemPriceElement = itemCard.querySelector('.product-price p');
+            const itemPrice = parseInt(itemPriceElement.innerText.replace('원', ''));
+            const itemQuantity = parseInt(itemCard.querySelector('.quantity').innerText);
+
+            items.push({
+              productName: itemName,
+              productPrice: itemPrice,
+              productQuantity: itemQuantity,
+              productImage: itemImage,
+            });
+          });
+
+          await addItemsToOrderStore(store, items);
+
+          window.location.href = '/order';
+        }
+      } else {
+        alert('결제할 상품을 선택해주세요.');
+      }
+    };
   });
 
-  // 초기 상태 확인
-  updatePaymentButtonState();
+  async function addItemsToOrderStore(store, items) {
+    return new Promise((resolve, reject) => {
+      const request = store.add(items);
+
+      request.onsuccess = (event) => {
+        resolve();
+      };
+
+      request.onerror = (event) => {
+        reject(event.target.error);
+      };
+    });
+  }
 });
