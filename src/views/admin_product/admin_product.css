@@ -2,6 +2,11 @@
   margin: 0 20px;
 }
 
+.card {
+  width: 350px;
+  height: auto;
+}
+
 .imgDiv {
   display: flex;
   justify-content: center;
@@ -9,7 +14,7 @@
 
 .imgDiv img {
   width: 150px;
-  height: 150px;
+  height: 300px;
   border-radius: 10px;
   margin: 7px 11px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
@@ -43,6 +48,12 @@
 .field {
   display: flex;
   justify-content: space-between;
+}
+
+#imgField {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 #categoryBtn {

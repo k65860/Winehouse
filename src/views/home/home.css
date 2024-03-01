@@ -19,6 +19,7 @@
 
 .recently-container a {
   display: flex;
+  justify-content: center;
   margin-right: 8px;
   padding: 0.3rem;
   background-color: #fff;
@@ -39,6 +40,12 @@
 .products-container {
   display: flex;
   flex-direction: column;
+  width: 20%;
+}
+
+.products-container img {
+  width: 150px;
+  height: 300px;
 }
 
 .product-name {

@@ -99,7 +99,7 @@ async function displayProducts() {
         <div class="card-content">
           <div class="content">
 
-            <div class="field">
+            <div class="field" id="imgField">
               <div class="imgDiv">
                 ${imgSrc}
               </div>
