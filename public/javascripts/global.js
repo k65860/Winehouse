@@ -2,8 +2,10 @@
 async function renderHeaderAndFooter() {
   // 헤더 추가
   const headerContainer = document.getElementById('header-container');
-  if (headerContainer) {
-    headerContainer.innerHTML = `
+
+  const updateHeader = () => {
+    if (localStorage.getItem('token')) {
+      headerContainer.innerHTML = `
         <nav class="navbar has-shadow ${window.location.pathname === '/' ? 'is-fixed-top' : ''}">
           <div class="navbar-brand">
             <a class="navbar-item" href="/">
@@ -29,7 +31,7 @@ async function renderHeaderAndFooter() {
                   <a class="cart-icon" href="/mypage">
                     <i class="fa-solid fa-user"></i>
                   </a>
-                  <a class="button is-light" href="/login"><strong>로그인</strong></a>
+                  <a class="button is-light" id="logoutBtn"><strong>로그아웃</strong></a> 
                 </div>
               </div>
             </div>
@@ -37,7 +39,51 @@ async function renderHeaderAndFooter() {
           </div>
         </nav>
       `;
-  }
+      // 로그아웃 버튼에 이벤트 리스너 추가
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('token'); // 토큰 삭제
+        updateHeader(); // 헤더 업데이트
+      });
+
+    } else {
+      headerContainer.innerHTML = `
+        <nav class="navbar has-shadow ${window.location.pathname === '/' ? 'is-fixed-top' : ''}">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/images/winehouse_logo.png" alt="winehouse-logo">
+          </a>
+
+          <a class="navbar-burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+        </div>
+
+        <div class="navbar-menu" id="nav-links">
+          <div class="navbar-start ml-2"><!-- 카테고리(타입) --></div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="cart-icon" href="/cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <a class="cart-icon" href="/mypage">
+                  <i class="fa-solid fa-user"></i>
+                </a>
+                <a class="button is-light" href="/login"><strong>로그인</strong></a> 
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </nav>
+      `;
+    }
+  };
+
+  updateHeader();
 
   // 푸터 추가
   const footerContainer = document.getElementById('footer-container');

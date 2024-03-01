@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function (event) {
+  event.preventDefault();
   const cancelButtons = document.querySelectorAll('#product-pay-cancel');
 
   document

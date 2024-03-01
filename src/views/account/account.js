@@ -24,7 +24,7 @@ signUpButton.addEventListener("click", async function (e) {
     alert("이메일 주소를 입력해주세요.");
   } else if (!addressInput) {
     alert("주소를 입력해주세요.");
-  }else if (!isValidPhoneNumber) {
+  } else if (!isValidPhoneNumber) {
     alert("전화번호를 입력해주세요.");
   } else if (!isValidAge) {
     alert("나이를 입력해주세요.");
@@ -66,7 +66,7 @@ signUpButton.addEventListener("click", async function (e) {
 //   let ageInput = document.getElementById('ageInput');
 //   let ageErrorMessage = document.getElementById('ageErrorMessage');
 
-//   // 나이 입력값 정규식 확인 
+//   // 나이 입력값 정규식 확인
 //   let agePattern = /^\d+$/;
 
 //   if (agePattern.test(ageInput.value)) {

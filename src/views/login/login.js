@@ -38,8 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.status === 200) {
-          // 로그인 성공
+        console.log('Server Response:', data);
+        if (data.status === 200 && data.data) {
+          // 로그인 성공 및 토큰 저장
+          localStorage.setItem('token', data.data);
           alert('로그인 되셨습니다.');
           window.location.href = '/';
         } else {
