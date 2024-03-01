@@ -1,7 +1,8 @@
+// 토큰 가져오기
+const token = localStorage.getItem('token');
+
 // 카테고리 조회
 document.addEventListener('DOMContentLoaded', async () => {
-  const token = localStorage.getItem('token');
-
   const res = await fetch('/category', {
     method: 'GET',
     header: {
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="item">${category.category_name}</div>
           <div class="subSelect">
             <button class="button is-light" id="updateBtn" name="${category._id}">수정</button>
-            <button class="button is-danger" id="deleteBtn">삭제</button>
+            <button class="button is-danger" id="deleteBtn" name="${category._id}">삭제</button>
           </div>
         </div>
       `;
@@ -49,8 +50,6 @@ document.addEventListener('click', async (e) => {
       }
 
       try {
-        const token = localStorage.getItem('token');
-
         const res = await fetch('/category', {
           method: 'POST',
           headers: {
@@ -105,7 +104,6 @@ document.addEventListener('click', async (e) => {
       }
 
       try {
-        const token = localStorage.getItem('token');
         const res = await fetch(`/category/${categoryId}`, {
           method: 'PATCH',
           headers: {
@@ -134,5 +132,36 @@ document.addEventListener('click', async (e) => {
         modal.classList.remove('is-active');
       }
     });
+  }
+});
+
+// 카테고리 삭제
+document.addEventListener('click', async (e) => {
+  if (e.target && e.target.id === 'deleteBtn') {
+    const categoryId = e.target.name;
+    const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+
+    if (confirmDelete) {
+      try {
+        const res = await fetch(`/category/${categoryId}`, {
+          method: 'DELETE',
+          headers: {
+            authorization: `Bearer ${token}`
+          },
+        });
+        const data = await res.json();
+  
+        if (data.status === 500) {
+          return alert('카테고리에 속한 상품이 남아있습니다.');
+        } else if (data.status === 200) {
+          alert('카테고리가 삭제되었습니다.');
+          window.location.reload();
+        }
+  
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    
   }
 });
