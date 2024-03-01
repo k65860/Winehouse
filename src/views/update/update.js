@@ -185,6 +185,6 @@ function isLoggedIn() {
     // 여기에 로그인 여부를 확인하는 코드를 작성 (예: 토큰 검증)
     // 반환값이 true면 로그인된 상태, false면 로그인 안된 상태
     // 예시: 토큰을 사용하는 경우
-    return sessionStorage.getItem('accessToken') !== null;
+    return sessionStorage.getItem('token') !== null;
 }
 
