@@ -1,4 +1,4 @@
 const mongoose = require('mongoose');
-const ImageSchema = require('../schemas/imageSchema');
+const OrderSchema = require('../schemas/orderSchema');
 
-module.exports = mongoose.model('Category', ImageSchema);
+module.exports = mongoose.model('Order', OrderSchema);
