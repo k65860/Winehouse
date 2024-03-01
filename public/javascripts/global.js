@@ -12,17 +12,14 @@ async function renderHeaderAndFooter() {
             <a class="navbar-item" href="/">
               <img src="/images/winehouse_logo.png" alt="winehouse-logo">
             </a>
-
             <a class="navbar-burger" id="burger">
               <span></span>
               <span></span>
               <span></span>
             </a>
           </div>
-
           <div class="navbar-menu" id="nav-links">
             <div class="navbar-start ml-2"><!-- 카테고리(타입) --></div>
-        
             <div class="navbar-end">
               <div class="navbar-item">
                 <div class="buttons">
@@ -32,18 +29,16 @@ async function renderHeaderAndFooter() {
                   <a class="cart-icon" href="/mypage">
                     <i class="fa-solid fa-user"></i>
                   </a>
-                  <a class="button is-light" id="logoutBtn"><strong>로그아웃</strong></a> 
+                  <a class="button is-light" id="logoutBtn"><strong>로그아웃</strong></a>
                 </div>
               </div>
             </div>
-
           </div>
         </nav>
       `;
       // 로그아웃 버튼에 이벤트 리스너 추가
       document.getElementById('logoutBtn').addEventListener('click', () => {
         const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
-
         if (confirmLogout) {
           localStorage.removeItem('token'); // 토큰 삭제
           window.location.href = '/'; // 로그아웃 후 로그인 페이지로 이동
@@ -53,37 +48,33 @@ async function renderHeaderAndFooter() {
       headerContainer.innerHTML = `
         <nav class="navbar has-shadow ${window.location.pathname === '/' ? 'is-fixed-top' : ''
         }">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/images/winehouse_logo.png" alt="winehouse-logo">
-          </a>
-
-          <a class="navbar-burger" id="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </a>
-        </div>
-
-        <div class="navbar-menu" id="nav-links">
-          <div class="navbar-start ml-2"><!-- 카테고리(타입) --></div>
-      
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="cart-icon" href="/cart">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-                <a class="cart-icon" href="/mypage">
-                  <i class="fa-solid fa-user"></i>
-                </a>
-                <a class="button is-light" href="/login"><strong>로그인</strong></a> 
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+              <img src="/images/winehouse_logo.png" alt="winehouse-logo">
+            </a>
+            <a class="navbar-burger" id="burger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+          <div class="navbar-menu" id="nav-links">
+            <div class="navbar-start ml-2"><!-- 카테고리(타입) --></div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                  <a class="cart-icon" href="/cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </a>
+                  <a class="cart-icon" href="/mypage">
+                    <i class="fa-solid fa-user"></i>
+                  </a>
+                  <a class="button is-light" href="/login"><strong>로그인</strong></a>
+                </div>
               </div>
             </div>
           </div>
-
-        </div>
-      </nav>
+        </nav>
       `;
     }
   };
@@ -111,7 +102,7 @@ async function renderHeaderAndFooter() {
           </div>
         </div>
       </footer>
-      `;
+    `;
   }
 }
 
@@ -137,14 +128,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const categories = data.data;
-
     const menuElement = document.querySelector('.navbar-start');
 
     // 카테고리 목록을 메뉴에 추가
     categories.forEach((category) => {
       menuElement.innerHTML += `
-          <a class="navbar-item" href="/list?categoryId=${category._id}">${category.category_name}</a>
-        `;
+        <a class="navbar-item" href="/list?categoryId=${category._id}">${category.category_name}</a>
+      `;
     });
   } catch (error) {
     console.error('카테고리 불러오기 오류:', error);
