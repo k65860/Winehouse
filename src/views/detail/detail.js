@@ -5,12 +5,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const res = await fetch(`/product/info/${productId}`);
     const data = await res.json();
-    console.log(data);
 
     const image = data.data.image;
-    console.log(image);
     const products = data.data.info;
-    console.log(products);
 
     // 사진 출력
     const imageContainer = document.querySelector('.left');
@@ -30,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <div class="detailRow">
           <a id="detailFont">가격</a>
-          <a id="data-price">${products.product_price} 원</a>
+          <a id="data-price">${products.product_price}원</a>
         </div>
         <hr class="hr">
         <div class="detailRow" id="quantity">
@@ -43,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <div class="detailRow">
           <a id="detailFont">총가격</a>
-          <a id="data-totalPrice">${products.product_price} 원</a>
+          <a id="data-totalPrice">${products.product_price}원</a>
         </div>
         <div class="buttonDiv">
           <button class="button is-light is-fullwidth mt-5" id="cartBtn">장바구니</button>
@@ -109,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // resultValue 값을 1씩 증가시킵니다.
       resultValue++;
       resultElement.innerText = resultValue;
-      totalPriceElement.innerHTML = `${products.product_price * resultValue} 원`;
+      totalPriceElement.innerHTML = `${products.product_price * resultValue}원`;
     });
 
     document.getElementById('minus').addEventListener('click', function () {
@@ -138,9 +135,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 결제하기 버튼
     document.getElementById('payBtn').addEventListener('click', function () {
+      // 상품 아이디
       const urlParams = new URLSearchParams(window.location.search);
       const productId = urlParams.get('productId');
-      window.location.href = `/order?productId=${productId}`;
+
+      // 수량
+      const resultElement = document.getElementById('result');
+      const resultValue = parseInt(resultElement.innerText);
+
+      // 가격
+      const priceElement = document.getElementById('data-totalPrice');
+      const price = parseInt(priceElement.innerText.replace('원', ''));
+
+      window.location.href = `/order?productId=${productId}?quantity=${resultValue}?price=${price}`;
     });
 
   } catch (err) {
