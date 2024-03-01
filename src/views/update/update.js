@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async function (event) {
     event.preventDefault();
 
     const token = localStorage.getItem('token');
+    const deleteToken = localStorage.removeItem('token');
     const userInfo = await fetchUserInfo(token);
 
     // if (!userInfo) {
@@ -16,7 +17,8 @@ document.addEventListener('DOMContentLoaded', async function (event) {
 
     // 사용자 정보 수정 버튼 클릭 시
     const editProfileButton = document.getElementById('editProfileButton');
-    editProfileButton.addEventListener('click', () => {
+    editProfileButton.addEventListener('click', (event) => {
+        event.preventDefault();
         // 사용자 정보 수정 함수 호출
         editProfile(userInfo, token);
     });
@@ -56,7 +58,7 @@ async function fetchUserInfo(token) {
             const userInfo = await response.json();
             document.getElementById('nameInput').value = userInfo.data.name;
             document.getElementById('emailInput').value = userInfo.data.email;
-            // document.getElementById('ageInput').value = userInfo.data.age;
+            document.getElementById('ageInput').value = userInfo.data.age;
             document.getElementById('telInput').value = userInfo.data.tel;
             document.getElementById('addressInput').value = userInfo.data.address;
             return userInfo; // 사용자 정보 반환
@@ -76,11 +78,13 @@ function initializeUserInfo(userInfo) {
     const emailInput = document.getElementById('emailInput');
     const phoneNumberInput = document.getElementById('telInput');
     const ageInput = document.getElementById('ageInput');
+    const addressInput = document.getElementById('addressInput');
 
     nameInput.value = userInfo.data.name;
     emailInput.value = userInfo.data.email;
     phoneNumberInput.value = userInfo.data.tel;
     ageInput.value = userInfo.data.age;
+    addressInput.value = userInfo.data.address;
 }
 
 // 사용자 정보 수정 함수
@@ -93,6 +97,7 @@ async function editProfile(userInfo, token) {
     const emailInput = document.getElementById('emailInput');
     const phoneNumberInput = document.getElementById('telInput');
     const ageInput = document.getElementById('ageInput');
+    const addressInput = document.getElementById('addressInput');
 
     const passwordsMatch = passwordInput.value === confirmPasswordInput.value;
     const isValidName = /^[가-힣]+$/.test(nameInput.value);
@@ -133,9 +138,9 @@ async function editProfile(userInfo, token) {
                 name: nameInput.value,
                 email: emailInput.value,
                 password: passwordInput.value,
-                address: '', // 이부분은 필요에 따라 추가
+                address: addressInput.value, // 이부분은 필요에 따라 추가
                 age: ageInput.value,
-                phoneNumber: phoneNumberInput.value
+                tel: telInput.value
             }),
         });
 
@@ -151,21 +156,21 @@ async function editProfile(userInfo, token) {
 }
 
 // 사용자 탈퇴 함수
-async function withdraw(userInfo, token) {
+async function withdraw(userInfo, deleteToken) {
     const confirmWithdraw = confirm('정말로 탈퇴하시겠습니까?');
     if (confirmWithdraw) {
-        const apiUrl = `/user/${userInfo.data._id}`;
+        const apiUrl = `/user`;
 
         try {
             const response = await fetch(apiUrl, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${deleteToken}`,
                 },
             });
 
-            if (response.ok) {
+            if (response.status === 200) {
                 alert("탈퇴가 완료되었습니다.");
             } else {
                 alert("탈퇴에 실패했습니다. 다시 시도해주세요.");
