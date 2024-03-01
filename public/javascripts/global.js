@@ -144,4 +144,29 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('카테고리 불러오기 오류:', error);
   }
+
+  // 장바구니 indexedDB 생성
+  if (window.indexedDB) {
+    const request = window.indexedDB.open('winehouse');
+    let db;
+
+    request.onupgradeneeded = (event) => {
+      db = event.target.result;
+
+      db.createObjectStore('cart', {
+        keyPath: 'id',
+        autoIncrement: true,
+      });
+
+      db.createObjectStore('order', {
+        keyPath: 'id',
+        autoIncrement: true,
+      });
+      
+    };
+
+    request.onerror = (event) => {
+      console.log(event.target.errorCode);
+    };
+  }
 });

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const image = data.data.image;
     const products = data.data.info;
+    console.log(products);
 
     // 사진 출력
     const imageContainer = document.querySelector('.left');
@@ -118,11 +119,57 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
-    // 장바구니 버튼 클릭 시 alert
+    // 장바구니 버튼 클릭 시
     document.getElementById('cartBtn').addEventListener('click', function (event) {
+      const request = window.indexedDB.open('winehouse');
+
+      request.onsuccess = (event) => {
+        const db = event.target.result;
+        const transaction = db.transaction(['cart'], 'readwrite');
+        const store = transaction.objectStore('cart');
+
+        // 상품 아이디
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('productId');
+
+        // 상품 이름
+        const nameElement = document.getElementById('data-name');
+        const productName = nameElement.innerText;
+
+        // 상품 사진
+        const imageElement = document.querySelector('.left img');
+        const productImage = imageElement.src;
+
+        // 수량
+        const quantityElement = document.getElementById('result');
+        const productQuantity = parseInt(quantityElement.innerText);
+
+        // 가격
+        const priceElement = document.getElementById('data-price');
+        const productPrice = parseInt(priceElement.innerText.replace('원', ''));
+
+        const products = [
+          {
+            product_id: productId,
+            product_name: productName,
+            product_image: productImage,
+            product_price: productPrice,
+            product_num: productQuantity,
+          },
+        ];
+        store.add(products);
+
+        transaction.oncomplete = () => {
+          console.log('상품 데이터가 IndexedDB에 추가되었습니다.');
+        };
+
+        transaction.onerror = (event) => {
+          console.error(event.target.errorCode);
+        };
+      };
+
       // 사용자에게 확인 메시지를 띄움
       const result = confirm('장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?');
-
       // 사용자가 확인을 선택한 경우
       if (result) {
         // 장바구니 페이지로 이동
@@ -149,7 +196,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       window.location.href = `/order?productId=${productId}?quantity=${resultValue}?price=${price}`;
     });
-
   } catch (err) {
     console.log(err);
   }
