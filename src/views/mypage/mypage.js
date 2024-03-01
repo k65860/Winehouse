@@ -7,9 +7,8 @@ document.addEventListener('DOMContentLoaded', async () =>  {
     const resOrder = await fetch('/api-order/user', {
       headers: {
         authorization: `Bearer ${token}`}})
-    await console.log(resOrder);
-    const orderlist = resOrder.json();
-    await console.log(orderlist);
+    const resArray = await resOrder.json();
+    const orderlist = await resArray.data;
 
     // 유저 주문 목록 띄우기
     const userOrderContainer = document.querySelector('.order-container');
@@ -18,19 +17,26 @@ document.addEventListener('DOMContentLoaded', async () =>  {
       orderElement.classList.add('order-details');
 
       // 각 주문의 배송상태 가져오기
-      const resDelivery = await fetch(`/api-order/status/${order._id}`);
-      const delivery = resDelivery.json();
+      const resDelivery = await fetch(`/api-order/status/${order._id}`, {
+        headers: {
+          authorization: `Bearer ${token}`}});
+      const delData = await resDelivery.json();
+      const delivery = delData.data;
       // 주문 리스트 하나 가져오기
-      const resOrderlist = await fetch(`/api-order/info/${order._id}`);
-      const orderlist = resOrderlist.json();
+      const resOrderlist = await fetch(`/api-order/info/${order._id}`, {
+        headers: {
+          authorization: `Bearer ${token}`}});
+      const olData = await resOrderlist.json();
+      const orderlist = olData.data;
       // 가져온 주문 리스트 상품의 이미지 가져오기
-      const resImage = await fetch(`/product/info/${orderlist.product_id}`);
+      const resImage = await fetch(`/product/info/${orderlist[0].product_id}`, {
+        headers: {
+          authorization: `Bearer ${token}`}
+      });
       const image = await resImage.json();
       const imgSrc = image.data.image;
 
       orderElement.innerHTML += `
-        <span class="product-name"></span>
-        <span class="product-price"></span>
         <div class="images">
           ${imgSrc}
         </div>
