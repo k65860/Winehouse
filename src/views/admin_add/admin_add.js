@@ -1,5 +1,5 @@
 // 사진 업로드
-const inputImage = document.querySelector('#input-img');
+const inputImage = document.querySelector('#imgUpload');
 inputImage.addEventListener('change', previewFile);
 
 function previewFile(event) {
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // 상품 추가
 const form = document.querySelector('#form');
-
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -66,17 +65,11 @@ form.addEventListener('submit', async (e) => {
   const productBodyrate = document.querySelector('#body').value;
   const productMadeyear = document.querySelector('#year').value;
 
-  const formData = {
-    productName,
-    productPrice,
-    categoryId,
-    productCountry,
-    productGrape,
-    productMadeyear,
-    productSweetrate,
-    productSourrate,
-    productBodyrate,
-  };
+  const productImage = document.querySelector('#imgUpload').files[0];
+
+  if (!productImage) {
+    return alert('이미지를 선택해주세요.');
+  }
 
   if (!productName || !productPrice || !categoryId || !productCountry
     || !productGrape || !productMadeyear || !productSweetrate 
@@ -85,15 +78,28 @@ form.addEventListener('submit', async (e) => {
   }
 
   try {
-    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('product_data', JSON.stringify({
+      productName,
+      productPrice,
+      categoryId,
+      productCountry,
+      productGrape,
+      productSweetrate,
+      productSourrate,
+      productBodyrate,
+      productMadeyear,
+    }));
+    formData.append('image', productImage); // 이미지 파일 추가
+    console.log(formData);
 
+    const token = localStorage.getItem('token');
     const res = await fetch('/product', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`
+        'authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(formData)
+      body: formData
     });
 
     if (!res.ok) {
@@ -102,10 +108,8 @@ form.addEventListener('submit', async (e) => {
 
     alert('상품이 추가되었습니다.');
     window.location.href = '/admin_product';
-  
+
   } catch (err) {
     console.error('상품 추가 오류: ', err);
   }
-  
 });
-

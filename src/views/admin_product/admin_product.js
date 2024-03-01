@@ -1,8 +1,9 @@
+// 토큰 가져오기
+const token = localStorage.getItem('token');
+
 // 카테고리 목록 가져오기
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const token = localStorage.getItem('token');
-
     const categoryRes = await fetch('/category', {
         method: 'GET',
         headers: {
@@ -43,8 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function displayProducts() {
   try {
     // 카테고리 목록 가져오기
-    const token = localStorage.getItem('token');
-
     const categoryRes = await fetch('/category', {
       method: 'GET',
       headers: {
@@ -54,7 +53,6 @@ async function displayProducts() {
 
     const categoryData = await categoryRes.json();
 
-    
     if (categoryData.status !== 200) {
       throw new Error('카테고리 목록을 가져오는데 실패했습니다.');
     }
@@ -79,7 +77,14 @@ async function displayProducts() {
     productsContainer.innerHTML = ''; // 기존 상품 목록 초기화
 
 
-    products.forEach((product) => {
+    products.forEach(async product => {
+      // 사진
+      const imageId = product.image_id;
+      
+      const imgRes = await fetch(`/product/image/${imageId}`);
+      const imgData = await imgRes.json();
+      const imgSrc = imgData.data;
+
       const productElement = document.createElement('div');
       productElement.classList.add('card');
 
@@ -94,9 +99,9 @@ async function displayProducts() {
         <div class="card-content">
           <div class="content">
 
-            <div class="field">
+            <div class="field" id="imgField">
               <div class="imgDiv">
-                <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
+                ${imgSrc}
               </div>
             </div>
 
@@ -173,8 +178,6 @@ document.addEventListener('click', async (e) => {
 
     if (confirmDelete) {
       try {
-        const token = localStorage.getItem('token');
-        
         const res = await fetch(`/product/${productId}`, {
           method: 'DELETE',
           headers: {
