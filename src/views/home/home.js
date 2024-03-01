@@ -6,16 +6,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const products = data.data.reverse().slice(0, 5); // 최신 5개 상품만
     // console.log(products);
-    
+
     const recentlyProductsContainer = document.querySelector('.recently-container');
 
-    products.forEach(product => {
+    products.forEach(async product => {
+      const imageId = product.image_id;
+      console.log(imageId);
+
+      const imgRes = await fetch(`/product/image/${imageId}`);
+      const imgData = await imgRes.json();
+      const imgSrc = imgData.data;
+
       const productElement = document.createElement('div');
       productElement.classList.add('products-container');
 
       productElement.innerHTML += `
         <a href="/detail?productId=${product._id}">
-          <img src="https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png" alt="${product.product_name}">
+          ${imgSrc}
         </a>
         <span class="product-name">${product.product_name}</span>
         <span class="product-price">${product.product_price}</span>
@@ -26,4 +33,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     console.log(err);
   }
+
 });
