@@ -1,13 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const photos = document.querySelectorAll("#photo");
-
-  photos.forEach((photo) => {
-    photo.addEventListener("click", () => {
-      window.location.href = "/detail";
-    });
-  });
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
@@ -30,7 +20,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       productElement.classList.add('photoBox');
 
       productElement.innerHTML += `
+        <a href="/detail?productId=${product._id}">
           <img src="https://cdn.pixabay.com/photo/2018/01/12/09/45/glass-3077869_1280.jpg" id="photo">
+        </a>
             <div class="dataBox">
               <div class="dataRow">
                 <a id="data-name">${product.product_name}</a>
@@ -46,3 +38,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(err);
   }
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const photos = document.querySelectorAll("#photo");
+
+//   photos.forEach((photo) => {
+//     photo.addEventListener("click", () => {
+//       window.location.href = `${product.product_id}`;
+//     });
+//   });
+// });

@@ -10,12 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const products = data.data;
     console.log(products);
 
-    // const productres = await fetch("/product");
-    // const productdata = await productres.json();
-
-    // const productData = productdata.data;
-    // console.log(productData);
-
     const productsContainer = document.querySelector(".detailDiv");
     productsContainer.innerHTML = ""; // 기존 상품 목록 초기화
 
@@ -34,10 +28,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         <hr class="hr">
         <div class="detailRow" id="quantity">
           <a id="detailFont">수량</a>
-          <div>
-            <button id="minus" class="quantityBtn">-</button>
-            <a id='result'>1</a>
-            <button id="plus" class="quantityBtn">+</button>
+        <div>
+          <button id="minus" class="quantityBtn">-</button>
+           <a id='result'>1</a>
+          <button id="plus" class="quantityBtn">+</button>
           </div>
         </div>
         <div class="detailRow">
@@ -91,10 +85,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-// 결제하기 버튼
-document.getElementById("payBtn").addEventListener("click", function () {
-  window.location.href = "/order";
-});
+  // 결제하기 버튼
+  document.getElementById("payBtn").addEventListener("click", function () {
+    window.location.href = "/order";
+  });
   } catch (err) {
     console.log(err);
   }
