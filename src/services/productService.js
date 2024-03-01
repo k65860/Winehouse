@@ -41,7 +41,7 @@ class ProductService {
   // 카테고리 소속 상품 유무 확인
   async checkCategoryHasProduct(categoryId) {
     const checkCategoryHasProduct = await this.Product.findOne({ category_id: categoryId });
-    if (checkCategoryHasProduct) {
+    if (!checkCategoryHasProduct) {
       return checkCategoryHasProduct;
     } else {
       const e = new Error('카테고리에 속한 상품이 남아있습니다.');
