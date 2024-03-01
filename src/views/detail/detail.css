@@ -46,17 +46,26 @@ body {
 
 .detailDiv {
   width: 500px;
+  height: auto;
   margin: 80px;
-  padding: 50px;
+  padding: 30px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
+.detailBox {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .detailRow {
-  margin: 40px 0 40px 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+}
+
+a {
+  margin: 10px;
 }
 
 #detailFont,
@@ -87,7 +96,7 @@ hr {
 .buttonDiv {
   display: flex;
   justify-content: center;
-  margin: 40px 0;
+  margin: 20px 0 0 0;
 }
 
 .buttonDiv button {

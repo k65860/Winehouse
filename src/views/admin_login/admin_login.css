@@ -14,7 +14,7 @@ body {
   justify-content: center;
 }
 
-.box {
+.loginBox {
   width: 700px;
   height: 400px;
   display: flex;
