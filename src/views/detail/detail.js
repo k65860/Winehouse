@@ -5,11 +5,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const res = await fetch(`/product/info/${productId}`);
     const data = await res.json();
-    //console.log(data);
+    console.log(data);
 
-    const products = data.data;
+    const image = data.data.image;
+    console.log(image);
+    const products = data.data.info;
     console.log(products);
 
+    // 사진 출력
+    const imageContainer = document.querySelector('.left');
+    imageContainer.innerHTML = image;
+
+    // 상품 출력
     const productsContainer = document.querySelector(".detailDiv");
     productsContainer.innerHTML = ""; // 기존 상품 목록 초기화
 
