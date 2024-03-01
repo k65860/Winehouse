@@ -44,27 +44,12 @@ cartContainer.addEventListener('click', (event) => {
 // 페이지 로드 시 IndexedDB 초기화 함수 호출
 window.onload = () => {
   initializeIndexedDB();
-  // 임시로 데이터 추가
-  // addProductsToIndexedDB();
 };
 
 // IndexedDB 초기화 함수
 function initializeIndexedDB() {
   if (window.indexedDB) {
     const request = window.indexedDB.open('winehouse');
-    let db;
-
-    request.onupgradeneeded = (event) => {
-      db = event.target.result;
-
-      const objectStore = db.createObjectStore('cart', {
-        keyPath: 'id',
-        autoIncrement: true,
-      });
-      objectStore.createIndex('productImage', 'productImage', { unique: false });
-      objectStore.createIndex('productName', 'productName', { unique: false });
-      objectStore.createIndex('productPrice', 'productPrice', { unique: false });
-    };
 
     request.onerror = (event) => {
       console.log(event.target.errorCode);
@@ -125,20 +110,20 @@ function createCardElement(item) {
             <input type="checkbox" name="${item.id}" checked>
           </label>
           <div class="product-image m-2">
-            <img src="${item.productImage}" alt="Product Image" />
+            <img src="${item[0].product_image}" id="${item[0].product_id}" alt="Product Image" />
           </div>
           <div class="product-info">
             <div class="product-name">
-              <p>${item.productName}</p>
+              <p>${item[0].product_name}</p>
             </div>
             <div class="product-price">
-              <p>${item.productPrice}원</p>
+              <p>${item[0].product_price}원</p>
             </div>
           </div>
         </div>
         <div class="count-button">
           <button class="quantity-minus-btn">-</button>
-          <span class="quantity">1</span>
+          <span class="quantity">${item[0].product_num}</span>
           <button class="quantity-plus-btn">+</button>
         </div>
       </div>
@@ -265,6 +250,7 @@ paymentButton.addEventListener('click', () => {
   const checkedItems = document.querySelectorAll('#cart-items input[type="checkbox"]:checked');
 
   const request = window.indexedDB.open('winehouse');
+  console.log('1');
 
   request.onsuccess = (event) => {
     const db = event.target.result;
@@ -279,6 +265,8 @@ paymentButton.addEventListener('click', () => {
 
         checkedItems.forEach((checkbox) => {
           const itemCard = checkbox.closest('.card');
+          // 아이디
+          const itemId = itemCard.querySelector('img').id;
           // 사진
           const itemImage = itemCard.querySelector('img').src;
           // 이름
@@ -290,10 +278,11 @@ paymentButton.addEventListener('click', () => {
           const itemQuantity = parseInt(itemCard.querySelector('.quantity').innerText);
 
           items.push({
-            productName: itemName,
-            productPrice: itemPrice,
-            productQuantity: itemQuantity,
-            productImage: itemImage,
+            product_id: itemId,
+            product_name: itemName,
+            product_price: itemPrice,
+            product_num: itemQuantity,
+            product_image: itemImage,
           });
 
         });
@@ -306,33 +295,3 @@ paymentButton.addEventListener('click', () => {
     }
   };
 });
-
-// 상품 데이터 추가
-// function addProductsToIndexedDB() {
-// const request = window.indexedDB.open('winehouse');
-
-// request.onsuccess = (event) => {
-//   const db = event.target.result;
-//   const transaction = db.transaction(['cart'], 'readwrite');
-//   const store = transaction.objectStore('cart');
-
-// const products = [
-//   { productName: '브레드앤버터 소비뇽', productPrice: '40000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
-//   { productName: '쇼비뇽블랑', productPrice: '32000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
-//   { productName: '소비뇽', productPrice: '140000', productImage: 'https://cdn.pixabay.com/photo/2018/02/25/11/17/wine-3180220_1280.jpg' },
-//   { productName: '클라우디', productPrice: '132000', productImage: 'https://cdn.pixabay.com/photo/2013/07/12/16/28/wine-150955_1280.png' },
-// ];
-
-//     products.forEach((product) => {
-//       store.add(product);
-//     });
-
-//     transaction.oncomplete = () => {
-//       console.log('상품 데이터가 IndexedDB에 추가되었습니다.');
-//     };
-
-//     transaction.onerror = (event) => {
-//       console.error(event.target.errorCode);
-//     };
-//   };
-// }
