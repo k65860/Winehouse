@@ -67,9 +67,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // 장바구니 버튼 클릭 시 alert
-  document
-  .getElementById("cartBtn")
-  .addEventListener("click", function (event) {
+    document
+    .getElementById("cartBtn")
+    .addEventListener("click", function (event) {
     // 사용자에게 확인 메시지를 띄움
     const result = confirm(
       "장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?"
@@ -89,6 +89,40 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("payBtn").addEventListener("click", function () {
     window.location.href = "/order";
   });
+
+  const  infoContainer = document.querySelector(".bottomBox");
+  infoContainer.innerHTML = ""; // 기존 상품 목록 초기화
+
+  const infoElement = document.createElement("div");
+  infoElement.classList.add("bottomRow");
+
+  infoElement.innerHTML += `
+      <div class="detailRow">
+        <a id="detailFont">바디</a>
+        <a id="data-name">${products.product_bodyrate}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">나라</a>
+        <a id="data-name">${products.product_country}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">포도품종</a>
+        <a id="data-name">${products.product_grape}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">생산연도</a>
+        <a id="data-name">${products.product_madeyear}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">산도</a>
+        <a id="data-name">${products.product_sourrate}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">당도</a>
+        <a id="data-name">${products.product_sweetrate}</a>
+      </div>
+  `;
+  infoContainer.appendChild(infoElement);
   } catch (err) {
     console.log(err);
   }

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 document.addEventListener("DOMContentLoaded", function () {
   const paymentButton = document.getElementById("payButton");
   const paymentMethodRadios = document.querySelectorAll(
