@@ -1,7 +1,7 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get("productId");
+    const productId = urlParams.get('productId');
 
     const res = await fetch(`/product/info/${productId}`);
     const data = await res.json();
@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const imageContainer = document.querySelector('.left');
     imageContainer.innerHTML = image;
 
-    // 상품 출력
-    const productsContainer = document.querySelector(".detailDiv");
-    productsContainer.innerHTML = ""; // 기존 상품 목록 초기화
+    // 상품 이름, 가격, 수량 출력
+    const productsContainer = document.querySelector('.detailDiv');
+    productsContainer.innerHTML = ''; // 기존 상품 목록 초기화
 
-    const productElement = document.createElement("div");
-    productElement.classList.add("detailBox");
+    const productElement = document.createElement('div');
+    productElement.classList.add('detailBox');
 
     productElement.innerHTML += `
         <div class="detailRow">
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="detailRow">
           <a id="detailFont">가격</a>
-          <a id="data-price">${products.product_price}</a>
+          <a id="data-price">${products.product_price} 원</a>
         </div>
         <hr class="hr">
         <div class="detailRow" id="quantity">
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="detailRow">
           <a id="detailFont">총가격</a>
-          <a id="data-totalPrice">${products.product_price}</a>
+          <a id="data-totalPrice">${products.product_price} 원</a>
         </div>
         <div class="buttonDiv">
           <button class="button is-light is-fullwidth mt-5" id="cartBtn">장바구니</button>
@@ -52,19 +52,67 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
     productsContainer.appendChild(productElement);
 
+    // 상품 상세 정보 출력
+    const infoContainer = document.querySelector('.bottomBox');
+    infoContainer.innerHTML = ''; // 기존 상품 목록 초기화
+
+    const infoElement = document.createElement('div');
+    infoElement.classList.add('bottomRow');
+
+    infoElement.innerHTML += `
+      <div class="detailRow">
+        <a id="detailFont">국가</a>
+        <a id="data-name">${products.product_country}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">포도 품종</a>
+        <a id="data-name">${products.product_grape}</a>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">생산 연도</a>
+        <a id="data-name">${products.product_madeyear}</a>
+      </div>
+      <hr class="hr">
+      <div class="detailRow">
+        <a id="detailFont">산도</a>
+        <div class="is-flex is-align-items-center">
+          <a id="data-name">${products.product_sourrate}</a>
+          <progress class="progress is-small" value="${products.product_sourrate}" max="5"></progress>
+          <p>5</p>
+        </div>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">당도</a>
+        <div class="is-flex is-align-items-center">
+          <a id="data-name">${products.product_sweetrate}</a>
+          <progress class="progress is-small" value="${products.product_sweetrate}" max="5"></progress>
+          <p>5</p>
+        </div>
+      </div>
+      <div class="detailRow">
+        <a id="detailFont">바디</a>
+        <div class="is-flex is-align-items-center">
+          <a id="data-name">${products.product_bodyrate}</a>
+          <progress class="progress is-small" value="${products.product_bodyrate}" max="5"></progress>
+          <p>5</p>
+        </div>
+      </div>
+  `;
+    infoContainer.appendChild(infoElement);
+
     // 마이너스 플러스 버튼
-    let resultElement = document.getElementById("result");
+    let resultElement = document.getElementById('result');
     let resultValue = parseInt(resultElement.innerText);
     let totalPriceElement = document.getElementById('data-totalPrice');
 
-    document.getElementById("plus").addEventListener("click", function () {
+    document.getElementById('plus').addEventListener('click', function () {
       // resultValue 값을 1씩 증가시킵니다.
       resultValue++;
       resultElement.innerText = resultValue;
-      totalPriceElement.innerHTML = products.product_price * resultValue;
+      totalPriceElement.innerHTML = `${products.product_price * resultValue} 원`;
     });
 
-    document.getElementById("minus").addEventListener("click", function () {
+    document.getElementById('minus').addEventListener('click', function () {
       // resultValue 값이 1보다 큰 경우에만 감소
       if (resultValue > 1) {
         resultValue--;
@@ -74,62 +122,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // 장바구니 버튼 클릭 시 alert
-    document
-    .getElementById("cartBtn")
-    .addEventListener("click", function (event) {
-    // 사용자에게 확인 메시지를 띄움
-    const result = confirm(
-      "장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?"
-    );
+    document.getElementById('cartBtn').addEventListener('click', function (event) {
+      // 사용자에게 확인 메시지를 띄움
+      const result = confirm('장바구니에 담겼습니다. 장바구니 페이지로 이동하시겠습니까?');
 
-    // 사용자가 확인을 선택한 경우
-    if (result) {
-      // 장바구니 페이지로 이동
-      window.location.href = "/cart";
-    } else {
-      // 아무런 동작도 하지 않음
-      event.preventDefault();
-    }
-  });
+      // 사용자가 확인을 선택한 경우
+      if (result) {
+        // 장바구니 페이지로 이동
+        window.location.href = '/cart';
+      } else {
+        // 아무런 동작도 하지 않음
+        event.preventDefault();
+      }
+    });
 
-  // 결제하기 버튼
-  document.getElementById("payBtn").addEventListener("click", function () {
-    window.location.href = "/order";
-  });
+    // 결제하기 버튼
+    document.getElementById('payBtn').addEventListener('click', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('productId');
+      window.location.href = `/order?productId=${productId}`;
+    });
 
-  const  infoContainer = document.querySelector(".bottomBox");
-  infoContainer.innerHTML = ""; // 기존 상품 목록 초기화
-
-  const infoElement = document.createElement("div");
-  infoElement.classList.add("bottomRow");
-
-  infoElement.innerHTML += `
-      <div class="detailRow">
-        <a id="detailFont">바디</a>
-        <a id="data-name">${products.product_bodyrate}</a>
-      </div>
-      <div class="detailRow">
-        <a id="detailFont">나라</a>
-        <a id="data-name">${products.product_country}</a>
-      </div>
-      <div class="detailRow">
-        <a id="detailFont">포도품종</a>
-        <a id="data-name">${products.product_grape}</a>
-      </div>
-      <div class="detailRow">
-        <a id="detailFont">생산연도</a>
-        <a id="data-name">${products.product_madeyear}</a>
-      </div>
-      <div class="detailRow">
-        <a id="detailFont">산도</a>
-        <a id="data-name">${products.product_sourrate}</a>
-      </div>
-      <div class="detailRow">
-        <a id="detailFont">당도</a>
-        <a id="data-name">${products.product_sweetrate}</a>
-      </div>
-  `;
-  infoContainer.appendChild(infoElement);
   } catch (err) {
     console.log(err);
   }
