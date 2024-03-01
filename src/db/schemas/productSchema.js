@@ -9,6 +9,9 @@ const ProductSchema = new Schema({
     type: Number,
     required: true,
   },
+  image_id: {
+    type: Schema.Types.ObjectId,
+  },
   category_id: {
     type: Schema.Types.ObjectId,
     required: true,

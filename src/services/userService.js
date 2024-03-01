@@ -82,7 +82,7 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY; // env 설정 필요
     return jwt.sign({
       userId: userData._id,
-      isAdimn: false,
+      isAdmin: false,
     }, secretKey);
   }
 
@@ -118,7 +118,7 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY; // env 설정 필요
     const adminToken = jwt.sign({
       userId: adminData._id,
-      isAdimn: true,
+      isAdmin: true,
     }, secretKey);
     return adminToken;
   }

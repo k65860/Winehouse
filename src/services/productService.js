@@ -82,27 +82,29 @@ class ProductService {
   }
 
   // 상품 수정
-  async setProduct(productId, reqBody) {
-    return await this.Product.findOneAndUpdate(
-      { _id: productId },
-      {
-        product_name: reqBody.productName,
-        product_price: reqBody.productPrice,
-        category_id: reqBody.categoryId,
-        product_country: reqBody.productCountry,
-        product_grape: reqBody.productGrape,
-        product_madeyear: reqBody.productMadeyear,
-        product_sweetrate: reqBody.productSweetrate,
-        product_sourrate: reqBody.productSourrate,
-        product_bodyrate: reqBody.productBodyrate,
-        // updatedAt: Date.now,
-      },
-    );
+  async setProduct(productId, reqBody, imageId) {
+    const product = await this.Product.findOne({ _id: productId });
+    if (reqBody.productName) product.product_name = reqBody.productName;
+    if (reqBody.productPrice) product.product_price = reqBody.productPrice;
+    if (imageId) product.image_id = imageId;
+    if (reqBody.categoryId) product.category_id = reqBody.categoryId;
+    if (reqBody.productCountry) product.product_country = reqBody.productCountry;
+    if (reqBody.productGrape) product.product_grape = reqBody.productGrape;
+    if (reqBody.productMadeyear) product.product_madeyear = reqBody.productMadeyear;
+    if (reqBody.productSweetrate) product.product_sweetrate = reqBody.productSweetrate;
+    if (reqBody.productSourrate) product.product_sourrate = reqBody.productSourrate;
+    if (reqBody.productBodyrate) product.product_bodyrate = reqBody.productBodyrate;
+    return await product.save();
   }
 
   // 상품 삭제
   async deleteProduct(productId) {
     return await this.Product.deleteOne({ _id: productId });
+  }
+
+  // 이미지 업로드 과정에서 튕겨서 생성된 상품들 삭제
+  async deleteProductWithNoImage(){
+    return await this.Product.deleteMany({ image_id: { $exists:false } });
   }
 }
 

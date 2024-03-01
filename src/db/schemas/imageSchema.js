@@ -2,17 +2,22 @@ const { Schema } = require('mongoose');
 
 const ImageSchema = new Schema({
   product_id: {
-    type: shortId,
+    type: Schema.Types.ObjectId,
     required: true,
     ref: 'Product',
   },
-  image_url: {
+  data: {
+    type: Buffer,
+    required: true,
+  },
+  contentType: {
     type: String,
     required: true,
   },
   createdAt: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   updatedAt: {
     type: Date,

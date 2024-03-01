@@ -56,7 +56,7 @@ userRouter.delete('/',
   authMiddleware,
   asyncHandler(async (req, res, next) => {
     // 회원 탈퇴 진행
-    const isDeleted = await UserService.deleteUser(userId);
+    const isDeleted = await UserService.deleteUser(req.userId);
     // 성공 상태 핸들링
     res.status(200).json({
     status: 200,
