@@ -27,7 +27,7 @@ signUpButton.addEventListener("click", async function (e) {
   } else if (!isValidPhoneNumber) {
     alert('전화번호를 확인해주세요.');
   } else if (!isValidAge) {
-    alert('나이를 확인해주세요.');
+    alert('만 18세 미만입니다.');
   } else {
     // 서버로 데이터 전송
     try {
