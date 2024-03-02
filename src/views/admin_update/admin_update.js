@@ -1,14 +1,13 @@
 // 사진 업로드
-const inputImage = document.querySelector('#input-img');
+const inputImage = document.querySelector('#imgUpload');
 inputImage.addEventListener('change', previewFile);
 
 function previewFile(event) {
   const reader = new FileReader();
 
   reader.onload = function (event) {
-    const img = document.createElement('img');
-    img.setAttribute('src', event.target.result);
-    document.querySelector('#img-container').appendChild(img);
+    const imageElement = document.querySelector('#img-container img');
+    imageElement.src = event.target.result;
   };
 
   reader.readAsDataURL(event.target.files[0]);
@@ -60,8 +59,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       throw new Error('상품 정보를 가져오는데 실패했습니다.');
     }
 
-    const product = productData.data;
-    // console.log(product);
+    const product = productData.data.info;
+    const productImage = productData.data.image;
 
     // 폼에 상품 정보 넣기
     document.querySelector('#name').value = product.product_name;
@@ -73,6 +72,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('#sour').value = product.product_sourrate;
     document.querySelector('#body').value = product.product_bodyrate;
     document.querySelector('#year').value = product.product_madeyear;
+    // 사진 넣기
+    const imageElement = document.querySelector('#img-container');
+    imageElement.innerHTML = productImage;
 
   } catch (err) {
     console.error(err);
@@ -98,7 +100,20 @@ form.addEventListener('submit', async (e) => {
     const productBodyrate = document.querySelector('#body').value;
     const productMadeyear = document.querySelector('#year').value;
 
-    const formData = {
+    const productImage = document.querySelector('#imgUpload').files[0];
+
+    if (!productImage) {
+      return alert('이미지를 선택해주세요.');
+    }
+
+    if (!productName || !productPrice || !categoryId || !productCountry
+      || !productGrape || !productMadeyear || !productSweetrate 
+      || !productSourrate || !productBodyrate) {
+      return alert("모든 값을 입력해 주세요.");
+    }
+
+    const formData = new FormData();
+    formData.append('product_data', JSON.stringify({
       productName,
       productPrice,
       categoryId,
@@ -108,20 +123,16 @@ form.addEventListener('submit', async (e) => {
       productSourrate,
       productBodyrate,
       productMadeyear,
-    };
+    }));
+    formData.append('image', productImage); // 이미지 파일 추가
 
-    if (!productName || !productPrice || !categoryId || !productCountry
-      || !productGrape || !productMadeyear || !productSweetrate 
-      || !productSourrate || !productBodyrate) {
-      return alert("모든 값을 입력해 주세요.");
-    }
-
+    const token = localStorage.getItem('token');
     const res = await fetch(`/product/${productId}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(formData)
+      body: formData
     });
 
     if (!res.ok) {
