@@ -25,7 +25,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     // 관리자 로그인 토큰
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || '';
     const cancelButtons = document.querySelectorAll('#product-pay-cancel');
     
     // 카테고리 api
@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           authorization: `Bearer ${token}`}
       });
       const image = await resImage.json();
+      console.log(image);
       const imgSrc = image.data.image;
 
       orderElement.innerHTML += `
