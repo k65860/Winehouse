@@ -1,9 +1,12 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
+const product = require('../models/product');
 
 const OrderlistSchema = new Schema({
-  shortId,
-  order_num: {
+  product_num: {
+    type: Number,
+    required: true,
+  },
+  product_price: {
     type: Number,
     required: true,
   },
@@ -20,14 +23,13 @@ const OrderlistSchema = new Schema({
   createdAt: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    required: true,
   },
   deletedAt: {
     type: Date,
-    required: true,
   },
 });
 
