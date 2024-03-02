@@ -1,8 +1,8 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id');
+// const shortId = require('./types/short-id');
 
 const CategorySchema = new Schema({
-  shortId,
+  // shortId,
   category_name: {
     type: String,
     required: true,
@@ -10,14 +10,15 @@ const CategorySchema = new Schema({
   createdAt: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    required: true,
+    required: false,
   },
   deletedAt: {
     type: Date,
-    required: true,
+    required: false,
   },
 });
 
