@@ -7,35 +7,17 @@ body {
 }
 
 /* main */
-.main {
+.inner {
   display: flex;
   justify-content: center;
-  /*사진이랑 글자있는 부분 정확히 반 나누고 싶음*/
   align-items: center;
-  flex: 1;
-  width: 100%;
+}
+
+.left img {
+  width: 300px;
   height: 500px;
-}
-
-.left {
-  width: 50%;
-  float: left;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: right;
-}
-
-.right {
-  width: 50%;
-  float: right;
-  box-sizing: border-box;
-  display: flex;
-}
-
-#photo {
-  width: 400px;
-  height: 400px;
-  margin: 20px;
+  margin: 40px;
+  padding: 10px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
@@ -45,35 +27,47 @@ body {
 }
 
 .detailDiv {
-  width: 500px;
-  height: auto;
-  margin: 80px;
-  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 500px;
+  margin: 40px;
+  padding: 10px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
 .detailBox {
-  margin: 20px;
   display: flex;
   flex-direction: column;
+  margin: 20px;
+  width: 300px;
 }
 
 .detailRow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
 }
 
-a {
+.detailBox a {
   margin: 10px;
 }
 
-#detailFont,
-#result,
+#detailFont {
+  margin-right: 15px;
+  color: #929292;
+  font-size: 0.9em;
+  pointer-events: none;
+}
+
 #data-name,
 #data-price,
+#result,
 #data-totalPrice {
-  color: black;
+  color: #554054;
   font-size: 0.9em;
   pointer-events: none;
 }
@@ -93,34 +87,26 @@ hr {
   cursor: pointer;
 }
 
-.buttonDiv {
+.bottom {
   display: flex;
   justify-content: center;
-  margin: 20px 0 0 0;
 }
 
-.buttonDiv button {
-  margin: 10px;
+.bottomBox {
+  width: 900px;
+  height: auto;
+  padding: 20px;
+  margin: 10px 100px 80px 100px;
+  padding: 30px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-#cartBtn {
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #af66aa;
-  background-color: #ffffff;
-  color: #d5d5d5;
-  margin: 10px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.detailRow progress {
+  width: 500px;
+  background-color: #d8bfd8;
 }
 
-#payBtn {
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #af66aa;
-  background-color: #af66aa;
-  color: white;
-  margin: 10px;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.progress:not(:last-child) {
+  margin: 0 5px;
 }

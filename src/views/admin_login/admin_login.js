@@ -35,10 +35,14 @@ loginForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify(formData)
     });
-
+    const data = await res.json();
+    
     if (res.ok) {
+      localStorage.setItem('token', data.data);
+
       alert('관리자 모드로 로그인 되었습니다.');
-        window.location.href = '/admin_product';
+      window.location.href = '/admin_product';
+
     } else {
       alert('로그인에 실패했습니다. 다시 시도해주세요.');
     }
