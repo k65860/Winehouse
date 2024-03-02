@@ -29,21 +29,21 @@
         <div class="field">
           <label class="label">이름</label>
           <div class="control">
-            <input class="input" type="text" placeholder="이름을 입력하세요">
+            <input class="input" type="text" id="nameInput" placeholder="이름을 입력하세요">
           </div>
         </div>
 
         <div class="field" style="margin-bottom: 20px;">
           <label class="label">전화번호</label>
           <div class="control">
-            <input class="input" type="tel" placeholder="전화번호를 입력하세요">
+            <input class="input" type="tel" id="telInput" placeholder="전화번호를 입력하세요">
           </div>
         </div>
 
         <div class="field" style="margin-bottom: 20px;">
           <label class="label">주소</label>
           <div class="control">
-            <input class="input" type="text" placeholder="주소를 입력하세요">
+            <input class="input" type="text" id="addressInput" placeholder="주소를 입력하세요">
           </div>
         </div>
 
@@ -59,38 +59,23 @@
             </div>
           </div>
         </div>
-        <!-- 주문상품 정보 부분 -->
+    </main>
+    <main>
+      <!-- 주문상품 정보 부분 -->
+      <div class="product-info">
+        <div class="notice">장바구니에 담긴 상품이 없습니다.</div>
 
-        <div class="product-info">
-          <div style="height: 50px;"></div>
-          <h2>주문상품 정보</h2>
-          <div class="your-class-name"></div>
-          <img src="wine_img3.jpg" alt="Product Image">
-          <div class="product-details">
-            <p>상품 이름</p>
-            <p>가격: 10,000원/수량: 2개</p>
-          </div>
-        </div>
+        <!-- 장바구니에 담긴 상품들이 표시될 영역 -->
+        <div id="order-items"></div>
+      </div>
     </main>
     <main class="main2 ">
       <div class="inner order-container">
         <div class="order-summary">
-          <div class="total-amount your-class-name">
-            <h2>결제 정보</h2>
-          </div>
-          <p>총 상품 금액: 20,000원</p>
-          <div style="height: 10px;"></div>
-          <div class="shipping-fee your-class-name">
-            <p>배송비: 2,000원</p>
-            <div style="height: 50px;"></div>
-          </div>
-          <div style="height: 3px;"></div>
-          <div class="total-payment">
-            <p>총 결제 금액: 22,000원</p>
-          </div>
-          <div style="height: 50px;"></div>
+          <h2>주문 상품 목록</h2>
+          <ul id="order-list"></ul>
         </div>
-
+        
         <div class="payment-info">
           <h2>결제 수단</h2>
           <div class="your-class-name"></div>
@@ -141,4 +126,5 @@
   <!-- footer -->
   <div id="footer-container"></div>
 </body>
+
 </html>

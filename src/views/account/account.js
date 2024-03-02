@@ -14,20 +14,20 @@ signUpButton.addEventListener("click", async function (e) {
   const isValidName = /^[가-힣]+$/.test(nameInput.value);
   const isValidEmail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i.test(emailInput.value);
   const isValidPhoneNumber = /^01[0-9]-\d{4}-\d{4}$/.test(phoneNumberInput.value);
-  const isValidAge = /^\d+$/.test(ageInput.value);
+  const isValidAge = /^(2[0-9]|[3-9]\d|\d{3,})$/.test(ageInput.value);
 
   if (!passwordsMatch) {
-    alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+    alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
   } else if (!isValidName) {
-    alert("이름을 입력해주세요.");
+    alert('이름을 확인해주세요.');
   } else if (!isValidEmail) {
-    alert("이메일 주소를 입력해주세요.");
+    alert('이메일 주소를 확인해주세요.');
   } else if (!addressInput) {
-    alert("주소를 입력해주세요.");
-  }else if (!isValidPhoneNumber) {
-    alert("전화번호를 입력해주세요.");
+    alert('주소를 확인해주세요.');
+  } else if (!isValidPhoneNumber) {
+    alert('전화번호를 확인해주세요.');
   } else if (!isValidAge) {
-    alert("나이를 입력해주세요.");
+    alert('만 18세 미만입니다.');
   } else {
     // 서버로 데이터 전송
     try {
@@ -66,7 +66,7 @@ signUpButton.addEventListener("click", async function (e) {
 //   let ageInput = document.getElementById('ageInput');
 //   let ageErrorMessage = document.getElementById('ageErrorMessage');
 
-//   // 나이 입력값 정규식 확인 
+//   // 나이 입력값 정규식 확인
 //   let agePattern = /^\d+$/;
 
 //   if (agePattern.test(ageInput.value)) {

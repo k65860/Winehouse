@@ -52,7 +52,7 @@ app.use('/', viewsRouter);
 app.use('/user', userRouter);
 app.use('/category', categoryRouter);
 app.use('/product', productRouter);
-app.use('/order', orderRouter);
+app.use('/api-order', orderRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

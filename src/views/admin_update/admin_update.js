@@ -18,7 +18,16 @@ function previewFile(event) {
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     //////// 카데고리 정보 가져오기
-    const categoryRes= await fetch('/category');
+    const token = localStorage.getItem('token');
+
+    const categoryRes= await fetch('/category', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`
+        },
+    });
+    
     const categoryData = await categoryRes.json();
 
     if (categoryData.status !== 200) {
