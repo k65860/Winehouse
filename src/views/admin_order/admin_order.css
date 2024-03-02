@@ -7,6 +7,10 @@ body {
     flex-direction: column;
 }
 
+.menu-list {
+    font-size: 1.15em;
+}
+
 /* main */
 .columns {
     margin: 0 20px;
@@ -15,10 +19,11 @@ body {
 .parent {
     padding: 20px;
 }
+
 .real_main {
     height: 100%;
     margin: 0 auto;
-    width: 80%;
+    width: 83.33333%;
 }
 
 .title {
@@ -27,7 +32,7 @@ body {
     margin: 20px;
 }
 
-.main {
+.order-container {
     display: flex;
     justify-content: center;
     /*사진이랑 글자있는 부분 정확히 반 나누고 싶음*/
@@ -36,14 +41,20 @@ body {
 }
 
 .box {
-    width: 700px;
-    height: 180px;
+    width: 800px;
+    height: auto;
     display: flex;
     align-items: center;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     justify-content: space-around;
     margin: 20px;
+    padding: 10px;
+}
+
+#infoBox {
+    margin: 20px;
+    padding: 10px;
 }
 
 #photo {
@@ -52,6 +63,9 @@ body {
     border-radius: 10px;
     margin: 20px;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cancelBtn {
@@ -78,4 +92,10 @@ select:focus {
 .buttonBox {
     display: flex;
     flex-direction: column;
+}
+
+a {
+    color: black;
+    font-size: 0.9em;
+    pointer-events: none;
 }
